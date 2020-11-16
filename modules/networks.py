@@ -82,6 +82,8 @@ class TriResNet(nn.Module):
         d1, d2, d3, U1, L1, U2, L2, U3, L3 = self.get_matrices()
 
         # Forward
+        if len(x.shape)==1:
+            x = x.view((x.shape[0],1))
         z0 = torch.cat((x, epsilon),1)
         z1 = self.LU_layer(z0, L1, U1, self.b1)
         z2 = self.LU_layer(self.f(z1), L2, U2, self.b2)

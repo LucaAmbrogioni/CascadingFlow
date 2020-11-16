@@ -4,10 +4,10 @@ import torch.nn.functional as F
 import numpy as np
 
 
-class TimeSeries(nn.Module):
+class ProbabilisticModel(nn.Module):
 
     def __init__(self):
-        super(TimeSeries, self).__init__()
+        super(ProbabilisticModel, self).__init__()
         self.dist = None
 
     def _avg_gaussian_log_prob(self, xt, mu, sigma):
@@ -17,20 +17,34 @@ class TimeSeries(nn.Module):
             sd_loss = np.log(2 * np.pi * sigma ** 2)
         return torch.sum(torch.mean(-(xt - mu) ** 2 / (2 * sigma ** 2) - 0.5 * sd_loss, 0))
 
-    def _avg_log_prob(self, xt, mu, sigma):
-        return torch.sum(torch.mean(self.dist.log_prob(x=xt, loc=mu, scale=sigma), 0))
+    def _avg_log_prob(self, xt, mu, sigma, dist=None):
+        if dist is None:
+            dist = self.dist
+        return torch.sum(torch.mean(dist.log_prob(x=xt, loc=mu, scale=sigma), 0))
 
-    def _avg_logistig_log_likelihood(self, xt, yt):
+    def _avg_log_likelihood(self, xt, yt, scale=None):
         N = xt.shape[0]
         if yt.shape[0] == 1:
             yt = yt.repeat((N, 1))
         zt = self.emission(xt)
-        return torch.mean(self.emission_distribution.log_prob(yt, zt))
+        if scale is None:
+            return torch.mean(self.emission_distribution.log_prob(yt, zt))
+        else:
+            return torch.mean(self.emission_distribution.log_prob(yt, zt, scale))
 
-    def sample_observations(self, N):
+    def sample_observations(self, N, scale=None):   #TODO: needs refactoring
         x, mu, _, _, _, _ = self.sample_timeseries(N)
-        y = self.emission_distribution.rsample(self.emission(x), None)
-        return x, y, mu
+        if scale is None:
+            return self.emission_distribution.rsample(self.emission(x), None)
+        else:
+            return self.emission_distribution.rsample(self.emission(x), scale)
+
+    def sample_hierarchical_observations(self, N, M):
+        x, _, _, _, _,  = self.sample(N)
+        y = []
+        for k, child in enumerate(x["children"]):
+            y.append(self.emission_distribution.rsample(self.emission(child), self.emission_sigma_list[k], M))
+        return y
 
     def _estimate_kl(self, smpl1, smpl2):
         mean1 = torch.mean(smpl1, 0)
@@ -41,8 +55,138 @@ class TimeSeries(nn.Module):
         dist2 = torch.distributions.multivariate_normal.MultivariateNormal(mean2, covariance_matrix=cov2)
         return torch.sum(torch.distributions.kl.kl_divergence(dist1, dist2))
 
+    def cascading_transformation(self, x, tr_index, log_jacobian, epsilon_loss, correction):
+        N = x.shape[0]
+        x, new_epsilon_in, new_epsilon_out, new_log_jacobian = self.transformations[tr_index](x.squeeze())
+        log_jacobian += new_log_jacobian
+        eps_sigma = self.transformations[0].epsilon_nu
+        epsilon_loss += - self._avg_gaussian_log_prob(new_epsilon_out, 0., eps_sigma) + self._avg_gaussian_log_prob(
+            new_epsilon_in, 0., eps_sigma)
+        correction += self._estimate_kl(new_epsilon_out, new_epsilon_in)
+        x = x.view((N, self.d_x, 1))
+        return x
 
-class DynamicModel(TimeSeries):
+
+class HierarchicalModel(ProbabilisticModel):
+
+    def __init__(self,n_children, d_x, mean_sigma, scale_sigma, scale_mu, emission_sigma_list, mean_dist, scale_dist,
+                 children_dist, mean_link, scale_link, emission, emission_distribution,
+                 transformations=(), mu_transformations=()):
+        self.n_children = n_children
+        self.d_x=d_x
+        self.mean_sigma = mean_sigma
+        self.scale_mu = scale_mu
+        self.scale_sigma = scale_sigma
+        self.emission_sigma_list = emission_sigma_list
+        self.mean_dist = mean_dist
+        self.scale_dist = scale_dist
+        self.children_dist = children_dist
+        self.mean_link = mean_link
+        self.scale_link = scale_link
+        self.emission = emission
+        self.emission_distribution = emission_distribution
+        if transformations:
+            self.transformations = transformations
+            self.is_transformed = True
+        else:
+            self.is_transformed = False
+        if mu_transformations:
+            self.mu_transformations = mu_transformations
+            self.is_mu_transformed = True
+        else:
+            self.is_mu_transformed = False
+
+    def sample(self, N):
+
+        # Output variables
+        log_jacobian = 0.
+        epsilon_loss = 0.
+        correction = 0.
+
+        # Initialize dynamic variables
+        mean_m = 0.
+        mean_s = self.mean_sigma
+        scale_m = self.scale_mu
+        scale_s = self.scale_sigma
+
+        # Pseudo-conjugate update
+        if self.is_mu_transformed:
+            mean_m, mean_s = self.mu_transformations[0](mean_m, mean_s)
+            scale_m, scale_s = self.mu_transformations[1](mean_m, mean_s)
+
+        # Sampling
+        mean_variable_pre = self.mean_dist.rsample(mean_m, mean_s, N * self.d_x).view((N, self.d_x, 1))
+        scale_variable_pre = self.mean_dist.rsample(scale_m, scale_s, N * self.d_x).view((N, self.d_x, 1))
+
+        # Cascading transformation
+        if self.is_transformed:
+            mean_variable = self.cascading_transformation(mean_variable_pre, 0, log_jacobian, epsilon_loss, correction)
+            scale_variable = self.cascading_transformation(scale_variable_pre, 1, log_jacobian, epsilon_loss, correction)
+        else:
+            mean_variable = mean_variable_pre
+            scale_variable = scale_variable_pre
+
+        children_sample_pre_list = []
+        children_sample_list = []
+        for child_index in range(self.n_children):
+            child_m = self.mean_link(mean_variable)
+            child_s = self.scale_link(scale_variable)
+
+            # Pseudo-conjugate update
+            if self.is_mu_transformed:
+                child_m, child_s = self.mu_transformations[child_index + 2](child_m, child_s)
+
+            # Sampling
+            child_variable_pre = self.children_dist.rsample(child_m, child_s, self.d_x).view((N, self.d_x, 1))
+
+            # Cascading transformation
+            if self.is_transformed:
+                child_variable = self.cascading_transformation(child_variable_pre, child_index+2, log_jacobian,
+                                                               epsilon_loss, correction)
+            else:
+                child_variable = child_variable_pre
+
+            children_sample_list.append(child_variable)
+            children_sample_pre_list.append(child_variable_pre)
+        x = {"mean": mean_variable, "scale": scale_variable, "children": children_sample_list}
+        x_pre = {"mean": mean_variable_pre, "scale": scale_variable_pre, "children": children_sample_pre_list}
+        return x, x_pre, log_jacobian, epsilon_loss, correction
+
+
+    def evaluate_avg_joint_log_prob(self, x, y=None, x_pre=None, log_jacobian=None, epsilon_loss=None, correction=None):
+        mean_m = 0.
+        mean_s = self.self.mean_sigma
+        scale_m = self.scale_mu
+        scale_s = self.scale_sigma
+
+        # Pseudo-conjugate update
+        if self.is_mu_transformed:
+            mean_m, mean_s = self.mu_transformations[0](mean_m, mean_s)
+            scale_m, scale_s = self.mu_transformations[1](mean_m, mean_s)
+
+        avg_log_prob = self._avg_log_prob(x["mean"], mean_m, mean_s, dist=self.mean_dist)
+        avg_log_prob += self._avg_log_prob(x["scale"], scale_m, scale_s, dist=self.scale_dist)
+        if log_jacobian:
+            avg_log_prob -= log_jacobian
+        if epsilon_loss:
+            avg_log_prob += epsilon_loss
+        if correction:
+            avg_log_prob -= correction
+
+        for child_index in range(self.n_children):
+            mu = self.mean_link(x["mean"])
+            s = self.scale_link(x["scale"])
+            if self.is_mu_transformed:
+                mu, s = self.mu_transformations[child_index + 2](mu, s)
+            c = x_pre["children"][child_index + 2] if x_pre is not None else x["children"][child_index + 2]
+            avg_log_prob += self._avg_log_prob(c, mu, s)
+            if y is not None:
+                y_c = y[child_index]
+                avg_log_prob += self._avg_log_likelihood(x["children"][child_index + 2], y_c, self.emission_sigma_list[child_index])
+        return avg_log_prob
+
+
+class DynamicModel(ProbabilisticModel):
 
     def __init__(self, sigma, T, initial_sigma, distribution, d_x, transition, emission, emission_distribution,
                  mu_sd=0.001,
@@ -144,11 +288,11 @@ class DynamicModel(TimeSeries):
                 avg_log_prob += self._avg_log_prob(xt, mut, st)
             if y is not None:
                 yt = y[:, t]
-                avg_log_prob += self._avg_logistig_log_likelihood(x[:, :, t], yt)
+                avg_log_prob += self._avg_log_likelihood(x[:, :, t], yt)
         return avg_log_prob
 
 
-class MeanField(TimeSeries):
+class MeanField(ProbabilisticModel):
 
   def __init__(self, T, d_x, mu_sd=0.001, transformations = ()):
     super(MeanField, self).__init__()
@@ -200,11 +344,11 @@ class MeanField(TimeSeries):
       avg_log_prob += self._avg_gaussian_log_prob(xt, mut, st) #TODO
       if y is not None:
         yt = y[:,t]
-        avg_log_prob += self._avg_logistig_log_likelihood(xt, yt)
+        avg_log_prob += self._avg_log_likelihood(xt, yt)
     return avg_log_prob
 
 
-class GlobalFlow(TimeSeries):
+class GlobalFlow(ProbabilisticModel):
 
   def __init__(self, T, d_x, d_eps, mu_sd = 0.001):
     super(GlobalFlow, self).__init__()
@@ -235,5 +379,5 @@ class GlobalFlow(TimeSeries):
       xt = x[:,t]
       if y is not None:
         yt = y[:,t]
-        avg_log_prob += self._avg_logistig_log_likelihood(xt, yt)
+        avg_log_prob += self._avg_log_likelihood(xt, yt)
     return avg_log_prob
