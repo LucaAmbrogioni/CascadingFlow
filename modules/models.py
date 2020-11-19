@@ -22,11 +22,11 @@ class ProbabilisticModel(nn.Module):
             dist = self.dist
         return torch.sum(torch.mean(dist.log_prob(x=xt, loc=mu, scale=sigma), 0))
 
-    def _avg_log_likelihood(self, xt, yt, scale=None):
+    def _avg_log_likelihood(self, xt, yt, scale=None, regressor=None):
         N = xt.shape[0]
         if yt.shape[0] == 1:
             yt = yt.repeat((N, 1))
-        zt = self.emission(xt)
+        zt = self.emission(xt, regressor)
         if scale is None:
             return torch.mean(self.emission_distribution.log_prob(yt, zt))
         else:
@@ -43,25 +43,29 @@ class ProbabilisticModel(nn.Module):
         x, _, _, _, _,  = self.sample(N)
         y = []
         for k, child in enumerate(x["children"]):
-            y.append(self.emission_distribution.rsample(self.emission(child), self.emission_sigma_list[k], M))
-        return y
+            r = self.regressors[k] if self.regressors is not None else None
+            M = None if self.regressors is not None else M
+            y.append(self.emission_distribution.rsample(self.emission(child, r), self.emission_sigma_list[k], M))
+        return x, y
 
-    def _estimate_kl(self, smpl1, smpl2):
+    def _estimate_kl(self, smpl1, smpl2, s=0.01):
+        n = smpl1.shape[1]
         mean1 = torch.mean(smpl1, 0)
-        cov1 = torch.matmul(torch.transpose(smpl1 - mean1, 1, 0), smpl1 - mean1)
+        cov1 = torch.matmul(torch.transpose(smpl1 - mean1, 1, 0), smpl1 - mean1) + s*torch.Tensor(np.identity(n))
         mean2 = torch.mean(smpl2, 0)
-        cov2 = torch.matmul(torch.transpose(smpl2 - mean2, 1, 0), smpl2 - mean2)
+        cov2 = torch.matmul(torch.transpose(smpl2 - mean2, 1, 0), smpl2 - mean2) + s*torch.Tensor(np.identity(n))
         dist1 = torch.distributions.multivariate_normal.MultivariateNormal(mean1, covariance_matrix=cov1)
         dist2 = torch.distributions.multivariate_normal.MultivariateNormal(mean2, covariance_matrix=cov2)
         return torch.sum(torch.distributions.kl.kl_divergence(dist1, dist2))
 
-    def cascading_transformation(self, x, tr_index, log_jacobian, epsilon_loss, correction):
+    def cascading_transformation(self, x, tr_index, log_jacobian, epsilon_loss, correction, global_epsilon=0.):
         N = x.shape[0]
-        x, new_epsilon_in, new_epsilon_out, new_log_jacobian = self.transformations[tr_index](x.squeeze())
+        x, new_epsilon_in, new_epsilon_out, new_log_jacobian = self.transformations[tr_index](x.squeeze(), global_epsilon)
         log_jacobian += new_log_jacobian
         eps_sigma = self.transformations[0].epsilon_nu
-        epsilon_loss += - self._avg_gaussian_log_prob(new_epsilon_out, 0., eps_sigma) + self._avg_gaussian_log_prob(
-            new_epsilon_in, 0., eps_sigma)
+        epsilon_loss += - self._avg_gaussian_log_prob(new_epsilon_out,
+                                                      global_epsilon, eps_sigma) + self._avg_gaussian_log_prob(
+            new_epsilon_in, global_epsilon, eps_sigma)
         correction += self._estimate_kl(new_epsilon_out, new_epsilon_in)
         x = x.view((N, self.d_x, 1))
         return x
@@ -69,8 +73,8 @@ class ProbabilisticModel(nn.Module):
 
 class HierarchicalModel(ProbabilisticModel):
 
-    def __init__(self,n_children, d_x, mean_sigma, scale_sigma, scale_mu, emission_sigma_list, mean_dist, scale_dist,
-                 children_dist, mean_link, scale_link, emission, emission_distribution,
+    def __init__(self,n_children, d_x, mean_sigma, scale_mu, scale_sigma, emission_sigma_list, mean_dist, scale_dist,
+                 children_dist, mean_link, scale_link, emission, emission_distribution, regressors=None,
                  transformations=(), mu_transformations=()):
         self.n_children = n_children
         self.d_x=d_x
@@ -85,6 +89,7 @@ class HierarchicalModel(ProbabilisticModel):
         self.scale_link = scale_link
         self.emission = emission
         self.emission_distribution = emission_distribution
+        self.regressors = regressors
         if transformations:
             self.transformations = transformations
             self.is_transformed = True
@@ -109,6 +114,12 @@ class HierarchicalModel(ProbabilisticModel):
         scale_m = self.scale_mu
         scale_s = self.scale_sigma
 
+        # Global cascading flow variable
+        if self.is_transformed:
+            global_nu = self.transformations[0].epsilon_nu
+            global_d_eps = self.transformations[0].d_epsilon
+            global_epsilon = torch.distributions.normal.Normal(0., global_nu).rsample((N, global_d_eps))
+
         # Pseudo-conjugate update
         if self.is_mu_transformed:
             mean_m, mean_s = self.mu_transformations[0](mean_m, mean_s)
@@ -120,8 +131,8 @@ class HierarchicalModel(ProbabilisticModel):
 
         # Cascading transformation
         if self.is_transformed:
-            mean_variable = self.cascading_transformation(mean_variable_pre, 0, log_jacobian, epsilon_loss, correction)
-            scale_variable = self.cascading_transformation(scale_variable_pre, 1, log_jacobian, epsilon_loss, correction)
+            mean_variable = self.cascading_transformation(mean_variable_pre, 0, log_jacobian, epsilon_loss, correction, global_epsilon)
+            scale_variable = self.cascading_transformation(scale_variable_pre, 1, log_jacobian, epsilon_loss, correction, global_epsilon)
         else:
             mean_variable = mean_variable_pre
             scale_variable = scale_variable_pre
@@ -137,12 +148,12 @@ class HierarchicalModel(ProbabilisticModel):
                 child_m, child_s = self.mu_transformations[child_index + 2](child_m, child_s)
 
             # Sampling
-            child_variable_pre = self.children_dist.rsample(child_m, child_s, self.d_x).view((N, self.d_x, 1))
+            child_variable_pre = self.children_dist.rsample(child_m, child_s).view((N, self.d_x, 1))
 
             # Cascading transformation
             if self.is_transformed:
                 child_variable = self.cascading_transformation(child_variable_pre, child_index+2, log_jacobian,
-                                                               epsilon_loss, correction)
+                                                               epsilon_loss, correction, global_epsilon)
             else:
                 child_variable = child_variable_pre
 
@@ -155,7 +166,7 @@ class HierarchicalModel(ProbabilisticModel):
 
     def evaluate_avg_joint_log_prob(self, x, y=None, x_pre=None, log_jacobian=None, epsilon_loss=None, correction=None):
         mean_m = 0.
-        mean_s = self.self.mean_sigma
+        mean_s = self.mean_sigma
         scale_m = self.scale_mu
         scale_s = self.scale_sigma
 
@@ -164,25 +175,30 @@ class HierarchicalModel(ProbabilisticModel):
             mean_m, mean_s = self.mu_transformations[0](mean_m, mean_s)
             scale_m, scale_s = self.mu_transformations[1](mean_m, mean_s)
 
-        avg_log_prob = self._avg_log_prob(x["mean"], mean_m, mean_s, dist=self.mean_dist)
-        avg_log_prob += self._avg_log_prob(x["scale"], scale_m, scale_s, dist=self.scale_dist)
+        avg_log_prob = self._avg_log_prob(x["mean"] if x_pre is None else x_pre["mean"],
+                                          mean_m, mean_s, dist=self.mean_dist)
+        avg_log_prob += self._avg_log_prob(x["scale"] if x_pre is None else x_pre["scale"],
+                                           scale_m, scale_s, dist=self.scale_dist)
         if log_jacobian:
             avg_log_prob -= log_jacobian
         if epsilon_loss:
             avg_log_prob += epsilon_loss
         if correction:
-            avg_log_prob -= correction
+            avg_log_prob -= correction.detach()
 
         for child_index in range(self.n_children):
             mu = self.mean_link(x["mean"])
             s = self.scale_link(x["scale"])
             if self.is_mu_transformed:
                 mu, s = self.mu_transformations[child_index + 2](mu, s)
-            c = x_pre["children"][child_index + 2] if x_pre is not None else x["children"][child_index + 2]
-            avg_log_prob += self._avg_log_prob(c, mu, s)
+            c = x_pre["children"][child_index] if x_pre is not None else x["children"][child_index]
+            avg_log_prob += self._avg_log_prob(c, mu, s, dist=self.children_dist)
             if y is not None:
                 y_c = y[child_index]
-                avg_log_prob += self._avg_log_likelihood(x["children"][child_index + 2], y_c, self.emission_sigma_list[child_index])
+                r = self.regressors[child_index] if self.regressors is not None else None
+                avg_log_prob += self._avg_log_likelihood(x["children"][child_index], y_c,
+                                                         self.emission_sigma_list[child_index],
+                                                         r)
         return avg_log_prob
 
 

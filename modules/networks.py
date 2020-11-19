@@ -107,10 +107,10 @@ class TriResNet(nn.Module):
         log_jacobian = torch.sum(torch.log(l + (1-l)*d1) + torch.log(l + (1-l)*d2) + torch.log(l + (1-l)*d3)) + torch.mean(torch.sum(self.log_df(z1) + self.log_df(z2),1))
         return x_out, epsilon_out, log_jacobian
 
-    def __call__(self, x):
+    def __call__(self, x, global_epsilon=0.):
         D = self.d_epsilon
         N = x.shape[0]
-        epsilon = torch.distributions.normal.Normal(torch.zeros((N,D)),self.epsilon_nu*torch.ones((N,D))).rsample()
+        epsilon = global_epsilon + torch.distributions.normal.Normal(torch.zeros((N,D)),self.epsilon_nu*torch.ones((N,D))).rsample()
         x_posterior, epsilon_out, log_jacobian = self.forward(x, epsilon)
         return x_posterior, epsilon, epsilon_out, log_jacobian
 

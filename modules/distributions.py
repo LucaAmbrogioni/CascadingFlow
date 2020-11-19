@@ -10,7 +10,7 @@ class NormalDistribution():
         dist = torch.distributions.normal.Normal(loc, scale)
         return dist.log_prob(x)
 
-    def rsample(self, loc, scale, N):
+    def rsample(self, loc, scale, N=None):
         dist = torch.distributions.normal.Normal(loc, scale)
         if N is not None:
             return dist.rsample((N,))
