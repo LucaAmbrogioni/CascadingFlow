@@ -6,11 +6,18 @@ import numpy as np
 
 class NormalDistribution():
 
-    def log_prob(self, x, loc, scale):
+    def __init__(self, scale=1.):
+        self.scale = scale
+
+    def log_prob(self, x, loc, scale=None):
+        if scale is None:
+            scale = self.scale
         dist = torch.distributions.normal.Normal(loc, scale)
         return dist.log_prob(x)
 
-    def rsample(self, loc, scale, N=None):
+    def rsample(self, loc, scale=None, N=None):
+        if scale is None:
+            scale = self.scale
         dist = torch.distributions.normal.Normal(loc, scale)
         if N is not None:
             return dist.rsample((N,))

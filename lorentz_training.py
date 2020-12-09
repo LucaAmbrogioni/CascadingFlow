@@ -10,63 +10,85 @@ import torch.optim as optim
 
 from modules.distributions import NormalDistribution, BernoulliDistribution
 from modules.models import DynamicModel
-from modules.dynamics import LorentzTransition
+from modules.dynamics import LorentzTransition, RNNTransition, BrusselatorTransition, VolterraTransition
 from modules.emissions import SingleCoordinateEmission
-from modules.models import MeanField
+from modules.experiments import rum_timeseries_experiment
 
 # Defining dynamical and emission model
-T = 40
-dt = 0.02
-sigma = np.sqrt(dt)*2.
-initial_sigma = 1.
-observation_gain = 2.
-d_x = 3 #Number of latent variables
-dist = NormalDistribution()
-bm = DynamicModel(sigma=sigma, initial_sigma=initial_sigma, distribution=dist, d_x=d_x,
-                  transition=LorentzTransition(dt=dt),
-                  emission=SingleCoordinateEmission(k=0, gain=observation_gain),
-                  emission_distribution=BernoulliDistribution(), observation_gain=observation_gain, T=T)
+model_name = "rnn"
+lik_name = "r"
+exp_name = model_name + "_" + lik_name
+
+if model_name == "lz":
+    T = 40
+    T_data = 20
+    dt = 0.02
+    sigma = np.sqrt(dt)*2.
+    initial_sigma = 1.
+    initial_mean = 0.
+    d_x = 3 #Number of latent variables
+    dist = NormalDistribution()
+    lk_sigma = 3.
+    transition_model = LorentzTransition(dt=dt)
+elif model_name == "vol":
+    T = 100
+    T_data = 50
+    dt = 1.
+    sigma = np.sqrt(dt)*0.5
+    initial_sigma = 3.
+    initial_mean = 20.
+    d_x = 2 #Number of latent variables
+    dist = NormalDistribution()
+    lk_sigma = 3.
+    transition_model = VolterraTransition(dt=dt)
+elif model_name == "bruss":
+    T = 80
+    T_data = 40
+    dt = 0.1
+    sigma = np.sqrt(dt)*0.1
+    initial_sigma = 1.
+    d_x = 2 #Number of latent variables
+    dist = NormalDistribution()
+    lk_sigma = 3.
+    transition_model = BrusselatorTransition(dt=dt)
+elif model_name == "bm":
+    T = 40
+    T_data = 20
+    dt = 0.2
+    sigma = np.sqrt(dt) * 1.
+    initial_sigma = 1.
+    initial_mean = 0.
+    d_x = 1  # Number of latent variables
+    dist = NormalDistribution()
+    lk_sigma = 1.
+    transition_model = lambda x,m: x
+elif model_name == "rnn":
+    T = 40  # 60
+    T_data = 20
+    dt = 0.2
+    sigma = np.sqrt(dt) * 0.1  # 0.5
+    initial_sigma = 1.
+    initial_mean = 0.
+    d_x = 3
+    dist = NormalDistribution()
+    lk_sigma = 1.
+    transition_model = RNNTransition(d_x=d_x, d_h=5, dt=dt)
+
+if lik_name == "c":
+    observation_gain = 2.
+    lk_sigma = None
+    emission_model = SingleCoordinateEmission(k=0, gain=observation_gain)
+    emission_dist = BernoulliDistribution()
+elif lik_name == "r":
+    observation_gain = 1.
+    emission_model = SingleCoordinateEmission(k=0, gain=observation_gain)
+    emission_dist = NormalDistribution(scale=lk_sigma)
 
 num_repetitions = 10
-num_iterations = 10000
+num_iterations = 4000 #8000
 batch_size = 50
-prior_model = bm
 
-for rep in range(num_repetitions):
-
-    print("Repetition: {}".format(rep))
-
-    # generate ground truth
-    X_true, Y, mu =  bm.sample_observations(1)
-    x = X_true[0, 0, :].detach().numpy()
-    y = Y[0, :].detach().numpy()
-    data = Y[0, :].view((1, T))
-
-
-    ### Mean field ###
-    variational_model = MeanField(T=T, d_x=d_x)
-    loss_list_mf = []
-    parames_list = [variational_model.parameters()]
-    params = []
-    for p in parames_list:
-        params += p
-    optimizer = optim.Adam(params, lr=0.001)
-
-    print("Train mean field model")
-    for itr in tqdm(range(num_iterations)):
-        # Gradient reset
-        optimizer.zero_grad()
-
-        # Variational loss
-        X, mu, x_pre, log_jacobian, epsilon_loss = variational_model.sample_timeseries(batch_size)
-        log_q = variational_model.evaluate_avg_joint_log_prob(X, None, mu, x_pre=x_pre, log_jacobian=log_jacobian,
-                                                              epsilon_loss=epsilon_loss)
-        log_p = prior_model.evaluate_avg_joint_log_prob(X, data, mu)
-        loss = (log_q - log_p)
-
-        # Update
-        loss.backward()
-        optimizer.step()
-        loss_list_mf.append(float(loss.detach().numpy()))
-
+rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_size, transition_model,
+                          dist, emission_model, emission_dist, d_x,
+                          sigma, initial_sigma, observation_gain, T, T_data, lk_sigma, initial_mean)
     

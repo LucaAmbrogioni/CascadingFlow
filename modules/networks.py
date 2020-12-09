@@ -5,7 +5,7 @@ import numpy as np
 
 class TriResNet(nn.Module):
 
-    def __init__(self, d_x, d_epsilon, epsilon_nu, in_pre_lambda=2.):
+    def __init__(self, d_x, d_epsilon, epsilon_nu, in_pre_lambda=None):
         super(TriResNet, self).__init__()
         self.d_x = d_x
         self.d_epsilon = d_epsilon
@@ -23,7 +23,10 @@ class TriResNet(nn.Module):
         self.b1 = nn.Parameter(torch.Tensor(np.random.normal(0,0.01,(self.width,))))
         self.b2 = nn.Parameter(torch.Tensor(np.random.normal(0,0.01,(self.width,))))
         self.b3 = nn.Parameter(torch.Tensor(np.random.normal(0,0.01,(self.width,))))
-        self.pre_l = nn.Parameter(torch.Tensor(np.random.normal(in_pre_lambda,0.1,(1,))))
+        if in_pre_lambda is None:
+            self.pre_l = torch.Tensor(np.random.normal(-100., 0.1, (1,)))
+        else:
+            self.pre_l = nn.Parameter(torch.Tensor(np.random.normal(in_pre_lambda,0.1,(1,))))
 
         # Masks
         self.masku = torch.tril(torch.ones((self.width, self.width)), -1)
@@ -113,6 +116,28 @@ class TriResNet(nn.Module):
         epsilon = global_epsilon + torch.distributions.normal.Normal(torch.zeros((N,D)),self.epsilon_nu*torch.ones((N,D))).rsample()
         x_posterior, epsilon_out, log_jacobian = self.forward(x, epsilon)
         return x_posterior, epsilon, epsilon_out, log_jacobian
+
+class LinearNet(nn.Module):
+
+    def __init__(self, d_x):
+        super(LinearNet, self).__init__()
+        self.d_x = d_x
+        self.l = nn.Linear(d_x, d_x)
+
+    def __call__(self, x):
+        return self.l(x)
+
+
+class DeepNet(nn.Module):
+
+    def __init__(self, d_x, d_h):
+        super(DeepNet, self).__init__()
+        self.d_x = d_x
+        self.l1 = nn.Linear(d_x, d_h)
+        self.l2 = nn.Linear(d_h, d_x)
+
+    def __call__(self, x):
+        return self.l2(F.relu(self.l1(x)))
 
 
 class ASVIupdate(nn.Module):

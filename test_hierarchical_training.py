@@ -63,7 +63,7 @@ for rep in range(num_repetitions):
         params += p
     optimizer = optim.Adam(params, lr=0.001)
 
-    print("Train mean field model")
+    print("Train Cascadinf Flow model")
     for itr in tqdm(range(num_iterations)):
         # Gradient reset
         optimizer.zero_grad()

@@ -1,0 +1,15 @@
+def variational_update(prior_model, variational_model, data, optimizer, batch_size):
+    # Gradient reset
+    optimizer.zero_grad()
+
+    # Variational loss
+    X, mu, x_pre, log_jacobian, epsilon_loss = variational_model.sample_timeseries(batch_size)
+    log_q = variational_model.evaluate_avg_joint_log_prob(X, None, mu, x_pre=x_pre, log_jacobian=log_jacobian,
+                                                          epsilon_loss=epsilon_loss)
+    log_p = prior_model.evaluate_avg_joint_log_prob(X, data, mu)
+    loss = (log_q - log_p)
+
+    # Update
+    loss.backward()
+    optimizer.step()
+    return loss
