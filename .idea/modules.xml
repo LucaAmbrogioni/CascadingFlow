@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/cascading_flows.iml" filepath="$PROJECT_DIR$/.idea/cascading_flows.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/CascadingFlow.iml" filepath="$PROJECT_DIR$/.idea/CascadingFlow.iml" />
     </modules>
   </component>
 </project>

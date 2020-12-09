@@ -1,8 +1,276 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="951d8c97-5297-40db-9ed7-fd776c6ec1bc" name="Default Changelist" comment="" />
+    <list default="true" id="951d8c97-5297-40db-9ed7-fd776c6ec1bc" name="Default Changelist" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/CascadingFlow.iml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/lucamb.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/AR_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/AR_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/AR_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/AR_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/ASVI_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/ASVI_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/ASVI_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/ASVI_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/CFn_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/CFn_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/CFn_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/CFn_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/CFr_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/CFr_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/CFr_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/CFr_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/GFn_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/GFn_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/GFn_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/GFn_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/GFr_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/GFr_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/GFr_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/GFr_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/MF_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/MF_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/MF_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/MF_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/MN_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/MN_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/MN_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/MN_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/NN_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/NN_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/NN_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_figures/NN_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_results/multi_results.pickle" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_results/pred_results.pickle" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bm_r_results/uni_results.pickle" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bruss_r_figures/CFr_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bruss_r_figures/CFr_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/bruss_r_figures/CFr_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/AR_loss.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/AR_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/AR_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/AR_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/ASVI_loss.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/ASVI_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/ASVI_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/ASVI_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/CFn_loss.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/CFn_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/CFn_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/CFn_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/CFr_loss.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/CFr_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/CFr_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/CFr_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/GFn_loss.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/GFn_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/GFn_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/GFn_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/GFr_loss.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/GFr_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/GFr_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/GFr_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/MF_loss.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/MF_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/MF_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/MF_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/MN_loss.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/MN_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/MN_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/MN_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/NN_loss.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/NN_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/NN_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_figures/NN_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_c_results/results_loader.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/AR_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/AR_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/AR_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/AR_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/ASVI_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/ASVI_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/ASVI_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/ASVI_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/CFn_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/CFn_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/CFn_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/CFn_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/CFr_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/CFr_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/CFr_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/CFr_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/GFn_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/GFn_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/GFn_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/GFn_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/GFr_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/GFr_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/GFr_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/GFr_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/MF_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/MF_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/MF_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/MF_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/MN_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/MN_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/MN_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/lz_r_figures/MN_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/modules/experiments.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/modules/plot_tools.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/modules/training_tools.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/ASVI_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/ASVI_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/ASVI_loss_rep:2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/ASVI_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/ASVI_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/ASVI_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/ASVI_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/ASVI_rep:1_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/ASVI_rep:1_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/ASVI_rep:2_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/ASVI_rep:2_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/ASVI_rep:2_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFn_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFn_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFn_loss_rep:2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFn_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFn_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFn_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFn_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFn_rep:1_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFn_rep:1_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFn_rep:2_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFn_rep:2_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFn_rep:2_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_loss_rep:2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_loss_rep:3.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_rep:1_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_rep:1_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_rep:2_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_rep:2_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_rep:2_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_rep:3_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_rep:3_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_rep:3_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFn_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFn_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFn_loss_rep:2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFn_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFn_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFn_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFn_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFn_rep:1_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFn_rep:1_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFn_rep:2_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFn_rep:2_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFn_rep:2_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFr_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFr_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFr_loss_rep:2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFr_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFr_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFr_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFr_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFr_rep:1_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFr_rep:1_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFr_rep:2_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFr_rep:2_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/GFr_rep:2_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MF_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MF_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MF_loss_rep:2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MF_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MF_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MF_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MF_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MF_rep:1_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MF_rep:1_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MF_rep:2_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MF_rep:2_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MF_rep:2_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MN_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MN_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MN_loss_rep:2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MN_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MN_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MN_rep:0_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MN_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MN_rep:1_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MN_rep:1_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MN_rep:2_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MN_rep:2_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rnn_r_figures/MN_rep:2_2.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test_hierarchical_nn_regression_sampling.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test_hierarchical_regression_sampling.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test_hierarchical_sampling.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test_hierarchical_training.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/variational_models_test.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/ASVI_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/ASVI_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/ASVI_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/ASVI_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/ASVI_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/ASVI_rep:1_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/CFn_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/CFn_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/CFn_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/CFn_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/CFn_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/CFn_rep:1_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/CFr_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/CFr_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/CFr_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/CFr_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/CFr_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/CFr_rep:1_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/GFn_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/GFn_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/GFn_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/GFn_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/GFn_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/GFn_rep:1_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/GFr_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/GFr_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/GFr_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/GFr_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/GFr_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/GFr_rep:1_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/MF_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/MF_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/MF_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/MF_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/MF_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/MF_rep:1_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/MN_loss_rep:0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/MN_loss_rep:1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/MN_rep:0_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/MN_rep:0_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/MN_rep:1_0.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_figures/MN_rep:1_1.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_results/multi_results.pickle" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_results/pred_results.pickle" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/vol_r_results/uni_results.pickle" />
+      <change beforePath="$PROJECT_DIR$/.idea/cascading_flows.iml" afterPath="$PROJECT_DIR$/.idea/cascading_flows.iml" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/lorentz_training.py" afterPath="$PROJECT_DIR$/lorentz_training.py" />
+      <change beforePath="$PROJECT_DIR$/modules/distributions.py" afterPath="$PROJECT_DIR$/modules/distributions.py" />
+      <change beforePath="$PROJECT_DIR$/modules/dynamics.py" afterPath="$PROJECT_DIR$/modules/dynamics.py" />
+      <change beforePath="$PROJECT_DIR$/modules/emissions.py" afterPath="$PROJECT_DIR$/modules/emissions.py" />
+      <change beforePath="$PROJECT_DIR$/modules/eval_utils.py" afterPath="$PROJECT_DIR$/modules/eval_utils.py" />
+      <change beforePath="$PROJECT_DIR$/modules/models.py" afterPath="$PROJECT_DIR$/modules/models.py" />
+      <change beforePath="$PROJECT_DIR$/modules/networks.py" afterPath="$PROJECT_DIR$/modules/networks.py" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,47 +312,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/networks.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="3" selection-end-column="18" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test_lorentz_sampling.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" selection-start-line="9" selection-end-line="35" selection-end-column="10" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lorentz_training.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="890">
-              <caret line="71" column="4" selection-start-line="71" selection-start-column="4" selection-end-line="71" selection-end-column="4" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="eval_utils.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/eval_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="360">
+              <caret line="22" column="9" lean-forward="false" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_lorentz_sampling.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_lorentz_sampling.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -92,47 +334,31 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/distributions.py">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/models.py">
+      <file leaf-file-name="lorentz_training.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lorentz_training.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1740">
-              <caret line="46" column="65" selection-start-line="46" selection-start-column="62" selection-end-line="46" selection-end-column="65" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="317">
+              <caret line="69" column="22" lean-forward="false" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file leaf-file-name="dynamics.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/dynamics.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="3" selection-end-column="18" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/emissions.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -152,7 +378,26 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>d_x</find>
+      <find>_avg_logistig_log_likelihood</find>
+      <find>sample_hiera</find>
+      <find>x_pre</find>
+      <find>correction</find>
+      <find>sample_timeseries</find>
+      <find>Lorentz</find>
+      <find>K=</find>
+      <find>plot</find>
+      <find>plot_model</find>
+      <find>figures</find>
+      <find>LorentzTransition(dt=dt)</find>
+      <find>K=3</find>
+      <find>savefig</find>
+      <find>evaluate</find>
+      <find>initial</find>
+      <find>initial_sigma</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -165,7 +410,21 @@
         <option value="$PROJECT_DIR$/plot_utils.py" />
         <option value="$PROJECT_DIR$/eval_utils.py" />
         <option value="$PROJECT_DIR$/test_lorentz_sampling.py" />
+        <option value="$PROJECT_DIR$/test_hierarchical_sampling.py" />
+        <option value="$PROJECT_DIR$/test_hierarchical_regression_sampling.py" />
+        <option value="$PROJECT_DIR$/test_hierarchical_nn_regression_sampling.py" />
+        <option value="$PROJECT_DIR$/test_hierarchical_training.py" />
+        <option value="$PROJECT_DIR$/modules/emissions.py" />
+        <option value="$PROJECT_DIR$/modules/training_tools.py" />
+        <option value="$PROJECT_DIR$/modules/distributions.py" />
+        <option value="$PROJECT_DIR$/modules/networks.py" />
+        <option value="$PROJECT_DIR$/variational_models_test.py" />
+        <option value="$PROJECT_DIR$/lz_c_results/results_loader.py" />
+        <option value="$PROJECT_DIR$/modules/plot_tools.py" />
         <option value="$PROJECT_DIR$/modules/models.py" />
+        <option value="$PROJECT_DIR$/modules/dynamics.py" />
+        <option value="$PROJECT_DIR$/modules/experiments.py" />
+        <option value="$PROJECT_DIR$/modules/eval_utils.py" />
         <option value="$PROJECT_DIR$/lorentz_training.py" />
       </list>
     </option>
@@ -177,26 +436,38 @@
     <option name="height" value="1000" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="cascading_flows" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cascading_flows" type="462c0819:PsiDirectoryNode" />
+              <item name="CascadingFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CascadingFlow" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="cascading_flows" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cascading_flows" type="462c0819:PsiDirectoryNode" />
+              <item name="CascadingFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CascadingFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="bm_r_results" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CascadingFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CascadingFlow" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cascading_flows" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -206,8 +477,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="last_opened_file_path" value="$USER_HOME$/anaconda2/envs/pytorch" />
+    <property name="ToolWindowRun.ShowToolbar" value="false" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/modules" />
     </key>
@@ -226,28 +503,42 @@
   </component>
   <component name="RunManager" selected="Python.lorentz_training">
     <configuration name="lorentz_training" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="cascading_flows" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="$USER_HOME$/anaconda2/envs/pytorch/bin/python" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CascadingFlow" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lorentz_training.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
     </configuration>
-    <configuration name="test_lorentz_sampling" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="results_loader" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lz_c_results" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="cascading_flows" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lz_c_results/results_loader.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="test_hierarchical_nn_regression_sampling" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -258,25 +549,68 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test_lorentz_sampling.py" />
+      <module name="cascading_flows" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test_hierarchical_nn_regression_sampling.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="Python.test_lorentz_sampling" />
-      <item itemvalue="Python.lorentz_training" />
+    <configuration name="test_hierarchical_regression_sampling" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="cascading_flows" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test_hierarchical_regression_sampling.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="variational_models_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="cascading_flows" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/variational_models_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Python.test_hierarchical_regression_sampling" />
+      <item index="1" class="java.lang.String" itemvalue="Python.test_hierarchical_nn_regression_sampling" />
+      <item index="2" class="java.lang.String" itemvalue="Python.lorentz_training" />
+      <item index="3" class="java.lang.String" itemvalue="Python.variational_models_test" />
+      <item index="4" class="java.lang.String" itemvalue="Python.results_loader" />
     </list>
     <recent_temporary>
-      <list>
-        <item itemvalue="Python.lorentz_training" />
-        <item itemvalue="Python.test_lorentz_sampling" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.lorentz_training" />
+        <item index="1" class="java.lang.String" itemvalue="Python.results_loader" />
+        <item index="2" class="java.lang.String" itemvalue="Python.variational_models_test" />
+        <item index="3" class="java.lang.String" itemvalue="Python.test_hierarchical_nn_regression_sampling" />
+        <item index="4" class="java.lang.String" itemvalue="Python.test_hierarchical_regression_sampling" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -292,112 +626,421 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1853" height="1175" extended-state="6" />
-    <editor active="true" />
+    <frame x="67" y="25" width="1857" height="1092" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24972677" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3295129" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17303494" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/test_hierarchical_training.py</url>
+          <line>92</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/modules/experiments.py</url>
+          <line>68</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="17" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>plt.plot(np.transpose(Y))
+plt.show()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>plt.plot(np.transpose(Y))
+  plt.show()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>plt.plot(Y)
+plt.show()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>plt.plot(Y[0,:])
+plt.show()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>plt.plot(out_data.detach().numpy()[0,:])
+plt.show()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>plt.plot(out_data.detach().numpy()[1,:])
+plt.show()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>out_data.detach().numpy()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>plt.plot(out_data.detach().numpy())
+plt.show()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>out_data</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+    </expressions>
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>self.emission_sigma_list[k]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>sample[&quot;children&quot;][n].detach().numpy()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>dist.rsample((N,))</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>child_s.shape</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>child_m.shape</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.children_dist.rsample(child_m, child_s, N * self.d_x)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>child_variable_pre = self.children_dist.rsample(child_m, child_s, N * self.d_x)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>(N, self.d_x, 1)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>N</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/MN_loss_rep:0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/MN_rep:0_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/MN_rep:0_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/MN_rep:0_2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/CFr_loss_rep:0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/CFr_loss_rep:1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/CFr_loss_rep:2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/CFr_rep:0_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/CFr_rep:0_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/CFr_rep:0_2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/CFr_rep:1_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/CFr_rep:1_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/CFr_rep:1_2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/CFr_rep:2_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/CFr_rep:2_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/CFr_rep:2_2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFr_loss_rep:0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFr_loss_rep:1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFr_loss_rep:2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFr_rep:0_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFr_rep:0_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFr_rep:0_2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFr_rep:1_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFr_rep:1_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFr_rep:1_2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFr_rep:2_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFr_rep:2_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFr_rep:2_2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/MF_loss_rep:0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/MF_loss_rep:1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/MF_rep:0_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/MF_rep:0_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFn_loss_rep:0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFn_loss_rep:1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFn_loss_rep:2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFn_rep:0_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFn_rep:0_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFn_rep:0_2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFn_rep:1_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFn_rep:1_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFn_rep:1_2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFn_rep:2_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/GFn_rep:2_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/MN_rep:1_2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/MN_rep:2_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/MN_rep:2_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn_r_figures/MN_rep:2_2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modules/eval_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="360">
+          <caret line="22" column="9" lean-forward="false" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/distributions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/dynamics.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="3" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/emissions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/lorentz_training.py">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/test_lorentz_sampling.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" selection-start-line="9" selection-end-line="35" selection-end-column="10" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1740">
-          <caret line="46" column="65" selection-start-line="46" selection-start-column="62" selection-end-line="46" selection-end-column="65" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/networks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="3" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lorentz_training.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="890">
-          <caret line="71" column="4" selection-start-line="71" selection-start-column="4" selection-end-line="71" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="317">
+          <caret line="69" column="22" lean-forward="false" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
