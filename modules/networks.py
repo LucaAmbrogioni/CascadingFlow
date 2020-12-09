@@ -5,7 +5,7 @@ import numpy as np
 
 class TriResNet(nn.Module):
 
-    def __init__(self, d_x, d_epsilon, epsilon_nu, in_pre_lambda=None):
+    def __init__(self, d_x, d_epsilon, epsilon_nu, in_pre_lambda=2.):
         super(TriResNet, self).__init__()
         self.d_x = d_x
         self.d_epsilon = d_epsilon
@@ -23,10 +23,7 @@ class TriResNet(nn.Module):
         self.b1 = nn.Parameter(torch.Tensor(np.random.normal(0,0.01,(self.width,))))
         self.b2 = nn.Parameter(torch.Tensor(np.random.normal(0,0.01,(self.width,))))
         self.b3 = nn.Parameter(torch.Tensor(np.random.normal(0,0.01,(self.width,))))
-        if in_pre_lambda is None:
-            self.pre_l = torch.Tensor(np.random.normal(-100., 0.1, (1,)))
-        else:
-            self.pre_l = nn.Parameter(torch.Tensor(np.random.normal(in_pre_lambda,0.1,(1,))))
+        self.pre_l = nn.Parameter(torch.Tensor(np.random.normal(in_pre_lambda,0.1,(1,))))
 
         # Masks
         self.masku = torch.tril(torch.ones((self.width, self.width)), -1)
@@ -85,8 +82,6 @@ class TriResNet(nn.Module):
         d1, d2, d3, U1, L1, U2, L2, U3, L3 = self.get_matrices()
 
         # Forward
-        if len(x.shape)==1:
-            x = x.view((x.shape[0],1))
         z0 = torch.cat((x, epsilon),1)
         z1 = self.LU_layer(z0, L1, U1, self.b1)
         z2 = self.LU_layer(self.f(z1), L2, U2, self.b2)
@@ -110,34 +105,12 @@ class TriResNet(nn.Module):
         log_jacobian = torch.sum(torch.log(l + (1-l)*d1) + torch.log(l + (1-l)*d2) + torch.log(l + (1-l)*d3)) + torch.mean(torch.sum(self.log_df(z1) + self.log_df(z2),1))
         return x_out, epsilon_out, log_jacobian
 
-    def __call__(self, x, global_epsilon=0.):
+    def __call__(self, x):
         D = self.d_epsilon
         N = x.shape[0]
-        epsilon = global_epsilon + torch.distributions.normal.Normal(torch.zeros((N,D)),self.epsilon_nu*torch.ones((N,D))).rsample()
+        epsilon = torch.distributions.normal.Normal(torch.zeros((N,D)),self.epsilon_nu*torch.ones((N,D))).rsample()
         x_posterior, epsilon_out, log_jacobian = self.forward(x, epsilon)
         return x_posterior, epsilon, epsilon_out, log_jacobian
-
-class LinearNet(nn.Module):
-
-    def __init__(self, d_x):
-        super(LinearNet, self).__init__()
-        self.d_x = d_x
-        self.l = nn.Linear(d_x, d_x)
-
-    def __call__(self, x):
-        return self.l(x)
-
-
-class DeepNet(nn.Module):
-
-    def __init__(self, d_x, d_h):
-        super(DeepNet, self).__init__()
-        self.d_x = d_x
-        self.l1 = nn.Linear(d_x, d_h)
-        self.l2 = nn.Linear(d_h, d_x)
-
-    def __call__(self, x):
-        return self.l2(F.relu(self.l1(x)))
 
 
 class ASVIupdate(nn.Module):

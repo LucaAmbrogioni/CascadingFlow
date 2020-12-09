@@ -10,5 +10,5 @@ class SingleCoordinateEmission():
     self.k = k
     self.gain = gain
 
-  def __call__(self, x, r=None):
+  def __call__(self, x):
     return x[:,self.k]*self.gain
