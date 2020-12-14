@@ -3,15 +3,27 @@ import scipy.stats as stats
 import matplotlib.pyplot as plt
 
 
-def evaluate_likelihood(X, x_true):
+def gauss_evaluate_likelihood(X, x_true):
   if len(X.shape) == 3:
     a,b,c = X.shape
     X = np.reshape(X, newshape=(a,b*c))
     x_true = np.reshape(x_true, newshape=(b*c,))
   X_mean = np.mean(X,0)
   X_sd = np.std(X,0)
-  return np.mean(-(x_true - X_mean)**2/(2*X_sd**2) - 0.5*np.log(2*np.pi*X_sd))
+  return np.mean(-(x_true - X_mean)**2/(2*X_sd**2) - 0.5*np.log(2*np.pi*X_sd**2))
 
+def evaluate_likelihood(X, x_true, s=0.00001):
+  def ker(x,y,bw):
+      return np.mean(np.log(np.mean(np.exp(-(x - y)**2/(2*bw**2))/(np.sqrt(2*np.pi)*bw),0) + s))
+  if len(X.shape) == 3:
+    N,b,c = X.shape
+    a = b*c
+  else:
+    N,a = X.shape
+  X = np.reshape(X, newshape=(N,a))
+  x_true = np.reshape(x_true, newshape=(1,a))
+  bw = 0.9*np.std(X,0)*N**(-1/5)
+  return ker(X, x_true, bw)
 
 def evaluate_multi_likelihood(X, x_true, s=0.01):
   try:
@@ -42,13 +54,14 @@ def evaluate_model(variational_model, X_true, M, emission_model, emission_distri
 def evaluate_predictive_error(X, emission_model, emission_distribution, scale, out_data, T_data, M):
   Y = np.zeros((X.shape[0], X.shape[2] - T_data))
   for t in range(T_data, X.shape[2]):
-    t = t - T_data
-    xt = X[:,:,t]
+    tau = t - T_data
     if scale is None:
-      Y[:,t] = emission_distribution.rsample(emission_model(xt), None).detach().numpy() + np.random.normal(0.,0.001, Y[:,t].shape)
+      Y[:,tau] = emission_distribution.rsample(emission_model(X[:,:,t]), None).detach().numpy()
     else:
-      Y[:, t] = emission_distribution.rsample(emission_model(xt), scale).detach().numpy() + np.random.normal(0.,0.001, Y[:,t].shape)
-  plt.plot(np.transpose(Y))
-  plt.show()
-  return evaluate_multi_likelihood(Y, out_data.detach().numpy(), s=0.01)
+      Y[:,tau] = emission_distribution.rsample(emission_model(X[:,:,t]), scale).detach().numpy()
+  #plt.plot(np.transpose(Y), alpha=0.01, c="r")
+  #plt.plot(np.transpose(X[:20,0,T_data:].detach().numpy()), alpha=0.8, c="k")
+  #plt.plot(np.transpose(out_data))
+  #plt.show()
+  return evaluate_likelihood(Y, out_data.detach().numpy())
 

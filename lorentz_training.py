@@ -1,21 +1,12 @@
 import numpy as np
-import matplotlib.pyplot as plt
-
-from tqdm import tqdm
-
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
 
 from modules.distributions import NormalDistribution, BernoulliDistribution
-from modules.models import DynamicModel
 from modules.dynamics import LorentzTransition, RNNTransition, BrusselatorTransition, VolterraTransition
 from modules.emissions import SingleCoordinateEmission
 from modules.experiments import rum_timeseries_experiment
 
 # Defining dynamical and emission model
-model_name = "rnn"
+model_name = "lz"
 lik_name = "r"
 exp_name = model_name + "_" + lik_name
 
@@ -47,6 +38,7 @@ elif model_name == "bruss":
     dt = 0.1
     sigma = np.sqrt(dt)*0.1
     initial_sigma = 1.
+    initial_mean = 0.
     d_x = 2 #Number of latent variables
     dist = NormalDistribution()
     lk_sigma = 3.
@@ -85,7 +77,7 @@ elif lik_name == "r":
     emission_dist = NormalDistribution(scale=lk_sigma)
 
 num_repetitions = 10
-num_iterations = 4000 #8000
+num_iterations = 1000 #8000
 batch_size = 50
 
 rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_size, transition_model,

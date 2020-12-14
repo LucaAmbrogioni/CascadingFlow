@@ -59,8 +59,6 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
 
         # generate ground truth
         X_true, Y, mu = prior_model.sample_observations(1)
-        x = X_true[0, 0, :].detach().numpy()
-        y = Y[0, :].detach().numpy()
         data = Y[0, :T_data].view((1, T_data))
         out_data = Y[0, T_data:].view((1, Y.shape[1] - T_data))
 
@@ -92,7 +90,7 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
             loss_list.append(float(loss.detach().numpy()))
 
         # Performance metrics
-        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=1000,
+        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
                                                 emission_model=emission_model,
                                                 emission_distribution=emission_dist,
                                                 scale=lk_sigma, out_data=out_data, T_data=T_data)
@@ -131,7 +129,7 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
             loss_list.append(float(loss.detach().numpy()))
 
         # Performance metrics
-        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=1000,
+        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
                                                 emission_model=emission_model,
                                                 emission_distribution=emission_dist,
                                                 scale=lk_sigma, out_data=out_data, T_data=T_data)
@@ -165,7 +163,7 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
             loss_list.append(float(loss.detach().numpy()))
 
         # Performance metrics
-        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=1000,
+        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
                                                 emission_model=emission_model,
                                                 emission_distribution=emission_dist,
                                                 scale=lk_sigma, out_data=out_data, T_data=T_data)
@@ -198,7 +196,7 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
             loss_list.append(float(loss.detach().numpy()))
 
         # Performance metrics
-        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=1000,
+        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
                                                 emission_model=emission_model,
                                                 emission_distribution=emission_dist,
                                                 scale=lk_sigma, out_data=out_data, T_data=T_data)
@@ -238,7 +236,7 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
             loss_list.append(float(loss.detach().numpy()))
 
         # Performance metrics
-        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=1000,
+        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
                                                 emission_model=emission_model,
                                                 emission_distribution=emission_dist,
                                                 scale=lk_sigma, out_data=out_data, T_data=T_data)
@@ -268,7 +266,7 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
             loss_list.append(float(loss.detach().numpy()))
 
         # Performance metrics
-        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=1000,
+        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
                                                 emission_model=emission_model,
                                                 emission_distribution=emission_dist,
                                                 scale=lk_sigma, out_data=out_data, T_data=T_data)
@@ -298,7 +296,7 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
             loss_list.append(float(loss.detach().numpy()))
 
         # Performance metrics
-        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=1000,
+        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
                                                 emission_model=emission_model,
                                                 emission_distribution=emission_dist,
                                                 scale=lk_sigma, out_data=out_data, T_data=T_data)
@@ -332,7 +330,7 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
         #     loss_list.append(float(loss.detach().numpy()))
         #
         # # Performance metrics
-        # uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=1000,
+        # uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
         #                                         emission_model=emission_model,
         #                                         emission_distribution=emission_dist,
         #                                         scale=lk_sigma, out_data=out_data, T_data=T_data)
@@ -366,7 +364,7 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
         #     loss_list.append(float(loss.detach().numpy()))
         #
         # # Performance metrics
-        # uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=1000,
+        # uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
         #                                         emission_model=emission_model,
         #                                         emission_distribution=emission_dist,
         #                                         scale=lk_sigma, out_data=out_data, T_data=T_data)
