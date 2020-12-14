@@ -2,46 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="951d8c97-5297-40db-9ed7-fd776c6ec1bc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/lorentz_training.py" afterPath="$PROJECT_DIR$/lorentz_training.py" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/AR_loss_rep:0.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/AR_rep:0_0.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/AR_rep:0_1.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/AR_rep:0_2.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/ASVI_loss_rep:0.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/ASVI_rep:0_0.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/ASVI_rep:0_1.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/ASVI_rep:0_2.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_loss_rep:0.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_rep:0_0.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_rep:0_1.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_rep:0_2.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_loss_rep:0.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_rep:0_0.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_rep:0_1.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_rep:0_2.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFn_loss_rep:0.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFn_rep:0_0.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFn_rep:0_1.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFn_rep:0_2.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFr_loss_rep:0.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFr_rep:0_0.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFr_rep:0_1.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFr_rep:0_2.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_loss_rep:0.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_rep:0_0.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_rep:0_1.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_rep:0_2.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/MN_loss_rep:0.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/MN_rep:0_0.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/MN_rep:0_1.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/lz_r_figures/MN_rep:0_2.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/modules/eval_utils.py" afterPath="$PROJECT_DIR$/modules/eval_utils.py" />
-      <change beforePath="$PROJECT_DIR$/modules/experiments.py" afterPath="$PROJECT_DIR$/modules/experiments.py" />
-      <change beforePath="$PROJECT_DIR$/rnn_r_figures/CFr_loss_rep:0.png" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_loss_rep:0.png" />
-      <change beforePath="$PROJECT_DIR$/rnn_r_figures/CFr_rep:0_0.png" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_rep:0_0.png" />
-      <change beforePath="$PROJECT_DIR$/rnn_r_figures/CFr_rep:0_1.png" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_rep:0_1.png" />
-      <change beforePath="$PROJECT_DIR$/rnn_r_figures/CFr_rep:0_2.png" afterPath="$PROJECT_DIR$/rnn_r_figures/CFr_rep:0_2.png" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -86,7 +47,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="eval_utils.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="eval_utils.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/eval_utils.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="587">
@@ -122,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lorentz_training.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="lorentz_training.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lorentz_training.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1037">
-              <caret line="79" column="19" lean-forward="false" selection-start-line="79" selection-start-column="19" selection-end-line="79" selection-end-column="19" />
+            <state relative-caret-position="641">
+              <caret line="79" column="18" lean-forward="false" selection-start-line="79" selection-start-column="18" selection-end-line="79" selection-end-column="18" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -225,9 +186,9 @@
         <option value="$PROJECT_DIR$/modules/plot_tools.py" />
         <option value="$PROJECT_DIR$/modules/models.py" />
         <option value="$PROJECT_DIR$/modules/dynamics.py" />
-        <option value="$PROJECT_DIR$/lorentz_training.py" />
         <option value="$PROJECT_DIR$/modules/experiments.py" />
         <option value="$PROJECT_DIR$/modules/eval_utils.py" />
+        <option value="$PROJECT_DIR$/lorentz_training.py" />
       </list>
     </option>
   </component>
@@ -892,16 +853,6 @@ plt.show()</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lorentz_training.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="79" column="19" lean-forward="false" selection-start-line="79" selection-start-column="19" selection-end-line="79" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/experiments.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -932,6 +883,16 @@ plt.show()</expression-string>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="587">
           <caret line="57" column="21" lean-forward="true" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lorentz_training.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="641">
+          <caret line="79" column="18" lean-forward="false" selection-start-line="79" selection-start-column="18" selection-end-line="79" selection-end-column="18" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

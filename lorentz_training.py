@@ -77,7 +77,7 @@ elif lik_name == "r":
     emission_dist = NormalDistribution(scale=lk_sigma)
 
 num_repetitions = 10
-num_iterations = 1000 #8000
+num_iterations = 5000 #8000
 batch_size = 50
 
 rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_size, transition_model,
