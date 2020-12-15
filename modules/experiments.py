@@ -66,250 +66,320 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
         #plt.plot(X_true.detach().numpy()[0, 1, :])
         #plt.show()
 
-        ### Cascading flow ###
-        print("Train cascading flows")
-        transformations = [TriResNet(d_x=d_x, d_epsilon=10, epsilon_nu=0.1, in_pre_lambda=4.) for _ in range(T)]
-        variational_model = DynamicModel(sigma=sigma, initial_sigma=initial_sigma, distribution=dist, d_x=d_x,
-                                         transition=transition_model,
-                                         emission=emission_model, emission_distribution=emission_dist,
-                                         observation_gain=observation_gain, T=T,
-                                         transformations=transformations, initial_mean=initial_mean)
+        while True:
 
-        loss_list = []
-        params_list = [list(tr.parameters()) for tr in transformations]
-        params = []
-        for p in params_list:
-            params += p
-        optimizer = optim.Adam(params, lr=0.001)
+            try:
+                ### Cascading flow ###
+                print("Train cascading flows")
+                transformations = [TriResNet(d_x=d_x, d_epsilon=10, epsilon_nu=0.1, in_pre_lambda=4.) for _ in range(T)]
+                variational_model = DynamicModel(sigma=sigma, initial_sigma=initial_sigma, distribution=dist, d_x=d_x,
+                                                 transition=transition_model,
+                                                 emission=emission_model, emission_distribution=emission_dist,
+                                                 observation_gain=observation_gain, T=T,
+                                                 transformations=transformations, initial_mean=initial_mean)
 
-        for itr in tqdm(range(num_iterations)):
-            # Variational update
-            loss = variational_update(prior_model, variational_model, data, optimizer, batch_size)
+                loss_list = []
+                params_list = [list(tr.parameters()) for tr in transformations]
+                params = []
+                for p in params_list:
+                    params += p
+                optimizer = optim.Adam(params, lr=0.001)
 
-            # Loss
-            loss_list.append(float(loss.detach().numpy()))
+                for itr in tqdm(range(num_iterations)):
+                    # Variational update
+                    loss = variational_update(prior_model, variational_model, data, optimizer, batch_size)
 
-        # Performance metrics
-        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
-                                                emission_model=emission_model,
-                                                emission_distribution=emission_dist,
-                                                scale=lk_sigma, out_data=out_data, T_data=T_data)
-        uni_eval_cfr.append(uni_lk)
-        multi_eval_cfr.append(multi_lk)
-        pred_eval_cfr.append(pred)
+                    # Loss
+                    loss_list.append(float(loss.detach().numpy()))
 
-        # Plots
-        plt.plot(loss_list)
-        plt.savefig('{}_figures/CFr_loss_rep:{}.png'.format(exp_name, rep))
-        plt.clf()
+                # Performance metrics
+                uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
+                                                        emission_model=emission_model,
+                                                        emission_distribution=emission_dist,
+                                                        scale=lk_sigma, out_data=out_data, T_data=T_data)
+                uni_eval_cfr.append(uni_lk)
+                multi_eval_cfr.append(multi_lk)
+                pred_eval_cfr.append(pred)
 
-        plot_model(variational_model, X_true, K=d_x, M=100, savename="{}_figures/CFr_rep:{}".format(exp_name, rep))
+                # Plots
+                plt.plot(loss_list)
+                plt.savefig('{}_figures/CFr_loss_rep:{}.png'.format(exp_name, rep))
+                plt.clf()
+
+                plot_model(variational_model, X_true, K=d_x, M=100, savename="{}_figures/CFr_rep:{}".format(exp_name, rep))
+                print('No problem found, moving forward..\n')
+                break
+
+            except Exception as e:
+                print('Problem found:')
+                print(e)
+                print('Trying again..\n')
 
         ### Cascading flow (No residuals) ###
-        print("Train cascading flows (No residuals)")
-        transformations = [TriResNet(d_x=d_x, d_epsilon=10, epsilon_nu=0.1, in_pre_lambda=None) for _ in range(T)]
-        variational_model = DynamicModel(sigma=sigma, initial_sigma=initial_sigma, distribution=dist, d_x=d_x,
-                                         transition=transition_model,
-                                         emission=emission_model,
-                                         emission_distribution=emission_dist,
-                                         observation_gain=observation_gain, T=T,
-                                         transformations=transformations, initial_mean=initial_mean)
-        loss_list = []
-        params_list = [list(tr.parameters()) for tr in transformations]
-        params = []
-        for p in params_list:
-            params += p
-        optimizer = optim.Adam(params, lr=0.001)
+        while True:
+            try:
+                print("Train cascading flows (No residuals)")
+                transformations = [TriResNet(d_x=d_x, d_epsilon=10, epsilon_nu=0.1, in_pre_lambda=None) for _ in range(T)]
+                variational_model = DynamicModel(sigma=sigma, initial_sigma=initial_sigma, distribution=dist, d_x=d_x,
+                                                 transition=transition_model,
+                                                 emission=emission_model,
+                                                 emission_distribution=emission_dist,
+                                                 observation_gain=observation_gain, T=T,
+                                                 transformations=transformations, initial_mean=initial_mean)
+                loss_list = []
+                params_list = [list(tr.parameters()) for tr in transformations]
+                params = []
+                for p in params_list:
+                    params += p
+                optimizer = optim.Adam(params, lr=0.001)
 
-        for itr in tqdm(range(num_iterations)):
-            # Variational update
-            loss = variational_update(prior_model, variational_model, data, optimizer, batch_size)
+                for itr in tqdm(range(num_iterations)):
+                    # Variational update
+                    loss = variational_update(prior_model, variational_model, data, optimizer, batch_size)
 
-            # Loss
-            loss_list.append(float(loss.detach().numpy()))
+                    # Loss
+                    loss_list.append(float(loss.detach().numpy()))
 
-        # Performance metrics
-        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
-                                                emission_model=emission_model,
-                                                emission_distribution=emission_dist,
-                                                scale=lk_sigma, out_data=out_data, T_data=T_data)
-        uni_eval_cfn.append(uni_lk)
-        multi_eval_cfn.append(multi_lk)
-        pred_eval_cfn.append(pred)
+                # Performance metrics
+                uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
+                                                        emission_model=emission_model,
+                                                        emission_distribution=emission_dist,
+                                                        scale=lk_sigma, out_data=out_data, T_data=T_data)
+                uni_eval_cfn.append(uni_lk)
+                multi_eval_cfn.append(multi_lk)
+                pred_eval_cfn.append(pred)
 
-        # Plots
-        plt.plot(loss_list)
-        plt.savefig('{}_figures/CFn_loss_rep:{}.png'.format(exp_name, rep))
-        plt.clf()
+                # Plots
+                plt.plot(loss_list)
+                plt.savefig('{}_figures/CFn_loss_rep:{}.png'.format(exp_name, rep))
+                plt.clf()
 
-        plot_model(variational_model, X_true, K=d_x, M=100, savename="{}_figures/CFn_rep:{}".format(exp_name, rep))
+                plot_model(variational_model, X_true, K=d_x, M=100, savename="{}_figures/CFn_rep:{}".format(exp_name, rep))
+                print('No problem found, moving forward..\n')
+                break
 
-        ### Mean field ###
-        print("Train mean field")
-        variational_model = MeanField(T=T, d_x=d_x)
+            except Exception as e:
+                print('Problem found:')
+                print(e)
+                print('Trying again..\n')
 
-        loss_list = []
-        params_list = [variational_model.parameters()]
-        params = []
-        for p in params_list:
-            params += p
-        optimizer = optim.Adam(params, lr=0.001)
+        while True:
+            try:
+                ### Mean field ###
+                print("Train mean field")
+                variational_model = MeanField(T=T, d_x=d_x)
 
-        for itr in tqdm(range(num_iterations)):
-            # Variational update
-            loss = variational_update(prior_model, variational_model, data, optimizer, batch_size)
+                loss_list = []
+                params_list = [variational_model.parameters()]
+                params = []
+                for p in params_list:
+                    params += p
+                optimizer = optim.Adam(params, lr=0.001)
 
-            # Loss
-            loss_list.append(float(loss.detach().numpy()))
+                for itr in tqdm(range(num_iterations)):
+                    # Variational update
+                    loss = variational_update(prior_model, variational_model, data, optimizer, batch_size)
 
-        # Performance metrics
-        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
-                                                emission_model=emission_model,
-                                                emission_distribution=emission_dist,
-                                                scale=lk_sigma, out_data=out_data, T_data=T_data)
-        uni_eval_mf.append(uni_lk)
-        multi_eval_mf.append(multi_lk)
-        pred_eval_mf.append(pred)
+                    # Loss
+                    loss_list.append(float(loss.detach().numpy()))
 
-        # Plots
-        plt.plot(loss_list)
-        plt.savefig('{}_figures/MF_loss_rep:{}.png'.format(exp_name, rep))
-        plt.clf()
+                # Performance metrics
+                uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
+                                                        emission_model=emission_model,
+                                                        emission_distribution=emission_dist,
+                                                        scale=lk_sigma, out_data=out_data, T_data=T_data)
+                uni_eval_mf.append(uni_lk)
+                multi_eval_mf.append(multi_lk)
+                pred_eval_mf.append(pred)
 
-        plot_model(variational_model, X_true, K=d_x, M=100, savename="{}_figures/MF_rep:{}".format(exp_name, rep))
+                # Plots
+                plt.plot(loss_list)
+                plt.savefig('{}_figures/MF_loss_rep:{}.png'.format(exp_name, rep))
+                plt.clf()
 
-        ### Multivariate normal ###
-        print("Train multivariate normal")
-        variational_model = MultivariateNormal(T=T, d_x=d_x)
-        loss_list = []
-        params_list = [variational_model.parameters()]
-        params = []
-        for p in params_list:
-            params += p
-        optimizer = optim.Adam(params, lr=0.001)
+                plot_model(variational_model, X_true, K=d_x, M=100, savename="{}_figures/MF_rep:{}".format(exp_name, rep))
+                print('No problem found, moving forward..\n')
+                break
 
-        for itr in tqdm(range(num_iterations)):
-            # Variational update
-            loss = variational_update(prior_model, variational_model, data, optimizer, batch_size)
+            except Exception as e:
+                print('Problem found:')
+                print(e)
+                print('Trying again..\n')
 
-            # Loss
-            loss_list.append(float(loss.detach().numpy()))
 
-        # Performance metrics
-        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
-                                                emission_model=emission_model,
-                                                emission_distribution=emission_dist,
-                                                scale=lk_sigma, out_data=out_data, T_data=T_data)
-        uni_eval_mn.append(uni_lk)
-        multi_eval_mn.append(multi_lk)
-        pred_eval_mn.append(pred)
+        while True:
+            try:
 
-        # Plots
-        plt.plot(loss_list)
-        plt.savefig('{}_figures/MN_loss_rep:{}.png'.format(exp_name, rep))
-        plt.clf()
+                ### Multivariate normal ###
+                print("Train multivariate normal")
+                variational_model = MultivariateNormal(T=T, d_x=d_x)
+                loss_list = []
+                params_list = [variational_model.parameters()]
+                params = []
+                for p in params_list:
+                    params += p
+                optimizer = optim.Adam(params, lr=0.001)
 
-        plot_model(variational_model, X_true, K=d_x, M=100, savename="{}_figures/MN_rep:{}".format(exp_name, rep))
+                for itr in tqdm(range(num_iterations)):
+                    # Variational update
+                    loss = variational_update(prior_model, variational_model, data, optimizer, batch_size)
 
-        ### ASVI ###
-        print("Train ASVI")
-        mu_transformations = [ASVIupdate(l_init=3.) for _ in range(T)]
-        variational_model = DynamicModel(sigma=sigma, initial_sigma=initial_sigma, distribution=dist, d_x=d_x,
-                                         transition=transition_model,
-                                         emission=emission_model,
-                                         emission_distribution=emission_dist,
-                                         observation_gain=observation_gain, T=T,
-                                         mu_transformations=mu_transformations,
-                                         initial_mean=initial_mean)
-        loss_list = []
-        params_list = [list(tr.parameters()) for tr in mu_transformations]
-        params = []
-        for p in params_list:
-            params += p
-        optimizer = optim.Adam(params, lr=0.001)
+                    # Loss
+                    loss_list.append(float(loss.detach().numpy()))
 
-        for itr in tqdm(range(num_iterations)):
-            # Variational update
-            loss = variational_update(prior_model, variational_model, data, optimizer, batch_size)
+                # Performance metrics
+                uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
+                                                        emission_model=emission_model,
+                                                        emission_distribution=emission_dist,
+                                                        scale=lk_sigma, out_data=out_data, T_data=T_data)
+                uni_eval_mn.append(uni_lk)
+                multi_eval_mn.append(multi_lk)
+                pred_eval_mn.append(pred)
 
-            # Loss
-            loss_list.append(float(loss.detach().numpy()))
+                # Plots
+                plt.plot(loss_list)
+                plt.savefig('{}_figures/MN_loss_rep:{}.png'.format(exp_name, rep))
+                plt.clf()
 
-        # Performance metrics
-        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
-                                                emission_model=emission_model,
-                                                emission_distribution=emission_dist,
-                                                scale=lk_sigma, out_data=out_data, T_data=T_data)
-        uni_eval_asvi.append(uni_lk)
-        multi_eval_asvi.append(multi_lk)
-        pred_eval_asvi.append(pred)
+                plot_model(variational_model, X_true, K=d_x, M=100, savename="{}_figures/MN_rep:{}".format(exp_name, rep))
+                print('No problem found, moving forward..\n')
+                break
 
-        # Plots
-        plt.plot(loss_list)
-        plt.savefig('{}_figures/ASVI_loss_rep:{}.png'.format(exp_name, rep))
-        plt.clf()
+            except Exception as e:
+                print('Problem found:')
+                print(e)
+                print('Trying again..\n')
 
-        plot_model(variational_model, X_true, K=d_x, M=100, savename="{}_figures/ASVI_rep:{}".format(exp_name, rep))
+        while True:
+            try:
 
-        ### Global flow (residual) ###
-        print("Train global flow model (Residual)")
-        variational_model = GlobalFlow(T=T, d_x=d_x, d_eps=10, residual=True)
-        loss_list = []
-        params = variational_model.transformation.parameters()
-        optimizer = optim.Adam(params, lr=0.001)
+                ### ASVI ###
+                print("Train ASVI")
+                mu_transformations = [ASVIupdate(l_init=3.) for _ in range(T)]
+                variational_model = DynamicModel(sigma=sigma, initial_sigma=initial_sigma, distribution=dist, d_x=d_x,
+                                                 transition=transition_model,
+                                                 emission=emission_model,
+                                                 emission_distribution=emission_dist,
+                                                 observation_gain=observation_gain, T=T,
+                                                 mu_transformations=mu_transformations,
+                                                 initial_mean=initial_mean)
+                loss_list = []
+                params_list = [list(tr.parameters()) for tr in mu_transformations]
+                params = []
+                for p in params_list:
+                    params += p
+                optimizer = optim.Adam(params, lr=0.001)
 
-        for itr in tqdm(range(num_iterations)):
-            # Variational update
-            loss = variational_update(prior_model, variational_model, data, optimizer, batch_size)
+                for itr in tqdm(range(num_iterations)):
+                    # Variational update
+                    loss = variational_update(prior_model, variational_model, data, optimizer, batch_size)
 
-            # Loss
-            loss_list.append(float(loss.detach().numpy()))
+                    # Loss
+                    loss_list.append(float(loss.detach().numpy()))
 
-        # Performance metrics
-        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
-                                                emission_model=emission_model,
-                                                emission_distribution=emission_dist,
-                                                scale=lk_sigma, out_data=out_data, T_data=T_data)
-        uni_eval_gfr.append(uni_lk)
-        multi_eval_gfr.append(multi_lk)
-        pred_eval_gfr.append(pred)
+                # Performance metrics
+                uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
+                                                        emission_model=emission_model,
+                                                        emission_distribution=emission_dist,
+                                                        scale=lk_sigma, out_data=out_data, T_data=T_data)
+                uni_eval_asvi.append(uni_lk)
+                multi_eval_asvi.append(multi_lk)
+                pred_eval_asvi.append(pred)
 
-        # Plots
-        plt.plot(loss_list)
-        plt.savefig('{}_figures/GFr_loss_rep:{}.png'.format(exp_name, rep))
-        plt.clf()
+                # Plots
+                plt.plot(loss_list)
+                plt.savefig('{}_figures/ASVI_loss_rep:{}.png'.format(exp_name, rep))
+                plt.clf()
 
-        plot_model(variational_model, X_true, K=d_x, M=100, savename="{}_figures/GFr_rep:{}".format(exp_name, rep))
+                plot_model(variational_model, X_true, K=d_x, M=100, savename="{}_figures/ASVI_rep:{}".format(exp_name, rep))
+                print('No problem found, moving forward..\n')
+                break
 
-        ### Global flow (non-residual) ###
-        print("Train global flow model (Non-residual)")
-        variational_model = GlobalFlow(T=T, d_x=d_x, d_eps=10)
-        loss_list = []
-        params = variational_model.transformation.parameters()
-        optimizer = optim.Adam(params, lr=0.001)
+            except Exception as e:
+                print('Problem found:')
+                print(e)
+                print('Trying again..\n')
 
-        for itr in tqdm(range(num_iterations)):
-            # Variational update
-            loss = variational_update(prior_model, variational_model, data, optimizer, batch_size)
+        while True:
+            try:
 
-            # Loss
-            loss_list.append(float(loss.detach().numpy()))
+                ### Global flow (residual) ###
+                print("Train global flow model (Residual)")
+                variational_model = GlobalFlow(T=T, d_x=d_x, d_eps=10, residual=True)
+                loss_list = []
+                params = variational_model.transformation.parameters()
+                optimizer = optim.Adam(params, lr=0.001)
 
-        # Performance metrics
-        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
-                                                emission_model=emission_model,
-                                                emission_distribution=emission_dist,
-                                                scale=lk_sigma, out_data=out_data, T_data=T_data)
-        uni_eval_gfn.append(uni_lk)
-        multi_eval_gfn.append(multi_lk)
-        pred_eval_gfn.append(pred)
+                for itr in tqdm(range(num_iterations)):
+                    # Variational update
+                    loss = variational_update(prior_model, variational_model, data, optimizer, batch_size)
 
-        # Plots
-        plt.plot(loss_list)
-        plt.savefig('{}_figures/GFn_loss_rep:{}.png'.format(exp_name, rep))
-        plt.clf()
+                    # Loss
+                    loss_list.append(float(loss.detach().numpy()))
 
-        plot_model(variational_model, X_true, K=d_x, M=100, savename="{}_figures/GFn_rep:{}".format(exp_name, rep))
+                # Performance metrics
+                uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
+                                                        emission_model=emission_model,
+                                                        emission_distribution=emission_dist,
+                                                        scale=lk_sigma, out_data=out_data, T_data=T_data)
+                uni_eval_gfr.append(uni_lk)
+                multi_eval_gfr.append(multi_lk)
+                pred_eval_gfr.append(pred)
+
+                # Plots
+                plt.plot(loss_list)
+                plt.savefig('{}_figures/GFr_loss_rep:{}.png'.format(exp_name, rep))
+                plt.clf()
+
+                plot_model(variational_model, X_true, K=d_x, M=100, savename="{}_figures/GFr_rep:{}".format(exp_name, rep))
+                print('No problem found, moving forward..\n')
+                break
+
+            except Exception as e:
+                print('Problem found:')
+                print(e)
+                print('Trying again..\n')
+
+
+        while True:
+            try:
+
+                ### Global flow (non-residual) ###
+                print("Train global flow model (Non-residual)")
+                variational_model = GlobalFlow(T=T, d_x=d_x, d_eps=10)
+                loss_list = []
+                params = variational_model.transformation.parameters()
+                optimizer = optim.Adam(params, lr=0.001)
+
+                for itr in tqdm(range(num_iterations)):
+                    # Variational update
+                    loss = variational_update(prior_model, variational_model, data, optimizer, batch_size)
+
+                    # Loss
+                    loss_list.append(float(loss.detach().numpy()))
+
+                # Performance metrics
+                uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
+                                                        emission_model=emission_model,
+                                                        emission_distribution=emission_dist,
+                                                        scale=lk_sigma, out_data=out_data, T_data=T_data)
+                uni_eval_gfn.append(uni_lk)
+                multi_eval_gfn.append(multi_lk)
+                pred_eval_gfn.append(pred)
+
+                # Plots
+                plt.plot(loss_list)
+                plt.savefig('{}_figures/GFn_loss_rep:{}.png'.format(exp_name, rep))
+                plt.clf()
+
+                plot_model(variational_model, X_true, K=d_x, M=100, savename="{}_figures/GFn_rep:{}".format(exp_name, rep))
+                print('No problem found, moving forward..\n')
+                break
+
+            except Exception as e:
+                print('Problem found:')
+                print(e)
+                print('Trying again..\n')
 
         # ### AR(1) ###
         # print("Train AR(1)")
