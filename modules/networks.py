@@ -155,3 +155,26 @@ class ASVIupdate(nn.Module):
     new_mu = lmu*mu + (1 - lmu)*self.alpha_mu
     new_s = ls*s + (1 - ls)*F.softplus(self.pre_alpha_s)
     return new_mu, new_s
+
+
+class LinearGaussianTree(nn.Module):
+
+    def __init__(self, node_size, depth, in_scale, scale):
+        super(LinearGaussianTree, self).__init__()
+        self.node_size = node_size
+        self.depth = depth
+        self.in_scale = in_scale
+        self.scale = scale
+        self.size = 2**(depth+1) - 1
+        self.weights = nn.Parameter(torch.tensor(np.random.normal(0.,0.1,(self.size,))))
+
+    def sample(self, M):
+        samples = torch.distributions.normal.Normal(0., self.in_scale).rsample((M,self.node_size,1))
+        for d in range(1,self.depth):
+            for j in range(2**d):
+                parent_idx = 2**(d-1) - 1 + j//2
+                w = torch.sigmoid(self.weights[parent_idx])
+                m = w*samples[:, :, parent_idx].unsqueeze(2)
+                new_sample = torch.distributions.normal.Normal(m,(1-w)*self.scale).rsample()
+                samples = torch.cat((samples, new_sample),2)
+        return samples
