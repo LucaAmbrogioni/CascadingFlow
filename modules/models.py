@@ -71,6 +71,81 @@ class ProbabilisticModel(nn.Module):
         return x
 
 
+class ColliderModel(ProbabilisticModel):
+
+    def __init__(self,depth, sigma, join_link, transition_distribution, emission, emission_distribution,
+                 transformations=(), mu_transformations=(), eps_generator=()):
+        self.depth = depth
+        self.sigma = sigma
+        self.join_link = join_link
+        self.transition_distribution = transition_distribution
+        self.emission = emission
+        self.emission_distribution = emission_distribution
+        self.eps_generator = eps_generator
+        if transformations:
+            self.transformations = transformations
+            self.is_transformed = True
+        else:
+            self.is_transformed = False
+        if mu_transformations:
+            self.mu_transformations = mu_transformations
+            self.is_mu_transformed = True
+        else:
+            self.is_mu_transformed = False
+
+    def sample(self, N):
+        log_jac = 0.
+        eps_loss = 0.
+
+        samples_list = []
+        samples_pre_list = []
+        tot_idx = 0
+        for d in range(self.depth):
+            # Latent cascading flow variables
+            global_eps = self.eps_generator.sample(N)
+
+            par_idx = 0
+            samples_d_list = []
+            samples_pre_d_list = []
+            for var_idx in range(2**(self.depth-d)):
+                if d == 0:
+                    m = torch.zeros((N,))
+                else:
+                    m = self.join_link(samples_list[d-1][:,par_idx], samples_list[d-1][:,par_idx+1])
+                s = self.sigma
+                par_idx += 2
+
+                # Pseudo-conjugate update
+                if self.is_mu_transformed:
+                    m, s = self.mu_transformations[tot_idx](m, s)
+
+                # Transition sampling
+                new_x = self.transition_distribution.rsample(m,s).view(N,1)
+
+                # Flow transformation
+                if self.is_transformed:
+                    new_x_tr, new_eps_in, new_eps_out, new_log_jac = self.transformations[tot_idx](new_x.squeeze())
+                    new_x_tr = new_x_tr.view((N, self.d_x, 1))
+                    log_jac += new_log_jac
+                    eps_sigma = self.transformations[tot_idx].epsilon_nu
+                    eps_loss += - self._avg_gaussian_log_prob(new_eps_out, 0.,
+                                                              eps_sigma) + self._avg_gaussian_log_prob(new_eps_in,
+                                                                                                       0.,
+                                                                                                       eps_sigma)
+                else:
+                    new_x_tr = new_x
+
+                samples_d_list.append(new_x_tr)
+                samples_pre_d_list.append(new_x)
+                tot_idx += 1
+            samples_list.append(torch.cat(samples_d_list, 1))
+            samples_pre_list.append(torch.cat(samples_pre_d_list, 1))
+        return torch.cat(samples_list, 1), torch.cat(samples_pre_list, 1), log_jac, eps_loss
+
+    def evaluate_avg_joint_log_prob(self, x, y=None, x_pre=None, log_jacobian=None, epsilon_loss=None):
+        pass
+
+
 class HierarchicalModel(ProbabilisticModel):
 
     def __init__(self,n_children, d_x, mean_sigma, scale_mu, scale_sigma, emission_sigma_list, mean_dist, scale_dist,

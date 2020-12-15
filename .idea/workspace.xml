@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="951d8c97-5297-40db-9ed7-fd776c6ec1bc" name="Default Changelist" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/ColliderTest.py" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/lorentz_training.py" afterPath="$PROJECT_DIR$/lorentz_training.py" />
+      <change beforePath="$PROJECT_DIR$/lz_c_figures/CFr_rep:0_0.png" afterPath="$PROJECT_DIR$/lz_c_figures/CFr_rep:0_0.png" />
+      <change beforePath="$PROJECT_DIR$/lz_c_figures/CFr_rep:0_1.png" afterPath="$PROJECT_DIR$/lz_c_figures/CFr_rep:0_1.png" />
+      <change beforePath="$PROJECT_DIR$/lz_c_figures/CFr_rep:0_2.png" afterPath="$PROJECT_DIR$/lz_c_figures/CFr_rep:0_2.png" />
+      <change beforePath="$PROJECT_DIR$/modules/eval_utils.py" afterPath="$PROJECT_DIR$/modules/eval_utils.py" />
+      <change beforePath="$PROJECT_DIR$/modules/models.py" afterPath="$PROJECT_DIR$/modules/models.py" />
+      <change beforePath="$PROJECT_DIR$/modules/networks.py" afterPath="$PROJECT_DIR$/modules/networks.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -50,22 +58,10 @@
       <file leaf-file-name="eval_utils.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/eval_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="587">
-              <caret line="57" column="21" lean-forward="true" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
+            <state relative-caret-position="335">
+              <caret line="54" column="49" lean-forward="true" selection-start-line="54" selection-start-column="49" selection-end-line="54" selection-end-column="49" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="emissions.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/emissions.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -74,8 +70,8 @@
       <file leaf-file-name="distributions.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/distributions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="198">
+              <caret line="14" column="60" lean-forward="false" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="60" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -87,7 +83,7 @@
         <entry file="file://$PROJECT_DIR$/lorentz_training.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="641">
-              <caret line="79" column="18" lean-forward="false" selection-start-line="79" selection-start-column="18" selection-end-line="79" selection-end-column="18" />
+              <caret line="79" column="21" lean-forward="false" selection-start-line="79" selection-start-column="21" selection-end-line="79" selection-end-column="21" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -95,11 +91,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="experiments.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/experiments.py">
+      <file leaf-file-name="networks.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/networks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="62" column="63" lean-forward="false" selection-start-line="62" selection-start-column="63" selection-end-line="62" selection-end-column="63" />
+            <state relative-caret-position="352">
+              <caret line="178" column="0" lean-forward="false" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="155">
+              <caret line="100" column="29" lean-forward="true" selection-start-line="100" selection-start-column="29" selection-end-line="100" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ColliderTest.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ColliderTest.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="13" column="29" lean-forward="false" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -117,11 +137,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_asarray.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/anaconda2/envs/pytorch/lib/python3.8/site-packages/numpy/core/_asarray.py">
+      <file leaf-file-name="module.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/anaconda2/envs/pytorch/lib/python3.8/site-packages/torch/nn/modules/module.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+            <state relative-caret-position="13788">
+              <caret line="777" column="0" lean-forward="false" selection-start-line="777" selection-start-column="0" selection-end-line="777" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -179,14 +199,15 @@
         <option value="$PROJECT_DIR$/test_hierarchical_training.py" />
         <option value="$PROJECT_DIR$/modules/emissions.py" />
         <option value="$PROJECT_DIR$/modules/training_tools.py" />
-        <option value="$PROJECT_DIR$/modules/distributions.py" />
-        <option value="$PROJECT_DIR$/modules/networks.py" />
         <option value="$PROJECT_DIR$/variational_models_test.py" />
         <option value="$PROJECT_DIR$/lz_c_results/results_loader.py" />
         <option value="$PROJECT_DIR$/modules/plot_tools.py" />
-        <option value="$PROJECT_DIR$/modules/models.py" />
         <option value="$PROJECT_DIR$/modules/dynamics.py" />
         <option value="$PROJECT_DIR$/modules/experiments.py" />
+        <option value="$PROJECT_DIR$/modules/distributions.py" />
+        <option value="$PROJECT_DIR$/modules/networks.py" />
+        <option value="$PROJECT_DIR$/ColliderTest.py" />
+        <option value="$PROJECT_DIR$/modules/models.py" />
         <option value="$PROJECT_DIR$/modules/eval_utils.py" />
         <option value="$PROJECT_DIR$/lorentz_training.py" />
       </list>
@@ -213,7 +234,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -230,12 +250,18 @@
             <path>
               <item name="CascadingFlow" type="b2602c69:ProjectViewProjectNode" />
               <item name="CascadingFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="bruss_c_figures" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CascadingFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CascadingFlow" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -265,6 +291,24 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.lorentz_training">
+    <configuration name="ColliderTest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CascadingFlow" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ColliderTest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration name="experiments" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -319,24 +363,6 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="test_hierarchical_nn_regression_sampling" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="cascading_flows" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test_hierarchical_nn_regression_sampling.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
     <configuration name="variational_models_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -356,19 +382,19 @@
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.test_hierarchical_nn_regression_sampling" />
-      <item index="1" class="java.lang.String" itemvalue="Python.lorentz_training" />
-      <item index="2" class="java.lang.String" itemvalue="Python.variational_models_test" />
-      <item index="3" class="java.lang.String" itemvalue="Python.results_loader" />
-      <item index="4" class="java.lang.String" itemvalue="Python.experiments" />
+      <item index="0" class="java.lang.String" itemvalue="Python.lorentz_training" />
+      <item index="1" class="java.lang.String" itemvalue="Python.variational_models_test" />
+      <item index="2" class="java.lang.String" itemvalue="Python.results_loader" />
+      <item index="3" class="java.lang.String" itemvalue="Python.experiments" />
+      <item index="4" class="java.lang.String" itemvalue="Python.ColliderTest" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.lorentz_training" />
-        <item index="1" class="java.lang.String" itemvalue="Python.experiments" />
-        <item index="2" class="java.lang.String" itemvalue="Python.results_loader" />
-        <item index="3" class="java.lang.String" itemvalue="Python.variational_models_test" />
-        <item index="4" class="java.lang.String" itemvalue="Python.test_hierarchical_nn_regression_sampling" />
+        <item index="1" class="java.lang.String" itemvalue="Python.ColliderTest" />
+        <item index="2" class="java.lang.String" itemvalue="Python.experiments" />
+        <item index="3" class="java.lang.String" itemvalue="Python.results_loader" />
+        <item index="4" class="java.lang.String" itemvalue="Python.variational_models_test" />
       </list>
     </recent_temporary>
   </component>
@@ -388,26 +414,35 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1857" height="1092" extended-state="6" />
+    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17303494" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41182795" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -427,139 +462,63 @@
           <line>66</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ColliderTest.py</url>
+          <line>21</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="20" />
+      <option name="time" value="23" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
       <expression>
-        <expression-string>plt.plot(np.transpose(Y), alpha=0.01, c=&quot;r&quot;)
-plt.plot(np.transpose(X[:20,0,T_data:].detach().numpy()), alpha=0.8, c=&quot;k&quot;)
-plt.plot(np.transpose(out_data))
-plt.show()</expression-string>
+        <expression-string>prior_model.sample(10)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>Y = np.zeros((X.shape[0], X.shape[2] - T_data))
-for t in range(T_data, X.shape[2]):
-    tau = t - T_data
-    if scale is None:
-      Y[:,tau] = emission_distribution.rsample(emission_model(X[:,:,t]), None).detach().numpy()
-    else:
-      Y[:,tau] = emission_distribution.rsample(emission_model(X[:,:,t]), scale).detach().numpy()
-plt.plot(np.transpose(Y), alpha=0.005, c=&quot;r&quot;)
-plt.plot(np.transpose(X[:10,0,T_data:].detach().numpy()), alpha=0.5, c=&quot;k&quot;)
-plt.plot(np.transpose(out_data))
-plt.show()</expression-string>
+        <expression-string>self.transition_distribution.rsample(m,s).view(N,1)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>Y = np.zeros((X.shape[0], X.shape[2] - T_data))
-for t in range(T_data, X.shape[2]):
-    tau = t - T_data
-    if scale is None:
-      Y[:,tau] = emission_distribution.rsample(emission_model(X[:,:,t]), None).detach().numpy()
-    else:
-      Y[:,tau] = emission_distribution.rsample(emission_model(X[:,:,t]), scale).detach().numpy()
-plt.plot(np.transpose(Y), alpha=0.02, c=&quot;r&quot;)
-plt.plot(np.transpose(X[:10,0,T_data:].detach().numpy()), alpha=0.5, c=&quot;k&quot;)
-plt.plot(np.transpose(out_data))
-plt.show()</expression-string>
+        <expression-string>self.transition_distribution.rsample(m,s,N)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>Y = np.zeros((X.shape[0], X.shape[2] - T_data))
-for t in range(T_data, X.shape[2]):
-    tau = t - T_data
-    if scale is None:
-      Y[:,tau] = emission_distribution.rsample(emission_model(X[:,:,t]), None).detach().numpy()
-    else:
-      Y[:,tau] = emission_distribution.rsample(emission_model(X[:,:,t]), scale).detach().numpy()
-plt.plot(np.transpose(Y), alpha=0.01)
-plt.plot(np.transpose(X[:10,0,T_data:].detach().numpy()), alpha=0.8, c=&quot;k&quot;)
-plt.plot(np.transpose(out_data))
-plt.show()</expression-string>
+        <expression-string>samples_list[d]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>Y = np.zeros((X.shape[0], X.shape[2] - T_data))
-for t in range(T_data, X.shape[2]):
-    tau = t - T_data
-    if scale is None:
-      Y[:,tau] = emission_distribution.rsample(emission_model(X[:,:,t]), None).detach().numpy()
-    else:
-      Y[:,tau] = emission_distribution.rsample(emission_model(X[:,:,t]), scale).detach().numpy()
-plt.plot(np.transpose(Y), alpha=0.01)
-plt.plot(np.transpose(X[:10,0,T_data:].detach().numpy()), alpha=0.1, c=&quot;k&quot;)
-plt.plot(np.transpose(out_data))
-plt.show()</expression-string>
+        <expression-string>samples_list</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>Y = np.zeros((X.shape[0], X.shape[2] - T_data))
-for t in range(T_data, X.shape[2]):
-    tau = t - T_data
-    if scale is None:
-      Y[:,tau] = emission_distribution.rsample(emission_model(X[:,:,t]), None).detach().numpy()
-    else:
-      Y[:,tau] = emission_distribution.rsample(emission_model(X[:,:,t]), scale).detach().numpy()
-plt.plot(np.transpose(Y), alpha=0.1)
-plt.plot(np.transpose(X[:10,0,T_data:].detach().numpy()), alpha=0.1, c=&quot;k&quot;)
-plt.plot(np.transpose(out_data))
-plt.show()</expression-string>
+        <expression-string>2**(d-1) - 1</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>Y = np.zeros((X.shape[0], X.shape[2] - T_data))
-for t in range(T_data, X.shape[2]):
-    tau = t - T_data
-    if scale is None:
-      Y[:,tau] = emission_distribution.rsample(emission_model(X[:,:,t]), None).detach().numpy()
-    else:
-      Y[:,tau] = emission_distribution.rsample(emission_model(X[:,:,t]), scale).detach().numpy()
-plt.plot(np.transpose(Y), alpha=0.1)
-plt.plot(np.transpose(X[:10,0,T_data:]), alpha=0.1, c=&quot;k&quot;)
-plt.plot(np.transpose(out_data))
-plt.show()</expression-string>
+        <expression-string>2**(d-1)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>Y = np.zeros((X.shape[0], X.shape[2] - T_data))
-for t in range(T_data, X.shape[2]):
-    tau = t - T_data
-    if scale is None:
-      Y[:,tau] = emission_distribution.rsample(emission_model(X[:,:,t]), None).detach().numpy()
-    else:
-      Y[:,tau] = emission_distribution.rsample(emission_model(X[:,:,t]), scale).detach().numpy()
-plt.plot(np.transpose(Y), alpha=0.1)
-plt.plot(np.transpose(out_data))
-plt.show()</expression-string>
+        <expression-string>(2**d - 1)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>Y = np.zeros((X.shape[0], X.shape[2] - T_data))
-for t in range(T_data, X.shape[2]):
-    t = t - T_data
-    if scale is None:
-      Y[:,t] = emission_distribution.rsample(emission_model(X[:,:,t]), None).detach().numpy()
-    else:
-      Y[:,t] = emission_distribution.rsample(emission_model(X[:,:,t]), scale).detach().numpy()
-plt.plot(np.transpose(Y), alpha=0.1)
-plt.plot(np.transpose(out_data))
-plt.show()</expression-string>
+        <expression-string>(2**d - 2)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
@@ -613,41 +572,6 @@ plt.show()</expression-string>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:0_0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:0_1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:0_2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:1_0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:1_1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:1_2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:2_0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:2_1.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -658,36 +582,16 @@ plt.show()</expression-string>
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:3_0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:3_1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:3_2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:4_0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:3_0.png" />
+    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:3_1.png" />
+    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:3_2.png" />
+    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:4_0.png" />
     <entry file="file://$PROJECT_DIR$/lz_r_figures/GFr_loss_rep:1.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFr_loss_rep:3.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFr_loss_rep:3.png" />
     <entry file="file://$PROJECT_DIR$/lz_r_figures/GFr_rep:1_0.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -837,19 +741,6 @@ plt.show()</expression-string>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/distributions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -858,16 +749,8 @@ plt.show()</expression-string>
         <state relative-caret-position="144">
           <caret line="62" column="63" lean-forward="false" selection-start-line="62" selection-start-column="63" selection-end-line="62" selection-end-column="63" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda2/envs/pytorch/lib/python3.8/site-packages/torch/tensor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="629" column="0" lean-forward="false" selection-start-line="629" selection-start-column="0" selection-end-line="629" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -879,10 +762,81 @@ plt.show()</expression-string>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/bruss_c_figures/CFr_loss_rep:0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bruss_c_figures/CFr_rep:0_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bruss_c_figures/CFr_rep:0_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/distributions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="14" column="60" lean-forward="false" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda2/envs/pytorch/lib/python3.8/site-packages/torch/nn/modules/module.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13788">
+          <caret line="777" column="0" lean-forward="false" selection-start-line="777" selection-start-column="0" selection-end-line="777" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda2/envs/pytorch/lib/python3.8/site-packages/torch/tensor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="629" column="0" lean-forward="false" selection-start-line="629" selection-start-column="0" selection-end-line="629" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/networks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="178" column="0" lean-forward="false" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ColliderTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="29" lean-forward="false" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="100" column="29" lean-forward="true" selection-start-line="100" selection-start-column="29" selection-end-line="100" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modules/eval_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="57" column="21" lean-forward="true" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
+        <state relative-caret-position="335">
+          <caret line="54" column="49" lean-forward="true" selection-start-line="54" selection-start-column="49" selection-end-line="54" selection-end-column="49" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -892,7 +846,7 @@ plt.show()</expression-string>
     <entry file="file://$PROJECT_DIR$/lorentz_training.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="641">
-          <caret line="79" column="18" lean-forward="false" selection-start-line="79" selection-start-column="18" selection-end-line="79" selection-end-column="18" />
+          <caret line="79" column="21" lean-forward="false" selection-start-line="79" selection-start-column="21" selection-end-line="79" selection-end-column="21" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

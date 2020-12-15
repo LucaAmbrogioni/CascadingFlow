@@ -7,7 +7,7 @@ from modules.experiments import rum_timeseries_experiment
 
 # Defining dynamical and emission model
 model_name = "lz"
-lik_name = "r"
+lik_name = "c"
 exp_name = model_name + "_" + lik_name
 
 if model_name == "lz":
