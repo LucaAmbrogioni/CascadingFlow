@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 
 from modules.distributions import NormalDistribution, BernoulliDistribution
@@ -6,9 +8,15 @@ from modules.emissions import SingleCoordinateEmission
 from modules.experiments import rum_timeseries_experiment
 
 # Defining dynamical and emission model
-model_name = "lz"
+model_name = "bruss"
 lik_name = "c"
 exp_name = model_name + "_" + lik_name
+
+if not os.path.isdir(f'{exp_name}_figures'):
+    os.makedirs(f'{exp_name}_figures')
+
+if not os.path.isdir(f'{exp_name}_results'):
+    os.makedirs(f'{exp_name}_results')
 
 if model_name == "lz":
     T = 40
