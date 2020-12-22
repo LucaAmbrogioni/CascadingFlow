@@ -5,7 +5,7 @@ import numpy as np
 
 class TriResNet(nn.Module):
 
-    def __init__(self, d_x, d_epsilon, epsilon_nu, in_pre_lambda=None):
+    def __init__(self, d_x, d_epsilon, epsilon_nu, in_pre_lambda=None, scale_w=0.01):
         super(TriResNet, self).__init__()
         self.d_x = d_x
         self.d_epsilon = d_epsilon
@@ -14,15 +14,15 @@ class TriResNet(nn.Module):
         self.in_pre_lambda = in_pre_lambda
 
         # Learnable parameters
-        self.W1 = nn.Parameter(torch.Tensor(np.random.normal(0,0.01,(self.width,self.width))))
-        self.W2 = nn.Parameter(torch.Tensor(np.random.normal(0,0.01,(self.width,self.width))))
-        self.W3 = nn.Parameter(torch.Tensor(np.random.normal(0,0.01,(self.width,self.width))))
-        self.d1 = nn.Parameter(torch.Tensor(np.random.normal(0,0.01,(self.width,))))
-        self.d2 = nn.Parameter(torch.Tensor(np.random.normal(0,0.01,(self.width,))))
-        self.d3 = nn.Parameter(torch.Tensor(np.random.normal(0,0.01,(self.width,))))
-        self.b1 = nn.Parameter(torch.Tensor(np.random.normal(0,0.01,(self.width,))))
-        self.b2 = nn.Parameter(torch.Tensor(np.random.normal(0,0.01,(self.width,))))
-        self.b3 = nn.Parameter(torch.Tensor(np.random.normal(0,0.01,(self.width,))))
+        self.W1 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,self.width))))
+        self.W2 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,self.width))))
+        self.W3 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,self.width))))
+        self.d1 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,))))
+        self.d2 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,))))
+        self.d3 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,))))
+        self.b1 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,))))
+        self.b2 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,))))
+        self.b3 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,))))
         if in_pre_lambda is None:
             self.pre_l = torch.Tensor(np.random.normal(-100., 0.1, (1,)))
         else:
@@ -159,22 +159,60 @@ class ASVIupdate(nn.Module):
 
 class LinearGaussianTree(nn.Module):
 
-    def __init__(self, node_size, depth, in_scale, scale):
+    def __init__(self, node_size, depth, in_scale, scale, in_w=1.8):
         super(LinearGaussianTree, self).__init__()
         self.node_size = node_size
         self.depth = depth
         self.in_scale = in_scale
         self.scale = scale
         self.size = 2**(depth+1) - 1
-        self.weights = nn.Parameter(torch.tensor(np.random.normal(0.,0.1,(self.size,))))
+        self.weights = nn.Parameter(torch.tensor(np.random.normal(in_w,0.0001,(self.size,))))
 
     def sample(self, M):
-        samples = torch.distributions.normal.Normal(0., self.in_scale).rsample((M,self.node_size,1))
+        samples_list = [torch.distributions.normal.Normal(0., self.in_scale).rsample((M,self.node_size,1))]#.type(torch.float32)]
+        tot_idx = 0
         for d in range(1,self.depth):
+            samples_d_list = []
+            parent_half_idx = 0
             for j in range(2**d):
-                parent_idx = 2**(d-1) - 1 + j//2
-                w = torch.sigmoid(self.weights[parent_idx])
-                m = w*samples[:, :, parent_idx].unsqueeze(2)
+                w = torch.sigmoid(self.weights[tot_idx])
+                m = w*samples_list[d-1][:, :, int(parent_half_idx)].unsqueeze(2)
                 new_sample = torch.distributions.normal.Normal(m,(1-w)*self.scale).rsample()
-                samples = torch.cat((samples, new_sample),2)
-        return samples
+                parent_half_idx += 1/2
+                tot_idx += 1
+                samples_d_list.append(new_sample)
+            samples_list.append(torch.cat(samples_d_list,2))
+        return torch.cat(list(reversed(samples_list)),2)
+
+
+class LinearGaussianChain(nn.Module):
+
+    def __init__(self, node_size, T, in_scale, scale, in_w=1.8, amortized=False, data_dim=None):
+        super(LinearGaussianChain, self).__init__()
+        self.node_size = node_size
+        self.T = T
+        self.in_scale = in_scale
+        self.scale = scale
+        self.weights = nn.Parameter(torch.tensor(np.random.normal(in_w,0.0001,(T,))))
+        self.is_amortized = amortized
+        if amortized:
+            self.embedding_layers = nn.ModuleList()
+            for _ in range(T):
+                self.embedding_layers.append(nn.Linear(data_dim, 2*node_size))
+
+    def sample(self, M, data):
+        samples_list = [torch.distributions.normal.Normal(0., self.in_scale).rsample((M,self.node_size,1))]#.type(torch.float32)]
+        for t in range(1,self.T):
+            w = torch.sigmoid(self.weights[t])
+            if self.is_amortized:
+                a_inpt = self.embedding_layers[t](data[t])
+                a_mu = a_inpt[:self.node_size]
+                a_scale = F.softplus(a_inpt[self.node_size:])
+            else:
+                a_mu = 0.
+                a_scale = self.scale
+            m = w*samples_list[-1] + (1-w)*a_mu
+            scale = (1 - w)*a_scale
+            new_sample = torch.distributions.normal.Normal(m,scale).rsample()
+            samples_list.append(new_sample)
+        return samples_list

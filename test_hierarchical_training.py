@@ -49,7 +49,7 @@ for rep in range(num_repetitions):
     data = Y
 
 
-    ### Cscading flowsd ###
+    ### Cscading flows ###
     transformations = [TriResNet(d_x=d_x, d_epsilon=20, epsilon_nu=0.05, in_pre_lambda=1.) for _ in
                        range(2 + n_children)]
     variational_model = HierarchicalModel(n_children, d_x, mean_sigma, scale_mu, scale_sigma, emission_sigma_list, mean_dist,

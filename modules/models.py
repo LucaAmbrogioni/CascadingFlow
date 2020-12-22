@@ -66,22 +66,31 @@ class ProbabilisticModel(nn.Module):
         eps_sigma = self.transformations[0].epsilon_nu
         epsilon_loss += - self._avg_gaussian_log_prob(new_epsilon_out,
                                                       global_epsilon, eps_sigma) + self._avg_gaussian_log_prob(
-            new_epsilon_in, global_epsilon, eps_sigma)
+                                                      new_epsilon_in, global_epsilon, eps_sigma)
         x = x.view((N, self.d_x, 1))
         return x
+
+    def reshape_collider_samples(self, x, depth):
+        samples = []
+        n = 0
+        for d in range(depth-1):
+            samples.append(x[:,0,n:n+2**(depth-d-1)])
+            n += 2**(depth-d-1)
+        return samples
 
 
 class ColliderModel(ProbabilisticModel):
 
-    def __init__(self,depth, sigma, join_link, transition_distribution, emission, emission_distribution,
-                 transformations=(), mu_transformations=(), eps_generator=()):
+    def __init__(self,depth, sigma, in_sigma, join_link, transition_distribution,
+                 transformations=(), mu_transformations=(), eps_generator=None):
+        super(ColliderModel, self).__init__()
         self.depth = depth
         self.sigma = sigma
+        self.in_sigma = in_sigma
         self.join_link = join_link
         self.transition_distribution = transition_distribution
-        self.emission = emission
-        self.emission_distribution = emission_distribution
         self.eps_generator = eps_generator
+        self.d_x = 1
         if transformations:
             self.transformations = transformations
             self.is_transformed = True
@@ -100,19 +109,21 @@ class ColliderModel(ProbabilisticModel):
         samples_list = []
         samples_pre_list = []
         tot_idx = 0
-        for d in range(self.depth):
-            # Latent cascading flow variables
-            global_eps = self.eps_generator.sample(N)
-
+        # Latent cascading flow variables
+        if self.eps_generator is not None:
+            global_eps = self.eps_generator.sample(N).type(torch.float32)
+        else:
+            global_eps = torch.zeros((1,))
+        for d in range(self.depth-1):
             par_idx = 0
             samples_d_list = []
             samples_pre_d_list = []
-            for var_idx in range(2**(self.depth-d)):
+            for var_idx in range(2**(self.depth-d - 1)):
                 if d == 0:
                     m = torch.zeros((N,))
                 else:
                     m = self.join_link(samples_list[d-1][:,par_idx], samples_list[d-1][:,par_idx+1])
-                s = self.sigma
+                s = self.sigma if d > 0 else self.in_sigma
                 par_idx += 2
 
                 # Pseudo-conjugate update
@@ -124,14 +135,13 @@ class ColliderModel(ProbabilisticModel):
 
                 # Flow transformation
                 if self.is_transformed:
-                    new_x_tr, new_eps_in, new_eps_out, new_log_jac = self.transformations[tot_idx](new_x.squeeze())
-                    new_x_tr = new_x_tr.view((N, self.d_x, 1))
-                    log_jac += new_log_jac
-                    eps_sigma = self.transformations[tot_idx].epsilon_nu
-                    eps_loss += - self._avg_gaussian_log_prob(new_eps_out, 0.,
-                                                              eps_sigma) + self._avg_gaussian_log_prob(new_eps_in,
-                                                                                                       0.,
-                                                                                                       eps_sigma)
+                    if len(global_eps.shape)==3:
+                        gl_eps = global_eps[:,:,tot_idx]
+                    else:
+                        gl_eps = global_eps
+                    new_x_tr = self.cascading_transformation(new_x, tot_idx, log_jac, eps_loss,
+                                                             global_epsilon=gl_eps)
+                    new_x_tr = new_x_tr.view(new_x.shape)
                 else:
                     new_x_tr = new_x
 
@@ -140,10 +150,32 @@ class ColliderModel(ProbabilisticModel):
                 tot_idx += 1
             samples_list.append(torch.cat(samples_d_list, 1))
             samples_pre_list.append(torch.cat(samples_pre_d_list, 1))
-        return torch.cat(samples_list, 1), torch.cat(samples_pre_list, 1), log_jac, eps_loss
+        return samples_list, samples_pre_list, log_jac, eps_loss
 
-    def evaluate_avg_joint_log_prob(self, x, y=None, x_pre=None, log_jacobian=None, epsilon_loss=None):
-        pass
+    def evaluate_avg_joint_log_prob(self, samples_list, y=None, samples_pre_list=None, log_jacobian=None, epsilon_loss=None):
+        avg_log_prob = 0.
+        if log_jacobian:
+            avg_log_prob -= log_jacobian
+        if epsilon_loss:
+            avg_log_prob += epsilon_loss
+        for d in range(self.depth):
+            par_idx = 0
+            for var_idx in range(2 ** (self.depth - d - 1)):
+                if d < self.depth - 1 or y is not None:
+                    if d == 0:
+                        m = 0.
+                    else:
+                        m = self.join_link(samples_list[d - 1][:, par_idx], samples_list[d - 1][:, par_idx + 1])
+                    s = self.sigma if d > 0 else self.in_sigma
+                    if d == self.depth-1:
+                        c = y
+                    elif samples_pre_list is not None:
+                        c = samples_pre_list[d][:,var_idx]
+                    else:
+                        c = samples_list[d][:,var_idx]
+                    avg_log_prob += self._avg_log_prob(c, m, s, dist=self.transition_distribution)
+                    par_idx += 2
+        return avg_log_prob
 
 
 class HierarchicalModel(ProbabilisticModel):

@@ -3,9 +3,6 @@ import matplotlib.pyplot as plt
 
 from tqdm import tqdm
 
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
 import torch.optim as optim
 
 from modules.models import DynamicModel
