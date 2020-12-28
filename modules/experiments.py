@@ -21,12 +21,33 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
                                emission_distribution=emission_dist,
                                observation_gain=observation_gain, T=T, initial_mean=initial_mean)
 
-    uni_eval_ar1 = []
+    '''uni_eval_ar1 = []
     multi_eval_ar1 = []
     pred_eval_ar1 = []
     uni_eval_nn1 = []
     multi_eval_nn1 = []
-    pred_eval_nn1 = []
+    pred_eval_nn1 = []'''
+    uni_eval_cfr = []
+    multi_eval_cfr = []
+    pred_eval_cfr = []
+    uni_eval_cfn = []
+    multi_eval_cfn = []
+    pred_eval_cfn = []
+    uni_eval_mf = []
+    multi_eval_mf = []
+    pred_eval_mf = []
+    uni_eval_mn = []
+    multi_eval_mn = []
+    pred_eval_mn = []
+    uni_eval_gfr = []
+    multi_eval_gfr = []
+    pred_eval_gfr = []
+    uni_eval_gfn = []
+    multi_eval_gfn = []
+    pred_eval_gfn = []
+    uni_eval_asvi = []
+    multi_eval_asvi = []
+    pred_eval_asvi = []
 
     for rep in range(num_repetitions):
 
@@ -43,9 +64,6 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
 
         while True:
 
-            uni_eval_cfr = []
-            multi_eval_cfr = []
-            pred_eval_cfr = []
             ### Cascading flow ###
             print("Train cascading flows")
             transformations = [TriResNet(d_x=d_x, d_epsilon=10, epsilon_nu=0.1, in_pre_lambda=4.) for _ in range(T)]
@@ -102,9 +120,6 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
 
         ### Cascading flow (No residuals) ###
         while True:
-            uni_eval_cfn = []
-            multi_eval_cfn = []
-            pred_eval_cfn = []
             print("Train cascading flows (No residuals)")
             transformations = [TriResNet(d_x=d_x, d_epsilon=10, epsilon_nu=0.1, in_pre_lambda=None) for _ in range(T)]
             variational_model = DynamicModel(sigma=sigma, initial_sigma=initial_sigma, distribution=dist, d_x=d_x,
@@ -158,9 +173,6 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
             break
 
         while True:
-            uni_eval_mf = []
-            multi_eval_mf = []
-            pred_eval_mf = []
             ### Mean field ###
             print("Train mean field")
             variational_model = MeanField(T=T, d_x=d_x)
@@ -212,9 +224,6 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
 
         while True:
 
-            uni_eval_mn = []
-            multi_eval_mn = []
-            pred_eval_mn = []
             ### Multivariate normal ###
             print("Train multivariate normal")
             variational_model = MultivariateNormal(T=T, d_x=d_x)
@@ -264,9 +273,7 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
             break
 
         while True:
-            uni_eval_asvi = []
-            multi_eval_asvi = []
-            pred_eval_asvi = []
+
             ### ASVI ###
             print("Train ASVI")
             mu_transformations = [ASVIupdate(l_init=3.) for _ in range(T)]
@@ -324,9 +331,6 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
 
         while True:
 
-            uni_eval_gfr = []
-            multi_eval_gfr = []
-            pred_eval_gfr = []
             ### Global flow (residual) ###
             print("Train global flow model (Residual)")
             variational_model = GlobalFlow(T=T, d_x=d_x, d_eps=10, residual=True)
@@ -372,9 +376,6 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
             break
 
         while True:
-            uni_eval_gfn = []
-            multi_eval_gfn = []
-            pred_eval_gfn = []
             ### Global flow (non-residual) ###
             print("Train global flow model (Non-residual)")
             variational_model = GlobalFlow(T=T, d_x=d_x, d_eps=10)
@@ -487,7 +488,7 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
         # plt.clf()
         #
         # plot_model(variational_model, X_true, K=d_x, M=100, savename="{}_figures/NN_rep:{}".format(exp_name, rep))
-    uni_results = {"CFr": uni_eval_cfr, "CFn": uni_eval_cfn, "MF": uni_eval_mf, "GFr": uni_eval_gfr,
+    '''uni_results = {"CFr": uni_eval_cfr, "CFn": uni_eval_cfn, "MF": uni_eval_mf, "GFr": uni_eval_gfr,
                    "GFn": uni_eval_gfn,
                    "ASVI": uni_eval_asvi, "AR1": uni_eval_ar1, "NN1": uni_eval_nn1, "MN": uni_eval_mn}
     multi_results = {"CFr": multi_eval_cfr, "CFn": multi_eval_cfn, "MF": multi_eval_mf, "GFr": multi_eval_gfr,
@@ -495,7 +496,17 @@ def rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_s
                      "ASVI": multi_eval_asvi, "AR1": multi_eval_ar1, "NN1": multi_eval_nn1, "MN": multi_eval_mn}
     pred_results = {"CFr": pred_eval_cfr, "CFn": pred_eval_cfn, "MF": pred_eval_mf, "GFr": pred_eval_gfr,
                     "GFn": pred_eval_gfn,
-                    "ASVI": pred_eval_asvi, "AR1": pred_eval_ar1, "NN1": pred_eval_nn1, "MN": pred_eval_mn}
+                    "ASVI": pred_eval_asvi, "AR1": pred_eval_ar1, "NN1": pred_eval_nn1, "MN": pred_eval_mn}'''
+
+    uni_results = {"CFr": uni_eval_cfr, "CFn": uni_eval_cfn, "MF": uni_eval_mf, "GFr": uni_eval_gfr,
+                   "GFn": uni_eval_gfn,
+                   "ASVI": uni_eval_asvi, "MN": uni_eval_mn}
+    multi_results = {"CFr": multi_eval_cfr, "CFn": multi_eval_cfn, "MF": multi_eval_mf, "GFr": multi_eval_gfr,
+                     "GFn": multi_eval_gfn,
+                     "ASVI": multi_eval_asvi, "MN": multi_eval_mn}
+    pred_results = {"CFr": pred_eval_cfr, "CFn": pred_eval_cfn, "MF": pred_eval_mf, "GFr": pred_eval_gfr,
+                    "GFn": pred_eval_gfn,
+                    "ASVI": pred_eval_asvi, "MN": pred_eval_mn}
 
     import pickle
     pickle_out = open("{}_results/uni_results.pickle".format(exp_name), "wb")
