@@ -4,8 +4,9 @@ from scipy.stats import sem
 import numpy as np
 from shutil import copyfile
 
-model_name = "lz"
+model_name = "vol"
 lik_name = "c"
+d_x = 2
 exp_name = model_name + "_" + lik_name
 
 results = {}
@@ -45,7 +46,7 @@ if not os.path.isdir(f'{exp_name}_selected_figures'):
     os.makedirs(f'{exp_name}_selected_figures')
 for m, values in results['uni'].items():
     max_v = np.argmax(values)
-    for r in range(3):
+    for r in range(d_x):
         file_name=f'{m}_rep:{max_v}_{r}.png'
         copyfile(f'{exp_name}_figures/{file_name}', f'{exp_name}_selected_figures/{file_name}')
 
