@@ -16,7 +16,7 @@ class ProbabilisticModel(nn.Module):
             sd_loss = torch.log(2 * np.pi * sigma ** 2)
         except TypeError:
             sd_loss = np.log(2 * np.pi * sigma ** 2)
-        return torch.sum(torch.mean(-(xt - mu) ** 2 / (2 * sigma ** 2) - 0.5 * sd_loss, 0))
+        return torch.sum(torch.mean(- (xt - mu) ** 2 / (2 * sigma ** 2) - 0.5 * sd_loss, 0))
 
     def _avg_log_prob(self, xt, mu, sigma, dist=None):
         if dist is None:
@@ -59,16 +59,17 @@ class ProbabilisticModel(nn.Module):
         dist2 = torch.distributions.multivariate_normal.MultivariateNormal(mean2, covariance_matrix=cov2)
         return torch.sum(torch.distributions.kl.kl_divergence(dist1, dist2))
 
-    def cascading_transformation(self, x, tr_index, log_jacobian, epsilon_loss, global_epsilon=0.):
+    def cascading_transformation(self, x, tr_index, log_jacobian, epsilon_loss, eps_mean=None, eps_scale=None, local_eps=None):
         N = x.shape[0]
-        x, new_epsilon_in, new_epsilon_out, new_log_jacobian = self.transformations[tr_index](x.squeeze(), global_epsilon)
+        m = eps_mean if eps_mean is not None else 0.
+        scale = eps_scale if eps_scale is not None else self.transformations[0].epsilon_nu
+        x, new_epsilon_in, new_epsilon_out, new_log_jacobian = self.transformations[tr_index](x.squeeze(), local_eps=local_eps)
         log_jacobian += new_log_jacobian
-        eps_sigma = self.transformations[0].epsilon_nu
-        epsilon_loss += - self._avg_gaussian_log_prob(new_epsilon_out,
-                                                      global_epsilon, eps_sigma) + self._avg_gaussian_log_prob(
-                                                      new_epsilon_in, global_epsilon, eps_sigma)
+        epsilon_loss += -self._avg_gaussian_log_prob(new_epsilon_out, m, scale)
+        epsilon_loss += self._avg_gaussian_log_prob(new_epsilon_in, m, scale)
         x = x.view((N, self.d_x, 1))
-        return x
+        #print(new_epsilon_out.detach().numpy())
+        return x, log_jacobian, epsilon_loss
 
     def reshape_collider_samples(self, x, depth):
         samples = []
@@ -111,9 +112,9 @@ class ColliderModel(ProbabilisticModel):
         tot_idx = 0
         # Latent cascading flow variables
         if self.eps_generator is not None:
-            global_eps = self.eps_generator.sample(N).type(torch.float32)
+            local_eps, eps_mean, eps_scale = [x.type(torch.float32) for x in self.eps_generator.sample(N)]
         else:
-            global_eps = torch.zeros((1,))
+            local_eps, eps_mean, eps_scale = None, None, None
         for d in range(self.depth-1):
             par_idx = 0
             samples_d_list = []
@@ -135,12 +136,10 @@ class ColliderModel(ProbabilisticModel):
 
                 # Flow transformation
                 if self.is_transformed:
-                    if len(global_eps.shape)==3:
-                        gl_eps = global_eps[:,:,tot_idx]
-                    else:
-                        gl_eps = global_eps
-                    new_x_tr = self.cascading_transformation(new_x, tot_idx, log_jac, eps_loss,
-                                                             global_epsilon=gl_eps)
+                    new_x_tr, log_jac, eps_loss = self.cascading_transformation(new_x, tot_idx, log_jac, eps_loss,
+                                                                                eps_mean=eps_mean[:, :, tot_idx],
+                                                                                eps_scale=eps_scale[:, :, tot_idx],
+                                                                                local_eps=local_eps[:, :, tot_idx])
                     new_x_tr = new_x_tr.view(new_x.shape)
                 else:
                     new_x_tr = new_x
@@ -237,8 +236,12 @@ class HierarchicalModel(ProbabilisticModel):
 
         # Cascading transformation
         if self.is_transformed:
-            mean_variable = self.cascading_transformation(mean_variable_pre, 0, log_jacobian, epsilon_loss, global_epsilon)
-            scale_variable = self.cascading_transformation(scale_variable_pre, 1, log_jacobian, epsilon_loss, global_epsilon)
+            mean_variable, log_jacobian, epsilon_loss = self.cascading_transformation(mean_variable_pre, 0,
+                                                                                      log_jacobian,
+                                                                                      epsilon_loss, global_epsilon) #TODO: Broken
+            scale_variable, log_jacobian, epsilon_loss = self.cascading_transformation(scale_variable_pre, 1,
+                                                                                       log_jacobian,
+                                                                                       epsilon_loss, global_epsilon)
         else:
             mean_variable = mean_variable_pre
             scale_variable = scale_variable_pre
@@ -258,8 +261,11 @@ class HierarchicalModel(ProbabilisticModel):
 
             # Cascading transformation
             if self.is_transformed:
-                child_variable = self.cascading_transformation(child_variable_pre, child_index+2, log_jacobian,
-                                                               epsilon_loss, global_epsilon)
+                child_variable, log_jacobian, epsilon_loss = self.cascading_transformation(child_variable_pre,
+                                                                                           child_index+2,
+                                                                                           log_jacobian,
+                                                                                           epsilon_loss,
+                                                                                           global_epsilon)
             else:
                 child_variable = child_variable_pre
 
@@ -310,7 +316,7 @@ class DynamicModel(ProbabilisticModel):
 
     def __init__(self, sigma, T, initial_sigma, distribution, d_x, transition, emission, emission_distribution,
                  mu_sd=0.001,
-                 observation_gain=1., transformations=(), mu_transformations=(), initial_mean=0.):
+                 observation_gain=1., transformations=(), mu_transformations=(), initial_mean=0., eps_generator=()):
         self.sigma = sigma
         self.d_x = d_x
         self.transition = transition
@@ -332,11 +338,22 @@ class DynamicModel(ProbabilisticModel):
             self.is_mu_transformed = True
         else:
             self.is_mu_transformed = False
+        if eps_generator:
+            self.eps_generator = eps_generator
+            self.has_eps_generator = True
+        else:
+            self.has_eps_generator = False
 
-    def sample_timeseries(self, N):
+    def sample_timeseries(self, N, data=None):
         # Output variables
         log_jacobian = 0.
         epsilon_loss = 0.
+
+        # Auxiliary variables
+        if self.has_eps_generator:
+            eps_global = self.eps_generator.sample(N, data)
+        else:
+            eps_global = [0. for _ in range(self.T)]
 
         # Initialize dynamic variables
         mu = torch.distributions.normal.Normal(0., self.mu_sd).rsample((N,))
@@ -348,6 +365,8 @@ class DynamicModel(ProbabilisticModel):
 
         # Transform prior
         if self.is_transformed:
+            #x = self.cascading_transformation(x_pre.squeeze(), 0, log_jacobian, epsilon_loss,
+            #                                         global_epsilon=eps_global)
             x, new_epsilon_in, new_epsilon_out, new_log_jacobian = self.transformations[0](x_pre.squeeze())
             log_jacobian += new_log_jacobian
             eps_sigma = self.transformations[0].epsilon_nu

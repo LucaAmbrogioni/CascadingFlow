@@ -23,6 +23,8 @@ class TriResNet(nn.Module):
         self.b1 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,))))
         self.b2 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,))))
         self.b3 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,))))
+        self.eps_b = nn.Parameter(torch.Tensor(np.zeros((d_epsilon,))))
+        self.eps_s = nn.Parameter(torch.Tensor(-4*np.ones((d_epsilon,))))
         if in_pre_lambda is None:
             self.pre_l = torch.Tensor(np.random.normal(-100., 0.1, (1,)))
         else:
@@ -96,25 +98,35 @@ class TriResNet(nn.Module):
         log_jacobian = torch.sum(torch.log(l + (1-l)*d1) + torch.log(l + (1-l)*d2) + torch.log(l + (1-l)*d3)) + torch.mean(torch.sum(self.log_df(z1) + self.log_df(z2),1))
         return x_out, epsilon_out, log_jacobian
 
-    def inverse(self, y, epsilon_out):
-        #Matrices
-        d1, d2, d3, U1, L1, U2, L2, U3, L3 = self.get_matrices()
+    # def inverse(self, y, epsilon_out):
+    #     #Matrices
+    #     d1, d2, d3, U1, L1, U2, L2, U3, L3 = self.get_matrices()
+    #
+    #     # Inverse
+    #     z3 = torch.cat((y, epsilon_out),1)
+    #     z2 = self.inv_f(self.inv_LU_layer(z3, L3, U3, self.b3))
+    #     z1 = self.inv_f(self.inv_LU_layer(z2, L3, U3, self.b3))
+    #     z0 = self.inv_LU_layer(z1, L1, U1, self.b1)
+    #     x_out, epsilon_out = z0[:,:self.d_x], z3[:,self.d_x:]
+    #     l = self.get_l()
+    #     log_jacobian = torch.sum(torch.log(l + (1-l)*d1) + torch.log(l + (1-l)*d2) + torch.log(l + (1-l)*d3)) + torch.mean(torch.sum(self.log_df(z1) + self.log_df(z2),1))
+    #     return x_out, epsilon_out, log_jacobian
 
-        # Inverse
-        z3 = torch.cat((y, epsilon_out),1)
-        z2 = self.inv_f(self.inv_LU_layer(z3, L3, U3, self.b3))
-        z1 = self.inv_f(self.inv_LU_layer(z2, L3, U3, self.b3))
-        z0 = self.inv_LU_layer(z1, L1, U1, self.b1)
-        x_out, epsilon_out = z0[:,:self.d_x], z3[:,self.d_x:]
-        l = self.get_l()
-        log_jacobian = torch.sum(torch.log(l + (1-l)*d1) + torch.log(l + (1-l)*d2) + torch.log(l + (1-l)*d3)) + torch.mean(torch.sum(self.log_df(z1) + self.log_df(z2),1))
-        return x_out, epsilon_out, log_jacobian
-
-    def __call__(self, x, global_epsilon=0.):
+    def __call__(self, x, eps_mean=None, eps_scale=None, local_eps=None):
         D = self.d_epsilon
         N = x.shape[0]
-        epsilon = global_epsilon + torch.distributions.normal.Normal(torch.zeros((N,D)),self.epsilon_nu*torch.ones((N,D))).rsample()
+        m = eps_mean if eps_mean is not None else 0.
+        s = eps_scale if eps_scale is not None else self.epsilon_nu
+        if local_eps is not None:
+            epsilon = local_eps
+        else:
+            epsilon = m + s*torch.distributions.normal.Normal(torch.zeros((N,D)),torch.ones((N,D))).rsample()
         x_posterior, epsilon_out, log_jacobian = self.forward(x, epsilon)
+        out_scale = F.softplus(self.eps_s)
+        epsilon_out = (epsilon_out - self.eps_b)*out_scale
+        log_jacobian += torch.sum(torch.log(out_scale))
+        #print(np.mean(epsilon_out.detach().numpy()))
+        #print("std: {}".format(np.std(epsilon_out.detach().numpy())))
         return x_posterior, epsilon, epsilon_out, log_jacobian
 
 class LinearNet(nn.Module):
@@ -165,24 +177,37 @@ class LinearGaussianTree(nn.Module):
         self.depth = depth
         self.in_scale = in_scale
         self.scale = scale
-        self.size = 2**(depth+1) - 1
+        self.size = 2**depth - 1
         self.weights = nn.Parameter(torch.tensor(np.random.normal(in_w,0.0001,(self.size,))))
+        #self.scaling_factors = nn.Parameter(torch.tensor(np.ones((self.size,))))
+        #self.bias_factors = nn.Parameter(torch.tensor(np.ones((self.size,))))
 
     def sample(self, M):
         samples_list = [torch.distributions.normal.Normal(0., self.in_scale).rsample((M,self.node_size,1))]#.type(torch.float32)]
+        m_list = []
+        scale_list = []
         tot_idx = 0
         for d in range(1,self.depth):
             samples_d_list = []
+            m_d_list = []
+            scale_d_list = []
             parent_half_idx = 0
             for j in range(2**d):
                 w = torch.sigmoid(self.weights[tot_idx])
-                m = w*samples_list[d-1][:, :, int(parent_half_idx)].unsqueeze(2)
-                new_sample = torch.distributions.normal.Normal(m,(1-w)*self.scale).rsample()
+                #a = torch.sigmoid(self.scaling_factors[tot_idx])
+                #b = self.bias_factors[tot_idx]
+                m = w*samples_list[d-1][:, :, int(parent_half_idx)].unsqueeze(2)# + b
+                scale = ((1-w)*self.scale).repeat(m.shape)
+                new_sample = torch.distributions.normal.Normal(m,scale).rsample()
                 parent_half_idx += 1/2
                 tot_idx += 1
                 samples_d_list.append(new_sample)
+                m_d_list.append(m)
+                scale_d_list.append(scale)
             samples_list.append(torch.cat(samples_d_list,2))
-        return torch.cat(list(reversed(samples_list)),2)
+            m_list.append(torch.cat(m_d_list, 2))
+            scale_list.append(torch.cat(scale_d_list, 2))
+        return torch.cat(list(reversed(samples_list)),2), torch.cat(list(reversed(m_list)),2), torch.cat(list(reversed(scale_list)),2)
 
 
 class LinearGaussianChain(nn.Module):
