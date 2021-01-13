@@ -2,9 +2,146 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="951d8c97-5297-40db-9ed7-fd776c6ec1bc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/collider_training_test.py" afterPath="$PROJECT_DIR$/collider_training_test.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/amortized_training.py" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/lucamb.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/lucamb.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/AR_loss_rep:0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/AR_loss_rep:1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/AR_rep:0_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/AR_rep:1_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/ASVI_loss_rep:0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/ASVI_loss_rep:1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/ASVI_rep:0_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/ASVI_rep:1_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/CFn_loss_rep:0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/CFn_loss_rep:1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/CFn_rep:0_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/CFn_rep:1_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/CFr_loss_rep:0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/CFr_loss_rep:1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/CFr_rep:0_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/CFr_rep:1_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/GFn_loss_rep:0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/GFn_loss_rep:1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/GFn_rep:0_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/GFn_rep:1_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/GFr_loss_rep:0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/GFr_loss_rep:1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/GFr_rep:0_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/GFr_rep:1_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/MF_loss_rep:0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/MF_loss_rep:1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/MF_rep:0_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/MF_rep:1_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/MN_loss_rep:0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/MN_loss_rep:1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/MN_rep:0_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/MN_rep:1_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/NN_loss_rep:0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/NN_loss_rep:1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/NN_rep:0_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bm_r_figures/NN_rep:1_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lorentz_training.py" afterPath="$PROJECT_DIR$/lorentz_training.py" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/ASVI_loss_rep:0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/ASVI_loss_rep:1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/ASVI_loss_rep:2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/ASVI_rep:0_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/ASVI_rep:0_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/ASVI_rep:0_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/ASVI_rep:1_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/ASVI_rep:1_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/ASVI_rep:1_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/ASVI_rep:2_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/ASVI_rep:2_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/ASVI_rep:2_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_loss_rep:0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_loss_rep:1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_loss_rep:2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_loss_rep:3.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_rep:0_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_rep:0_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_rep:0_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_rep:1_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_rep:1_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_rep:1_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_rep:2_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_rep:2_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_rep:2_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_rep:3_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_rep:3_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFn_rep:3_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_loss_rep:0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_loss_rep:1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_loss_rep:2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_loss_rep:3.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_rep:0_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_rep:0_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_rep:0_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_rep:1_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_rep:1_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_rep:1_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_rep:2_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_rep:2_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_rep:2_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_rep:3_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_rep:3_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/CFr_rep:3_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFn_loss_rep:0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFn_loss_rep:1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFn_loss_rep:2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFn_rep:0_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFn_rep:0_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFn_rep:0_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFn_rep:1_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFn_rep:1_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFn_rep:1_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFn_rep:2_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFn_rep:2_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFn_rep:2_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFr_loss_rep:0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFr_loss_rep:1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFr_loss_rep:2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFr_rep:0_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFr_rep:0_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFr_rep:0_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFr_rep:1_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFr_rep:1_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFr_rep:1_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFr_rep:2_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFr_rep:2_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/GFr_rep:2_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_loss_rep:0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_loss_rep:1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_loss_rep:2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_loss_rep:3.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_rep:0_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_rep:0_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_rep:0_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_rep:1_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_rep:1_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_rep:1_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_rep:2_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_rep:2_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_rep:2_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_rep:3_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_rep:3_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MF_rep:3_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MN_loss_rep:0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MN_loss_rep:1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MN_loss_rep:2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MN_rep:0_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MN_rep:0_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MN_rep:0_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MN_rep:1_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MN_rep:1_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MN_rep:1_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MN_rep:2_0.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MN_rep:2_1.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/lz_r_figures/MN_rep:2_2.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/modules/dynamics.py" afterPath="$PROJECT_DIR$/modules/dynamics.py" />
       <change beforePath="$PROJECT_DIR$/modules/models.py" afterPath="$PROJECT_DIR$/modules/models.py" />
       <change beforePath="$PROJECT_DIR$/modules/networks.py" afterPath="$PROJECT_DIR$/modules/networks.py" />
+      <change beforePath="$PROJECT_DIR$/modules/training_tools.py" afterPath="$PROJECT_DIR$/modules/training_tools.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -49,55 +186,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="lorentz_training.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lorentz_training.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-151">
-              <caret line="35" column="10" lean-forward="true" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="experiments.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/experiments.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-810">
-              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="networks.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/networks.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="32" column="15" lean-forward="true" selection-start-line="32" selection-start-column="15" selection-end-line="32" selection-end-column="15" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="71" column="44" lean-forward="true" selection-start-line="71" selection-start-column="44" selection-end-line="71" selection-end-column="44" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="plot_tools.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/plot_tools.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="396">
+              <caret line="64" column="0" lean-forward="true" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -105,24 +198,44 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="collider_test.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/collider_test.py">
+      <file leaf-file-name="networks.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/networks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="40" column="101" lean-forward="false" selection-start-line="40" selection-start-column="101" selection-end-line="40" selection-end-column="101" />
+            <state relative-caret-position="1455">
+              <caret line="237" column="0" lean-forward="false" selection-start-line="237" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="collider_training_test.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/collider_training_test.py">
+      <file leaf-file-name="amortized_training.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/amortized_training.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="13" column="9" lean-forward="false" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
+            <state relative-caret-position="396">
+              <caret line="22" column="23" lean-forward="true" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="functional.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/anaconda2/envs/pytorch/lib/python3.8/site-packages/torch/nn/functional.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="334">
+              <caret line="1691" column="0" lean-forward="false" selection-start-line="1691" selection-start-column="0" selection-end-line="1691" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="370">
+              <caret line="365" column="65" lean-forward="true" selection-start-line="365" selection-start-column="65" selection-end-line="365" selection-end-column="65" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -158,6 +271,8 @@
       <find>M=1000</find>
       <find>out_data</find>
       <find>cascading_</find>
+      <find>local_eps</find>
+      <find>old_xt</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -178,21 +293,23 @@
         <option value="$PROJECT_DIR$/test_hierarchical_regression_sampling.py" />
         <option value="$PROJECT_DIR$/test_hierarchical_nn_regression_sampling.py" />
         <option value="$PROJECT_DIR$/modules/emissions.py" />
-        <option value="$PROJECT_DIR$/modules/training_tools.py" />
         <option value="$PROJECT_DIR$/variational_models_test.py" />
         <option value="$PROJECT_DIR$/lz_c_results/results_loader.py" />
         <option value="$PROJECT_DIR$/modules/plot_tools.py" />
-        <option value="$PROJECT_DIR$/modules/dynamics.py" />
         <option value="$PROJECT_DIR$/modules/distributions.py" />
         <option value="$PROJECT_DIR$/modules/eval_utils.py" />
         <option value="$PROJECT_DIR$/ColliderTest.py" />
         <option value="$PROJECT_DIR$/test_hierarchical_training.py" />
-        <option value="$PROJECT_DIR$/modules/experiments.py" />
         <option value="$PROJECT_DIR$/collider_test.py" />
+        <option value="$PROJECT_DIR$/collider_training_test.py" />
+        <option value="$PROJECT_DIR$/modules/dynamics.py" />
+        <option value="$PROJECT_DIR$/modules/experiments.py" />
+        <option value="$PROJECT_DIR$/alternative_lorentz_training.py" />
         <option value="$PROJECT_DIR$/lorentz_training.py" />
+        <option value="$PROJECT_DIR$/modules/training_tools.py" />
         <option value="$PROJECT_DIR$/modules/models.py" />
         <option value="$PROJECT_DIR$/modules/networks.py" />
-        <option value="$PROJECT_DIR$/collider_training_test.py" />
+        <option value="$PROJECT_DIR$/amortized_training.py" />
       </list>
     </option>
   </component>
@@ -217,7 +334,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -228,13 +345,18 @@
             <path>
               <item name="CascadingFlow" type="b2602c69:ProjectViewProjectNode" />
               <item name="CascadingFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="lz_r_figures" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CascadingFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CascadingFlow" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -243,11 +365,11 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/modules" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/modules" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -262,8 +384,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.collider_training_test">
-    <configuration name="ColliderTest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.amortized_training">
+    <configuration name="amortized_training" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -275,7 +397,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="CascadingFlow" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/collider_test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/amortized_training.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -299,24 +421,6 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="experiments" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/modules" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="CascadingFlow" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/modules/experiments.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
     <configuration name="lorentz_training" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -335,19 +439,37 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="results_loader" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="models" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lz_c_results" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/modules" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="cascading_flows" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lz_c_results/results_loader.py" />
+      <module name="CascadingFlow" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/modules/models.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="training_tools" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/modules" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CascadingFlow" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/modules/training_tools.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -355,18 +477,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.lorentz_training" />
-      <item index="1" class="java.lang.String" itemvalue="Python.results_loader" />
-      <item index="2" class="java.lang.String" itemvalue="Python.experiments" />
-      <item index="3" class="java.lang.String" itemvalue="Python.ColliderTest" />
-      <item index="4" class="java.lang.String" itemvalue="Python.collider_training_test" />
+      <item index="1" class="java.lang.String" itemvalue="Python.collider_training_test" />
+      <item index="2" class="java.lang.String" itemvalue="Python.amortized_training" />
+      <item index="3" class="java.lang.String" itemvalue="Python.models" />
+      <item index="4" class="java.lang.String" itemvalue="Python.training_tools" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.collider_training_test" />
-        <item index="1" class="java.lang.String" itemvalue="Python.lorentz_training" />
-        <item index="2" class="java.lang.String" itemvalue="Python.ColliderTest" />
-        <item index="3" class="java.lang.String" itemvalue="Python.experiments" />
-        <item index="4" class="java.lang.String" itemvalue="Python.results_loader" />
+        <item index="0" class="java.lang.String" itemvalue="Python.amortized_training" />
+        <item index="1" class="java.lang.String" itemvalue="Python.training_tools" />
+        <item index="2" class="java.lang.String" itemvalue="Python.lorentz_training" />
+        <item index="3" class="java.lang.String" itemvalue="Python.models" />
+        <item index="4" class="java.lang.String" itemvalue="Python.collider_training_test" />
       </list>
     </recent_temporary>
   </component>
@@ -399,11 +521,10 @@
     <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17303494" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16593887" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22580644" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -415,6 +536,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -430,11 +552,6 @@
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/modules/experiments.py</url>
-          <line>63</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/collider_training_test.py</url>
           <line>155</line>
           <option name="timeStamp" value="30" />
@@ -443,54 +560,54 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="33" />
+      <option name="time" value="40" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
       <expression>
-        <expression-string>2**depth</expression-string>
+        <expression-string>data[1].shape</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>self.size</expression-string>
+        <expression-string>data[0].shape</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>print(np.mean(epsilon_out.detach().numpy()))</expression-string>
+        <expression-string>data[self.T-t].shape</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>np.mean(torch.sigmoid(tree.weights).detach().numpy())</expression-string>
+        <expression-string>T</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>np.mean(torch.sigmoid(tree.weights.detach().numpy()))</expression-string>
+        <expression-string>data.shape</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>np.mean(tree.weights.detach().numpy())</expression-string>
+        <expression-string>data</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>tree.weights</expression-string>
+        <expression-string>data[2].shape</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>tree</expression-string>
+        <expression-string>data[0]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>((1-w)*self.scale).repeat(m.shape)</expression-string>
+        <expression-string>print(data[0])</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
@@ -544,79 +661,245 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/ASVI_rep:1_0.png">
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/ASVI_loss_rep:0.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/ASVI_rep:1_1.png">
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/GFn_rep:0_1.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/ASVI_rep:1_2.png">
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/MF_rep:0_0.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/ASVI_rep:2_0.png">
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/MF_rep:0_1.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/ASVI_rep:2_1.png">
+    <entry file="file://$PROJECT_DIR$/modules/dynamics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="28" column="2" lean-forward="false" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vol_r_figures/CFr_loss_rep:0.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/MF_rep:1_1.png">
+    <entry file="file://$PROJECT_DIR$/vol_r_figures/CFr_loss_rep:1.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/MF_rep:2_0.png">
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/CFr_rep:1_1.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/MF_rep:2_1.png">
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/ASVI_rep:0_1.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/MN_rep:2_0.png">
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/ASVI_rep:0_0.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/MN_rep:1_2.png">
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/GFn_rep:0_0.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/CFn_loss_rep:1.png">
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/GFr_loss_rep:0.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/CFn_loss_rep:0.png">
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/GFr_rep:0_0.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/CFn_rep:0_2.png">
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/GFr_rep:0_1.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/CFn_rep:1_0.png">
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/CFr_rep:1_0.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/CFn_rep:1_1.png">
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/MF_rep:1_0.png">
       <provider selected="true" editor-type-id="images">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/MF_rep:1_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/ASVI_rep:1_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/ASVI_rep:1_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/CFn_loss_rep:0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/CFn_loss_rep:1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/CFn_rep:0_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/CFr_loss_rep:0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/CFr_loss_rep:1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/CFr_rep:0_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vdp_r_figures/CFr_rep:0_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda2/envs/pytorch/lib/python3.8/site-packages/torch/nn/modules/module.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="806" column="0" lean-forward="false" selection-start-line="806" selection-start-column="0" selection-end-line="806" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda2/envs/pytorch/lib/python3.8/site-packages/torch/distributions/normal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="874">
+          <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/distributions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda2/envs/pytorch/lib/python3.8/site-packages/matplotlib/axes/_axes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="4440" column="0" lean-forward="false" selection-start-line="4440" selection-start-column="0" selection-end-line="4440" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda2/envs/pytorch/lib/python3.8/site-packages/matplotlib/cbook/deprecation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="410" column="0" lean-forward="false" selection-start-line="410" selection-start-column="0" selection-end-line="410" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bm_r_figures/CFr_loss_rep:0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bm_r_figures/CFr_loss_rep:1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bm_r_figures/CFr_rep:1_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bm_r_figures/CFr_rep:0_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bm_r_figures/CFn_rep:1_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bm_r_figures/CFn_rep:0_0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bm_r_figures/CFn_loss_rep:1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bm_r_figures/CFn_loss_rep:0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lorentz_training.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="666">
+          <caret line="90" column="18" lean-forward="false" selection-start-line="90" selection-start-column="18" selection-end-line="90" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lz_r_figures/CFr_rep:0_1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lz_r_figures/CFr_rep:0_2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collider_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="false" />
+          </folding>
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lz_r_figures/CFr_loss_rep:0.png">
@@ -624,66 +907,34 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/modules/experiments.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="64" column="0" lean-forward="true" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lz_r_figures/CFr_rep:0_0.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/emissions.py">
+    <entry file="file://$PROJECT_DIR$/modules/training_tools.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda2/envs/pytorch/lib/python3.8/site-packages/numpy/core/_asarray.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+        <state relative-caret-position="288">
+          <caret line="16" column="15" lean-forward="true" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bruss_c_figures/CFr_loss_rep:0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bruss_c_figures/CFr_rep:0_0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bruss_c_figures/CFr_rep:0_1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/distributions.py">
+    <entry file="file://$PROJECT_DIR$/modules/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="14" column="60" lean-forward="false" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#12#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda2/envs/pytorch/lib/python3.8/site-packages/torch/tensor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="629" column="0" lean-forward="false" selection-start-line="629" selection-start-column="0" selection-end-line="629" selection-end-column="0" />
+        <state relative-caret-position="370">
+          <caret line="365" column="65" lean-forward="true" selection-start-line="365" selection-start-column="65" selection-end-line="365" selection-end-column="65" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/eval_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="54" column="49" lean-forward="true" selection-start-line="54" selection-start-column="49" selection-end-line="54" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -695,177 +946,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/anaconda2/envs/pytorch/lib/python3.8/site-packages/torch/nn/modules/module.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="777" column="0" lean-forward="false" selection-start-line="777" selection-start-column="0" selection-end-line="777" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/variational_models_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_hierarchical_training.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="80" column="57" lean-forward="true" selection-start-line="80" selection-start-column="57" selection-end-line="80" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_lorentz_sampling.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/ASVI_loss_rep:0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/ASVI_rep:0_0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/ASVI_rep:0_1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFr_loss_rep:0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:0_0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:0_1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFn_rep:0_2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFr_loss_rep:1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFr_rep:0_0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFr_rep:0_1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFr_rep:0_2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFr_rep:1_0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lz_r_figures/GFr_loss_rep:2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LICENSE">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/collider_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="40" column="101" lean-forward="false" selection-start-line="40" selection-start-column="101" selection-end-line="40" selection-end-column="101" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lorentz_training.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-151">
-          <caret line="35" column="10" lean-forward="true" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/experiments.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-810">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/plot_tools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="71" column="44" lean-forward="true" selection-start-line="71" selection-start-column="44" selection-end-line="71" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/networks.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="32" column="15" lean-forward="true" selection-start-line="32" selection-start-column="15" selection-end-line="32" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1455">
+          <caret line="237" column="0" lean-forward="false" selection-start-line="237" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/collider_training_test.py">
+    <entry file="file://$PROJECT_DIR$/amortized_training.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="9" lean-forward="false" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
+        <state relative-caret-position="396">
+          <caret line="22" column="23" lean-forward="true" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>

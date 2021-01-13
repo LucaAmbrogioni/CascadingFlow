@@ -61,8 +61,10 @@ class ProbabilisticModel(nn.Module):
 
     def cascading_transformation(self, x, tr_index, log_jacobian, epsilon_loss, eps_mean=None, eps_scale=None, local_eps=None):
         N = x.shape[0]
-        m = eps_mean if eps_mean is not None else 0.
-        scale = eps_scale if eps_scale is not None else self.transformations[0].epsilon_nu
+        m = eps_mean[:,:,tr_index] if eps_mean is not None else 0.
+        scale = eps_scale[:,:,tr_index] if eps_scale is not None else self.transformations[0].epsilon_nu
+        if local_eps is not None:
+            local_eps = local_eps[:,:,tr_index]
         x, new_epsilon_in, new_epsilon_out, new_log_jacobian = self.transformations[tr_index](x.squeeze(), local_eps=local_eps)
         log_jacobian += new_log_jacobian
         epsilon_loss += -self._avg_gaussian_log_prob(new_epsilon_out, m, scale)
@@ -78,103 +80,6 @@ class ProbabilisticModel(nn.Module):
             samples.append(x[:,0,n:n+2**(depth-d-1)])
             n += 2**(depth-d-1)
         return samples
-
-
-class ColliderModel(ProbabilisticModel):
-
-    def __init__(self,depth, sigma, in_sigma, join_link, transition_distribution,
-                 transformations=(), mu_transformations=(), eps_generator=None):
-        super(ColliderModel, self).__init__()
-        self.depth = depth
-        self.sigma = sigma
-        self.in_sigma = in_sigma
-        self.join_link = join_link
-        self.transition_distribution = transition_distribution
-        self.eps_generator = eps_generator
-        self.d_x = 1
-        if transformations:
-            self.transformations = transformations
-            self.is_transformed = True
-        else:
-            self.is_transformed = False
-        if mu_transformations:
-            self.mu_transformations = mu_transformations
-            self.is_mu_transformed = True
-        else:
-            self.is_mu_transformed = False
-
-    def sample(self, N):
-        log_jac = 0.
-        eps_loss = 0.
-
-        samples_list = []
-        samples_pre_list = []
-        tot_idx = 0
-        # Latent cascading flow variables
-        if self.eps_generator is not None:
-            local_eps, eps_mean, eps_scale = [x.type(torch.float32) for x in self.eps_generator.sample(N)]
-        else:
-            local_eps, eps_mean, eps_scale = None, None, None
-        for d in range(self.depth-1):
-            par_idx = 0
-            samples_d_list = []
-            samples_pre_d_list = []
-            for var_idx in range(2**(self.depth-d - 1)):
-                if d == 0:
-                    m = torch.zeros((N,))
-                else:
-                    m = self.join_link(samples_list[d-1][:,par_idx], samples_list[d-1][:,par_idx+1])
-                s = self.sigma if d > 0 else self.in_sigma
-                par_idx += 2
-
-                # Pseudo-conjugate update
-                if self.is_mu_transformed:
-                    m, s = self.mu_transformations[tot_idx](m, s)
-
-                # Transition sampling
-                new_x = self.transition_distribution.rsample(m,s).view(N,1)
-
-                # Flow transformation
-                if self.is_transformed:
-                    new_x_tr, log_jac, eps_loss = self.cascading_transformation(new_x, tot_idx, log_jac, eps_loss,
-                                                                                eps_mean=eps_mean[:, :, tot_idx],
-                                                                                eps_scale=eps_scale[:, :, tot_idx],
-                                                                                local_eps=local_eps[:, :, tot_idx])
-                    new_x_tr = new_x_tr.view(new_x.shape)
-                else:
-                    new_x_tr = new_x
-
-                samples_d_list.append(new_x_tr)
-                samples_pre_d_list.append(new_x)
-                tot_idx += 1
-            samples_list.append(torch.cat(samples_d_list, 1))
-            samples_pre_list.append(torch.cat(samples_pre_d_list, 1))
-        return samples_list, samples_pre_list, log_jac, eps_loss
-
-    def evaluate_avg_joint_log_prob(self, samples_list, y=None, samples_pre_list=None, log_jacobian=None, epsilon_loss=None):
-        avg_log_prob = 0.
-        if log_jacobian:
-            avg_log_prob -= log_jacobian
-        if epsilon_loss:
-            avg_log_prob += epsilon_loss
-        for d in range(self.depth):
-            par_idx = 0
-            for var_idx in range(2 ** (self.depth - d - 1)):
-                if d < self.depth - 1 or y is not None:
-                    if d == 0:
-                        m = 0.
-                    else:
-                        m = self.join_link(samples_list[d - 1][:, par_idx], samples_list[d - 1][:, par_idx + 1])
-                    s = self.sigma if d > 0 else self.in_sigma
-                    if d == self.depth-1:
-                        c = y
-                    elif samples_pre_list is not None:
-                        c = samples_pre_list[d][:,var_idx]
-                    else:
-                        c = samples_list[d][:,var_idx]
-                    avg_log_prob += self._avg_log_prob(c, m, s, dist=self.transition_distribution)
-                    par_idx += 2
-        return avg_log_prob
 
 
 class HierarchicalModel(ProbabilisticModel):
@@ -275,7 +180,6 @@ class HierarchicalModel(ProbabilisticModel):
         x_pre = {"mean": mean_variable_pre, "scale": scale_variable_pre, "children": children_sample_pre_list}
         return x, x_pre, log_jacobian, epsilon_loss
 
-
     def evaluate_avg_joint_log_prob(self, x, y=None, x_pre=None, log_jacobian=None, epsilon_loss=None):
         mean_m = 0.
         mean_s = self.mean_sigma
@@ -312,11 +216,109 @@ class HierarchicalModel(ProbabilisticModel):
         return avg_log_prob
 
 
+class ColliderModel(ProbabilisticModel):
+
+    def __init__(self,depth, sigma, in_sigma, join_link, transition_distribution,
+                 transformations=(), mu_transformations=(), eps_generator=None):
+        super(ColliderModel, self).__init__()
+        self.depth = depth
+        self.sigma = sigma
+        self.in_sigma = in_sigma
+        self.join_link = join_link
+        self.transition_distribution = transition_distribution
+        self.eps_generator = eps_generator
+        self.d_x = 1
+        if transformations:
+            self.transformations = transformations
+            self.is_transformed = True
+        else:
+            self.is_transformed = False
+        if mu_transformations:
+            self.mu_transformations = mu_transformations
+            self.is_mu_transformed = True
+        else:
+            self.is_mu_transformed = False
+
+    def sample(self, N):
+        log_jac = 0.
+        eps_loss = 0.
+
+        samples_list = []
+        samples_pre_list = []
+        tot_idx = 0
+        # Latent cascading flow variables
+        if self.eps_generator is not None:
+            local_eps, eps_mean, eps_scale = [x.type(torch.float32) for x in self.eps_generator.sample(N)]
+        else:
+            local_eps, eps_mean, eps_scale = None, None, None
+        for d in range(self.depth-1):
+            par_idx = 0
+            samples_d_list = []
+            samples_pre_d_list = []
+            for var_idx in range(2**(self.depth-d - 1)):
+                if d == 0:
+                    m = torch.zeros((N,))
+                else:
+                    m = self.join_link(samples_list[d-1][:,par_idx], samples_list[d-1][:,par_idx+1])
+                s = self.sigma if d > 0 else self.in_sigma
+                par_idx += 2
+
+                # Pseudo-conjugate update
+                if self.is_mu_transformed:
+                    m, s = self.mu_transformations[tot_idx](m, s)
+
+                # Transition sampling
+                new_x = self.transition_distribution.rsample(m,s).view(N,1)
+
+                # Flow transformation
+                if self.is_transformed:
+                    new_x_tr, log_jac, eps_loss = self.cascading_transformation(new_x, tot_idx, log_jac, eps_loss,
+                                                                                eps_mean=eps_mean,
+                                                                                eps_scale=eps_scale,
+                                                                                local_eps=local_eps)
+                    new_x_tr = new_x_tr.view(new_x.shape)
+                else:
+                    new_x_tr = new_x
+
+                samples_d_list.append(new_x_tr)
+                samples_pre_d_list.append(new_x)
+                tot_idx += 1
+            samples_list.append(torch.cat(samples_d_list, 1))
+            samples_pre_list.append(torch.cat(samples_pre_d_list, 1))
+        return samples_list, samples_pre_list, log_jac, eps_loss
+
+    def evaluate_avg_joint_log_prob(self, samples_list, y=None, samples_pre_list=None, log_jacobian=None, epsilon_loss=None):
+        avg_log_prob = 0.
+        if log_jacobian:
+            avg_log_prob -= log_jacobian
+        if epsilon_loss:
+            avg_log_prob += epsilon_loss
+        for d in range(self.depth):
+            par_idx = 0
+            for var_idx in range(2 ** (self.depth - d - 1)):
+                if d < self.depth - 1 or y is not None:
+                    if d == 0:
+                        m = 0.
+                    else:
+                        m = self.join_link(samples_list[d - 1][:, par_idx], samples_list[d - 1][:, par_idx + 1])
+                    s = self.sigma if d > 0 else self.in_sigma
+                    if d == self.depth-1:
+                        c = y
+                    elif samples_pre_list is not None:
+                        c = samples_pre_list[d][:,var_idx]
+                    else:
+                        c = samples_list[d][:,var_idx]
+                    avg_log_prob += self._avg_log_prob(c, m, s, dist=self.transition_distribution)
+                    par_idx += 2
+        return avg_log_prob
+
+
 class DynamicModel(ProbabilisticModel):
 
     def __init__(self, sigma, T, initial_sigma, distribution, d_x, transition, emission, emission_distribution,
-                 mu_sd=0.001,
-                 observation_gain=1., transformations=(), mu_transformations=(), initial_mean=0., eps_generator=()):
+                 mu_sd=0.001, observation_gain=1., transformations=(), mu_transformations=(),
+                 initial_mean=0., eps_generator=None, is_amortized=False):
+        super(DynamicModel, self).__init__()
         self.sigma = sigma
         self.d_x = d_x
         self.transition = transition
@@ -328,6 +330,7 @@ class DynamicModel(ProbabilisticModel):
         self.dist = distribution
         self.T = T
         self.observation_gain = observation_gain
+        self.is_amortized = is_amortized
         if transformations:
             self.transformations = transformations
             self.is_transformed = True
@@ -349,11 +352,25 @@ class DynamicModel(ProbabilisticModel):
         log_jacobian = 0.
         epsilon_loss = 0.
 
-        # Auxiliary variables
+        # Latent cascading flow variables
         if self.has_eps_generator:
-            eps_global = self.eps_generator.sample(N, data)
+            if self.is_amortized:
+                if isinstance(data, list):
+                    in_data = data
+                elif len(data.shape) == 3:
+                    T_data = data.shape[2]
+                    in_data = [data[:,:,t] if t < T_data else None
+                               for t in range(self.T)]
+                else:
+                    T_data = data.shape[1]
+                    in_data = [data[:, t] if t < T_data else None
+                               for t in range(self.T)]
+            else:
+                in_data = None
+            local_eps, eps_mean, eps_scale = self.eps_generator.sample(N, in_data)
+            #local_eps = local_eps.type(torch.float32)
         else:
-            eps_global = [0. for _ in range(self.T)]
+            local_eps, eps_mean, eps_scale = None, None, None
 
         # Initialize dynamic variables
         mu = torch.distributions.normal.Normal(0., self.mu_sd).rsample((N,))
@@ -365,14 +382,11 @@ class DynamicModel(ProbabilisticModel):
 
         # Transform prior
         if self.is_transformed:
-            #x = self.cascading_transformation(x_pre.squeeze(), 0, log_jacobian, epsilon_loss,
-            #                                         global_epsilon=eps_global)
-            x, new_epsilon_in, new_epsilon_out, new_log_jacobian = self.transformations[0](x_pre.squeeze())
-            log_jacobian += new_log_jacobian
-            eps_sigma = self.transformations[0].epsilon_nu
-            epsilon_loss += - self._avg_gaussian_log_prob(new_epsilon_out, 0., eps_sigma) + self._avg_gaussian_log_prob(
-                new_epsilon_in, 0., eps_sigma)
-            x = x.view((N, self.d_x, 1))
+            x, log_jac, eps_loss = self.cascading_transformation(x_pre, 0, log_jacobian, epsilon_loss,
+                                                                 eps_mean=eps_mean,
+                                                                 eps_scale=eps_scale,
+                                                                 local_eps=local_eps)
+            x = x.view(x_pre.shape)
         else:
             x = x_pre
 
@@ -390,13 +404,11 @@ class DynamicModel(ProbabilisticModel):
 
             # Flow transformation
             if self.is_transformed:
-                new_x_tr, new_epsilon_in, new_epsilon_out, new_log_jacobian = self.transformations[t](new_x.squeeze())
-                new_x_tr = new_x_tr.view((N, self.d_x, 1))
-                log_jacobian += new_log_jacobian
-                eps_sigma = self.transformations[t].epsilon_nu
-                epsilon_loss += - self._avg_gaussian_log_prob(new_epsilon_out, 0.,
-                                                              eps_sigma) + self._avg_gaussian_log_prob(new_epsilon_in,
-                                                                                                       0., eps_sigma)
+                new_x_tr, log_jac, eps_loss = self.cascading_transformation(new_x, t, log_jacobian, epsilon_loss,
+                                                                            eps_mean=eps_mean,
+                                                                            eps_scale=eps_scale,
+                                                                            local_eps=local_eps)
+                new_x_tr = new_x_tr.view(new_x.shape)
             else:
                 new_x_tr = new_x
 
@@ -422,7 +434,7 @@ class DynamicModel(ProbabilisticModel):
                 xt = x_pre[:, :, t + 1] if x_pre is not None else x[:, :, t + 1]
                 avg_log_prob += self._avg_log_prob(xt, mut, st)
             if y is not None and y.shape[1] > t:
-                yt = y[:, t]
+                yt = y[:, t] if len(y.shape) == 2 else y[:, :, t]
                 avg_log_prob += self._avg_log_likelihood(x[:, :, t], yt)
         return avg_log_prob
 

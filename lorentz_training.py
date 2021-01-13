@@ -1,7 +1,7 @@
 import numpy as np
 
 from modules.distributions import NormalDistribution, BernoulliDistribution
-from modules.dynamics import LorentzTransition, RNNTransition, BrusselatorTransition, VolterraTransition
+from modules.dynamics import LorentzTransition, RNNTransition, BrusselatorTransition, VolterraTransition, VanDerPollTransition
 from modules.emissions import SingleCoordinateEmission
 from modules.experiments import rum_timeseries_experiment
 
@@ -21,6 +21,17 @@ if model_name == "lz":
     dist = NormalDistribution()
     lk_sigma = 3.
     transition_model = LorentzTransition(dt=dt)
+elif model_name == "vdp":
+    T = 200
+    T_data = 50
+    dt = 0.005
+    sigma = np.sqrt(dt) * 0.1
+    initial_sigma = 2.
+    initial_mean = 0.
+    d_x = 2  # Number of latent variables
+    dist = NormalDistribution()
+    lk_sigma = 3.
+    transition_model = VanDerPollTransition(dt=dt, mu=7., omega=20*np.pi*2)
 elif model_name == "vol":
     T = 100
     T_data = 50
@@ -33,11 +44,11 @@ elif model_name == "vol":
     lk_sigma = 3.
     transition_model = VolterraTransition(dt=dt)
 elif model_name == "bruss":
-    T = 80
-    T_data = 40
-    dt = 0.1
-    sigma = np.sqrt(dt)*0.1
-    initial_sigma = 1.
+    T = 100
+    T_data = 50
+    dt = 0.05
+    sigma = np.sqrt(dt)*0.05
+    initial_sigma = 4.
     initial_mean = 0.
     d_x = 2 #Number of latent variables
     dist = NormalDistribution()
@@ -77,7 +88,7 @@ elif lik_name == "r":
     emission_dist = NormalDistribution(scale=lk_sigma)
 
 num_repetitions = 10
-num_iterations = 5000 #8000
+num_iterations = 500 #8000
 batch_size = 50
 
 rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_size, transition_model,

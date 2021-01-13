@@ -212,32 +212,33 @@ class LinearGaussianTree(nn.Module):
 
 class LinearGaussianChain(nn.Module):
 
-    def __init__(self, node_size, T, in_scale, scale, in_w=1.8, amortized=False, data_dim=None):
+    def __init__(self, node_size, T, in_scale, amortized=False, data_dim=None):
         super(LinearGaussianChain, self).__init__()
         self.node_size = node_size
         self.T = T
         self.in_scale = in_scale
-        self.scale = scale
-        self.weights = nn.Parameter(torch.tensor(np.random.normal(in_w,0.0001,(T,))))
         self.is_amortized = amortized
-        if amortized:
-            self.embedding_layers = nn.ModuleList()
-            for _ in range(T):
-                self.embedding_layers.append(nn.Linear(data_dim, 2*node_size))
+        self.coupling_layers = nn.ModuleList()
+        self.data_embedding_layers = nn.ModuleList()
+        self.noise_embedding = nn.Parameter(torch.ones((1,node_size,T)))
+        for _ in range(T):
+            self.coupling_layers.append(nn.Linear(node_size, node_size))
+            if amortized:
+                self.data_embedding_layers.append(nn.Linear(data_dim, node_size))
 
-    def sample(self, M, data):
-        samples_list = [torch.distributions.normal.Normal(0., self.in_scale).rsample((M,self.node_size,1))]#.type(torch.float32)]
+    def sample(self, M, data): #TODO: Work in progress
+        m0 = torch.zeros((M,self.node_size,1))
+        s0 = self.in_scale*torch.ones((M,self.node_size,1))
+        m_list = [m0]
+        scale_list = [s0]
+        samples_list = [torch.distributions.normal.Normal(m0, s0).rsample()]#.type(torch.float32)]
         for t in range(1,self.T):
-            w = torch.sigmoid(self.weights[t])
-            if self.is_amortized:
-                a_inpt = self.embedding_layers[t](data[t])
-                a_mu = a_inpt[:self.node_size]
-                a_scale = F.softplus(a_inpt[self.node_size:])
-            else:
-                a_mu = 0.
-                a_scale = self.scale
-            m = w*samples_list[-1] + (1-w)*a_mu
-            scale = (1 - w)*a_scale
-            new_sample = torch.distributions.normal.Normal(m,scale).rsample()
-            samples_list.append(new_sample)
-        return samples_list
+            noise_sample = torch.distributions.normal.Normal(0,1.).sample((M,self.node_size))
+            st = F.softplus(self.noise_embedding[:,:,t]).repeat((M,1))
+            data_inpt = self.data_embedding_layers[t](data[self.T-t].view((M,1))) if (self.is_amortized and data[self.T-t] is not None) else 0.
+            coupling_inpt = self.coupling_layers[t](samples_list[-1].view((M,self.node_size)))
+            mt = data_inpt + coupling_inpt
+            m_list.append(mt.view((M,self.node_size,1)))
+            scale_list.append(st.view((M,self.node_size,1)))
+            samples_list.append((mt + st*noise_sample).view((M,self.node_size,1)))
+        return torch.cat(list(reversed(samples_list)),2), torch.cat(list(reversed(m_list)),2), torch.cat(list(reversed(scale_list)),2)

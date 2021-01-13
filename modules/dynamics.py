@@ -16,6 +16,27 @@ class LorentzTransition():
     x,y,z = torch.split(inpt, split_size_or_sections=1, dim=1)
     return inpt + self.dt*torch.cat((self.s*(y - x), x*(self.r - z)-y,x*y - self.b*z),1)
 
+class VanDerPollTransition():
+
+  def __init__(self, dt, mu=2., omega=5*2*np.pi):
+    self.dt = dt
+    self.mu = mu
+    self.omega = omega
+
+  def __call__(self, inpt, mu):
+    x,v = torch.split(inpt, split_size_or_sections=1, dim=1)
+    return inpt + self.dt*torch.cat((v,
+                                     self.mu*(1 - x**2)*v - self.omega*x),1)
+
+  #def __call__(self, inpt, mu):
+  #  f = lambda x,y: (v, self.mu*(1 - x**2)*v - self.omega*x)
+  #  h = 0.5*self.dt
+  #  x,v = torch.split(inpt, split_size_or_sections=1, dim=1)
+  #  x1,v1 = f(x,v)
+  #  x2,v2 = f(x + h*x1, v + h*v1)
+  #  x3, v3 = f(x + h*x2, v + h*v2)
+  #  return inpt + self.dt*torch.cat(f(x + self.dt * x3, v + self.dt * v3),1)
+
 class VolterraTransition():
 
   def __init__(self, dt, a=0.2, b=0.02, c=0.02, d=0.1):
