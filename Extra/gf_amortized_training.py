@@ -5,20 +5,20 @@ from tqdm import tqdm
 
 import torch.optim as optim
 
-from modules.models import DynamicModel
+from modules.models import GlobalFlow, DynamicModel
 from modules.training_tools import variational_update
-from modules.networks import TriResNet, LinearGaussianChain
+from modules.networks import InferenceNet
 from modules.dynamics import VolterraTransition
 
 from modules.distributions import NormalDistribution
 from modules.emissions import SingleCoordinateEmission
 
 # Simulation parameters
-num_iterations = 3500
-batch_size = 200
+num_iterations = 3000
+batch_size = 100
 
 # Model
-T = 50
+T = 100
 dt = 0.5
 sigma = np.sqrt(dt)*0.5
 initial_sigma = 3.
@@ -26,7 +26,8 @@ initial_mean = 0.
 d_x = 2 #Number of latent variables
 d_eps = 10
 dist = NormalDistribution()
-lk_sigma = 0.1
+lk_sigma = 3.
+#transition_model = lambda x,m: x #
 transition_model = VolterraTransition(dt=dt)
 
 # Likelihood
@@ -43,18 +44,11 @@ prior_model = DynamicModel(sigma=sigma, initial_sigma=initial_sigma, distributio
 
 ### Cascading flow ###
 print("Train cascading flows")
-transformations = [TriResNet(d_x=d_x, d_epsilon=d_eps, epsilon_nu=0.1, in_pre_lambda=4.) for _ in range(T)]
-auxiliary_model = LinearGaussianChain(node_size=d_eps, T=T, in_scale=0.1, amortized=True, data_dim=1)
-variational_model = DynamicModel(sigma=sigma, initial_sigma=initial_sigma, distribution=dist, d_x=d_x,
-                                 transition=transition_model,
-                                 emission=emission_model, emission_distribution=emission_dist,
-                                 observation_gain=observation_gain, T=T,
-                                 transformations=transformations, initial_mean=initial_mean,
-                                 eps_generator=auxiliary_model,
-                                 is_amortized=True)
+inference_net = InferenceNet(in_size=T, out_size=T*d_x, n_hidden=T, out_shape=(T,d_x), eps=0.1)
+variational_model = GlobalFlow(T,d_x, d_eps=10, inference_net=inference_net)
 
 loss_list = []
-params_list = [list(tr.parameters()) for tr in transformations] + [list(auxiliary_model.parameters())]
+params_list = [inference_net.parameters()] + [variational_model.transformation.parameters()]
 params = []
 for p in params_list:
     params += p
@@ -75,7 +69,7 @@ for itr in tqdm(range(num_iterations)):
     data = Y #[0, :].view((1, T))
 
     # Variational update
-    loss = variational_update(prior_model, variational_model, data, optimizer, batch_size)
+    loss = variational_update(prior_model, variational_model, data, optimizer, batch_size, amortized=True)
 
     # Loss
     loss_list.append(float(loss.detach().numpy()))

@@ -35,7 +35,7 @@ elif model_name == "vdp":
 elif model_name == "vol":
     T = 100
     T_data = 50
-    dt = 1.
+    dt = 0.5
     sigma = np.sqrt(dt)*0.5
     initial_sigma = 3.
     initial_mean = 20.
@@ -88,7 +88,7 @@ elif lik_name == "r":
     emission_dist = NormalDistribution(scale=lk_sigma)
 
 num_repetitions = 10
-num_iterations = 500 #8000
+num_iterations = 2 #8000
 batch_size = 50
 
 rum_timeseries_experiment(exp_name, num_repetitions, num_iterations, batch_size, transition_model,
