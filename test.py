@@ -7,7 +7,7 @@ from tqdm import tqdm
 from modules.distributions import NormalDistribution
 from modules.dynamics import ConvTransition
 from modules.emissions import LinearEmission
-from modules.eval_utils import evaluate_model
+from modules.eval_utils import evaluate_img_model
 from modules.models import DynamicImgModel
 from modules.networks import ASVIupdate
 from modules.plot_tools import plot_model
@@ -66,7 +66,7 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
             loss_list.append(float(loss.detach().numpy()))
 
         # Performance metrics
-        uni_lk, multi_lk, pred = evaluate_model(variational_model, X_true, M=5000,
+        uni_lk, multi_lk, pred = evaluate_img_model(variational_model, X_true, M=5000,
                                                 emission_model=emission_model,
                                                 emission_distribution=emission_dist,
                                                 scale=lk_sigma, out_data=out_data, T_data=T_data)
@@ -79,7 +79,22 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
         plt.savefig('{}_figures/ASVI_loss_rep:{}.png'.format(exp_name, rep))
         plt.clf()
 
-        plot_model(variational_model, X_true, K=d_x, M=100, savename="{}_figures/ASVI_rep:{}".format(exp_name, rep))
+    uni_results = {"ASVI": uni_eval_asvi}
+    multi_results = {"ASVI": multi_eval_asvi}
+    pred_results = {"ASVI": pred_eval_asvi}
+
+    import pickle
+    pickle_out = open("{}_results/uni_results.pickle".format(exp_name), "wb")
+    pickle.dump(uni_results, pickle_out)
+    pickle_out.close()
+
+    pickle_out = open("{}_results/multi_results.pickle".format(exp_name), "wb")
+    pickle.dump(multi_results, pickle_out)
+    pickle_out.close()
+
+    pickle_out = open("{}_results/pred_results.pickle".format(exp_name), "wb")
+    pickle.dump(pred_results, pickle_out)
+    pickle_out.close()
 
 
 # Defining dynamical and emission model
@@ -109,7 +124,7 @@ if lik_name == "r":
     emission_dist = NormalDistribution(scale=lk_sigma)
 
 num_repetitions = 10
-num_iterations = 2  # 8000
+num_iterations = 200  # 8000
 batch_size = 50
 
 rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, batch_size, transition_model,
