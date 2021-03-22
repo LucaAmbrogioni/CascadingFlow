@@ -473,6 +473,14 @@ class DynamicImgModel(ProbabilisticModel):
         else:
             self.has_eps_generator = False
 
+    def sample_observations(self, N, scale=None):   #TODO: needs refactoring
+        x, mu, _, _, _ = self.sample_timeseries(N)
+        x = x.permute(0,4,1,2,3)
+        if scale is None:
+            return x, self.emission_distribution.rsample(self.emission(x), None), mu
+        else:
+            return x, self.emission_distribution.rsample(self.emission(x), scale), mu
+
     def sample_timeseries(self, N, data=None):
         # Output variables
         log_jacobian = 0.
@@ -549,19 +557,19 @@ class DynamicImgModel(ProbabilisticModel):
             avg_log_prob -= log_jacobian
         if epsilon_loss:
             avg_log_prob += epsilon_loss
-        avg_log_prob += self._avg_log_prob(x[:, :, 0], self.initial_mean, self.initial_sigma)
+        avg_log_prob += self._avg_log_prob(x[:, :, :, :, 0], self.initial_mean, self.initial_sigma)
         for t in range(self.T):
             if t < self.T - 1:
-                old_xt = x[:, :, t]
-                mut = self.transition(x[:, :, t], mu)
+                old_xt = x[:, :, :, :, t]
+                mut = self.transition(x[:, :, :, :, t], mu)
                 st = self.sigma
                 if self.is_mu_transformed:
                     mut, st = self.mu_transformations[t](mut, st)
-                xt = x_pre[:, :, t + 1] if x_pre is not None else x[:, :, t + 1]
+                xt = x_pre[:, :, :, :, t + 1] if x_pre is not None else x[:, :, :, :, t + 1]
                 avg_log_prob += self._avg_log_prob(xt, mut, st)
             if y is not None and y.shape[1] > t:
-                yt = y[:, t] if len(y.shape) == 2 else y[:, :, t]
-                avg_log_prob += self._avg_log_likelihood(x[:, :, t], yt)
+                yt = y[:, t] if len(y.shape) == 2 else y[:, t, :]
+                avg_log_prob += self._avg_log_likelihood(x[:, :, :, :, t], yt)
         return avg_log_prob
 
 
