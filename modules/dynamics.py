@@ -89,7 +89,7 @@ class ConvTransition():
         self.dt = dt
         self.conv = nn.Conv2d(in_ch, out_ch, kernel_size, padding=pad)
         self.conv.weight = nn.Parameter(
-            torch.tensor(np.random.normal(0., s, (out_ch, in_ch, kernel_size, kernel_size))), requires_grad=False)
+            torch.tensor(np.random.normal(0., s, (out_ch, in_ch, kernel_size, kernel_size))).float(), requires_grad=False)
         self.activation_fn = activation
 
     def __call__(self, inpt, mu):
