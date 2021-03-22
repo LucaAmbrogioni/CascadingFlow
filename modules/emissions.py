@@ -22,4 +22,4 @@ class LinearEmission():
       param.requires_grad = False
 
   def __call__(self, x, r=None):
-    return self.linear(x)
+    return self.linear(torch.flatten(x.permute(0,4,1,2,3), 2))
