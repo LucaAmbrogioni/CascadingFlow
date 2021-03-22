@@ -475,7 +475,9 @@ class DynamicImgModel(ProbabilisticModel):
 
     def sample_observations(self, N, scale=None):   #TODO: needs refactoring
         x, mu, _, _, _ = self.sample_timeseries(N)
+        # x is now (N,Channels,Width, Height, TimeSteps)
         x = x.permute(0,4,1,2,3)
+        # x becomes (N, TimeSteps, Channels, Width, Height)
         if scale is None:
             return x, self.emission_distribution.rsample(self.emission(x), None), mu
         else:
@@ -487,6 +489,7 @@ class DynamicImgModel(ProbabilisticModel):
         epsilon_loss = 0.
 
         # Latent cascading flow variables
+        # Todo: not checked yet since not used by ASVI
         if self.has_eps_generator:
             if self.is_amortized:
                 if isinstance(data, list):
@@ -512,6 +515,8 @@ class DynamicImgModel(ProbabilisticModel):
         st = self.initial_sigma
         if self.is_mu_transformed:
             mut, st = self.mu_transformations[0](mut, st)
+        # d_x is width, assuming that the input image is squared with one channel
+        # x_pre has size (N, Channels(1), Width, Hight, TimeSteps)
         x_pre = self.dist.rsample(mut, st, N * self.d_x* self.d_x).view((N, 1, self.d_x, self.d_x, 1)).float()
 
         # Transform prior
@@ -526,6 +531,7 @@ class DynamicImgModel(ProbabilisticModel):
 
         for t in range(self.T - 1):
             # Dynamic transition
+            # input is N x 1 x 28 x 28, same for output (thanks to padding=1)
             mut = self.transition(x[:,:,:,:,t], mu)
             st = self.sigma
 
@@ -552,6 +558,9 @@ class DynamicImgModel(ProbabilisticModel):
         return x, mu, x_pre, log_jacobian, epsilon_loss
 
     def evaluate_avg_joint_log_prob(self, x, y, mu, x_pre=None, log_jacobian=None, epsilon_loss=None):
+        # here modified all the dimensions so that it accounts for shapes
+        # x: (N_Samples, Channels, Width, Height, TimeSteps)
+        # y: None or (1, T_data, Out_size)
         avg_log_prob = self._avg_gaussian_log_prob(mu, 0., self.mu_sd)
         if log_jacobian:
             avg_log_prob -= log_jacobian

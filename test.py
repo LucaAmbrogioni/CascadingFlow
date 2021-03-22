@@ -34,6 +34,8 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
         # generate ground truth
         with torch.no_grad():
             X_true, Y, mu = prior_model.sample_observations(1)
+            # X_true shape: (N_samples, TimeSteps, Channels, Width, Height)
+            # Y shape : (N_samples, TimeSteps, OutFeatures (10))
             data = Y[0, :T_data].view((1, T_data, -1))
             out_data = Y[0, T_data:].view((1, Y.shape[1] - T_data, -1))
 
@@ -117,14 +119,15 @@ if model_name == "conv":
     dist = NormalDistribution()
     lk_sigma = 1.
     transition_model = ConvTransition(in_ch, out_ch, kernel_size, pad=padding, dt=dt)
+    out_features = 10 # size after linear emission
 
 if lik_name == "r":
     observation_gain = 1.
-    emission_model = LinearEmission(28 * 28, out_features=10)
+    emission_model = LinearEmission(28 * 28, out_features=out_features)
     emission_dist = NormalDistribution(scale=lk_sigma)
 
 num_repetitions = 10
-num_iterations = 200  # 8000
+num_iterations = 2  # 8000
 batch_size = 50
 
 rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, batch_size, transition_model,

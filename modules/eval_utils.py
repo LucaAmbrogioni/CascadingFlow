@@ -82,6 +82,10 @@ def evaluate_img_likelihood(X, x_true, s=0.00001):
   def ker(x,y,bw):
       return np.mean(np.log(np.mean(np.exp(-(x - y)**2/(2*bw**2))/(np.sqrt(2*np.pi)*bw),0) + s))
 
+  # N: num samples
+  # c: num channels
+  # w, h: width, height
+  # a: time steps
   N, c, w, h, a = X.shape
   X = np.reshape(X, newshape=(N, a, c, w, h))
   x_true = np.reshape(x_true, newshape=(1, a, c, w, h))
@@ -105,7 +109,11 @@ def evaluate_multi_img_likelihood(X, x_true, s=0.01):
     return np.nan
 
 def evaluate_img_predictive_error(X, emission_model, emission_distribution, scale, out_data, T_data):
+  # todo: here 10 is hardcoded as outpudt dim of linear emission
+  # Y has shape (N samples, out_size, TimeSteps - T_data)
   Y = np.zeros((X.shape[0], 10, X.shape[-1] - T_data))
+
+  # dimensions are adjusted to deal with images and output with out_size
   for t in range(T_data, X.shape[-1]):
     tau = t - T_data
     eps = np.random.normal(0,0.0001,(Y.shape[0],Y.shape[1]))
