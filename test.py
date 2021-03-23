@@ -22,7 +22,7 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
                                   transition=transition_model,
                                   emission=emission_model,
                                   emission_distribution=emission_dist,
-                                  observation_gain=observation_gain, T=T, initial_mean=initial_mean)
+                                  observation_gain=observation_gain, T=T, initial_mean=initial_mean, is_prior=True)
 
     if not os.path.isdir(f'{exp_name}_figures'):
         os.makedirs(f'{exp_name}_figures')

@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 from modules.networks import TriResNet
+import torchvision
 
 
 class ProbabilisticModel(nn.Module):
@@ -443,7 +444,7 @@ class DynamicImgModel(ProbabilisticModel):
 
     def __init__(self, sigma, T, initial_sigma, distribution, d_x, transition, emission, emission_distribution,
                  mu_sd=0.001, observation_gain=1., transformations=(), mu_transformations=(),
-                 initial_mean=0., eps_generator=None, is_amortized=False):
+                 initial_mean=0., eps_generator=None, is_amortized=False, is_prior=False):
         super(DynamicImgModel, self).__init__()
         self.sigma = sigma
         self.d_x = d_x
@@ -472,6 +473,17 @@ class DynamicImgModel(ProbabilisticModel):
             self.has_eps_generator = True
         else:
             self.has_eps_generator = False
+
+        self.is_prior = is_prior
+        if is_prior:
+            self.mnist= iter(torch.utils.data.DataLoader(
+                torchvision.datasets.MNIST('files/', train=False, download=True,
+                                           transform=torchvision.transforms.Compose([
+                                               torchvision.transforms.ToTensor(),
+                                               torchvision.transforms.Normalize(
+                                                   (0.1307,), (0.3081,))
+                                           ])),
+                batch_size=1, shuffle=False))
 
     def sample_observations(self, N, scale=None):   #TODO: needs refactoring
         x, mu, _, _, _ = self.sample_timeseries(N)
@@ -517,7 +529,10 @@ class DynamicImgModel(ProbabilisticModel):
             mut, st = self.mu_transformations[0](mut, st)
         # d_x is width, assuming that the input image is squared with one channel
         # x_pre has size (N, Channels(1), Width, Hight, TimeSteps)
-        x_pre = self.dist.rsample(mut, st, N * self.d_x* self.d_x).view((N, 1, self.d_x, self.d_x, 1)).float()
+        if self.is_prior:
+            x_pre = torch.cat([self.mnist.next()[0].unsqueeze(-1) for _ in range(N)])
+        else:
+            x_pre = self.dist.rsample(mut, st, N * self.d_x* self.d_x).view((N, 1, self.d_x, self.d_x, 1)).float()
 
         # Transform prior
         if self.is_transformed:
