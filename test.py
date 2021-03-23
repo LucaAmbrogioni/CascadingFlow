@@ -11,7 +11,7 @@ from modules.emissions import LinearEmission
 from modules.eval_utils import evaluate_img_model
 from modules.models import DynamicImgModel
 from modules.networks import ASVIupdate
-from modules.plot_tools import plot_model
+from modules.plot_tools import plot_img_model, plot_img_steps
 from modules.training_tools import variational_img_update
 from modules.networks import TriResNet
 
@@ -22,7 +22,7 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
                                   transition=transition_model,
                                   emission=emission_model,
                                   emission_distribution=emission_dist,
-                                  observation_gain=observation_gain, T=T, initial_mean=initial_mean, is_prior=True)
+                                  observation_gain=observation_gain, T=T, initial_mean=initial_mean)
 
     if not os.path.isdir(f'{exp_name}_figures'):
         os.makedirs(f'{exp_name}_figures')
@@ -56,6 +56,7 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
                                          observation_gain=observation_gain, T=T,
                                          mu_transformations=mu_transformations,
                                          initial_mean=initial_mean)
+        plot_img_model(variational_model, X_true, M=1, savename="{}_figures/ASVI_rep:{}".format(exp_name, rep))
         loss_list = []
         params_list = [list(tr.parameters()) for tr in mu_transformations]
         params = []
@@ -76,6 +77,9 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
         uni_eval_asvi.append(uni_lk)
 
         # Plots
+
+        plot_img_model(variational_model, X_true, M=1, savename="{}_figures/ASVI_rep:{}".format(exp_name, rep))
+
         plt.plot(loss_list)
         plt.savefig('{}_figures/ASVI_loss_rep:{}.png'.format(exp_name, rep))
         plt.clf()
@@ -118,7 +122,7 @@ if lik_name == "r":
     emission_dist = NormalDistribution(scale=lk_sigma)
 
 num_repetitions = 10
-num_iterations = 2  # 8000
+num_iterations = 200  # 8000
 batch_size = 50
 
 rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, batch_size, transition_model,
