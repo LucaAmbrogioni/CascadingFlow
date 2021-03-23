@@ -62,7 +62,7 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
         params = []
         for p in params_list:
             params += p
-        optimizer = optim.Adam(params, lr=0.001)
+        optimizer = optim.Adam(params, lr=0.01)
 
         for itr in tqdm(range(num_iterations)):
             # Variational update
@@ -113,7 +113,7 @@ if model_name == "conv":
     d_x = 28
     dist = NormalDistribution()
     lk_sigma = 1.
-    transition_model = ConvTransition(in_ch, out_ch, kernel_size, pad=padding)
+    transition_model = [ConvTransition(in_ch, out_ch, kernel_size, pad=padding) for _ in range(T)]
     out_features = 512 # size after linear emission
 
 if lik_name == "r":
@@ -121,8 +121,8 @@ if lik_name == "r":
     emission_model = LinearEmission(d_x * d_x, out_features=out_features)
     emission_dist = NormalDistribution(scale=lk_sigma)
 
-num_repetitions = 10
-num_iterations = 200  # 8000
+num_repetitions = 1
+num_iterations = 2000  # 8000
 batch_size = 50
 
 rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, batch_size, transition_model,

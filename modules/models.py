@@ -544,7 +544,7 @@ class DynamicImgModel(ProbabilisticModel):
         for t in range(self.T - 1):
             # Dynamic transition
             # input is N x 1 x 28 x 28, same for output (thanks to padding=1)
-            mut = self.transition(x[:,:,:,:,t], mu)
+            mut = self.transition[t](x[:,:,:,:,t], mu)
             st = self.sigma
 
             # Parameter transformation (ASVI)
@@ -582,7 +582,7 @@ class DynamicImgModel(ProbabilisticModel):
         for t in range(self.T):
             if t < self.T - 1:
                 old_xt = x[:, :, :, :, t]
-                mut = self.transition(x[:, :, :, :, t], mu)
+                mut = self.transition[t](x[:, :, :, :, t], mu)
                 st = self.sigma
                 if self.is_mu_transformed:
                     mut, st = self.mu_transformations[t](mut, st)
