@@ -20,6 +20,7 @@ class TriResNet(nn.Module):
         self.d1 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,))))
         self.d2 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,))))
         self.d3 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,))))
+        self.d3 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,))))
         self.b1 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,))))
         self.b2 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,))))
         self.b3 = nn.Parameter(torch.Tensor(np.random.normal(0,scale_w,(self.width,))))

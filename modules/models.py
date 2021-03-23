@@ -489,7 +489,7 @@ class DynamicImgModel(ProbabilisticModel):
         epsilon_loss = 0.
 
         # Latent cascading flow variables
-        # Todo: not checked yet since not used by ASVI
+        # todo: check me when implementing CG
         if self.has_eps_generator:
             if self.is_amortized:
                 if isinstance(data, list):
@@ -557,7 +557,7 @@ class DynamicImgModel(ProbabilisticModel):
             x = torch.cat((x, new_x_tr), -1)
         return x, mu, x_pre, log_jacobian, epsilon_loss
 
-    def evaluate_avg_joint_log_prob(self, x, y, mu, x_pre=None, log_jacobian=None, epsilon_loss=None):
+    def evaluate_avg_joint_log_prob(self, x, y, mu, bin_list, x_pre=None, log_jacobian=None, epsilon_loss=None):
         # here modified all the dimensions so that it accounts for shapes
         # x: (N_Samples, Channels, Width, Height, TimeSteps)
         # y: None or (1, T_data, Out_size)
@@ -576,8 +576,8 @@ class DynamicImgModel(ProbabilisticModel):
                     mut, st = self.mu_transformations[t](mut, st)
                 xt = x_pre[:, :, :, :, t + 1] if x_pre is not None else x[:, :, :, :, t + 1]
                 avg_log_prob += self._avg_log_prob(xt, mut, st)
-            if y is not None and y.shape[1] > t:
-                yt = y[:, t] if len(y.shape) == 2 else y[:, t, :]
+            if y is not None and bin_list[t]==1:
+                yt = y[:, t, :]
                 avg_log_prob += self._avg_log_likelihood(x[:, :, :, :, t], yt)
         return avg_log_prob
 
