@@ -50,7 +50,7 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
         # plt.show()
 
         ### Cascading flow ###
-        '''print("Train cascading flows")
+        print("Train cascading flows")
         transformations = [TriResNet(d_x=d_x*d_x, d_epsilon=10, epsilon_nu=0.1, in_pre_lambda=4.) for _ in range(T)]
         variational_model = DynamicImgModel(sigma=sigma, initial_sigma=initial_sigma, distribution=dist, d_x=d_x,
                                          transition=transition_model,
@@ -101,7 +101,7 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
         params = []
         for p in params_list:
             params += p
-        optimizer = optim.Adam(params, lr=0.01)
+        optimizer = optim.Adam(params, lr=0.001)
 
         for itr in tqdm(range(num_iterations)):
             # Variational update
@@ -133,7 +133,7 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
         params = []
         for p in params_list:
             params += p
-        optimizer = optim.Adam(params, lr=0.01)
+        optimizer = optim.Adam(params, lr=0.001)
 
         for itr in tqdm(range(num_iterations)):
             # Variational update
@@ -153,7 +153,7 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
 
         plt.plot(loss_list)
         plt.savefig('{}_figures/MF_loss_rep:{}.png'.format(exp_name, rep))
-        plt.clf()'''
+        plt.clf()
 
         ### GF ###
         print("Train GF")
@@ -162,7 +162,7 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
         plot_img_model(variational_model, X_true, M=1, name=f"GF_rep:{rep}_initial", savename=f"{exp_name}_figures")
         loss_list = []
         params = variational_model.transformation.parameters()
-        optimizer = optim.Adam(params, lr=0.01)
+        optimizer = optim.Adam(params, lr=0.001)
 
         for itr in tqdm(range(num_iterations)):
             # Variational update
@@ -204,7 +204,7 @@ if model_name == "conv":
     bin_list = [0 for _ in range(T-1)]
     bin_list.append(1)
     dt = 0.2
-    sigma = np.sqrt(dt) * 0.1  # 0.5
+    sigma = 1.
     initial_sigma = 1.
     initial_mean = 0.
     in_ch = 1
@@ -223,7 +223,7 @@ if lik_name == "r":
     emission_dist = NormalDistribution(scale=lk_sigma)
 
 num_repetitions = 1
-num_iterations = 200  # 8000
+num_iterations = 2000  # 8000
 batch_size = 50
 
 rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, batch_size, transition_model,
