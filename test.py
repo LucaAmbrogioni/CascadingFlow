@@ -9,7 +9,7 @@ from modules.distributions import NormalDistribution
 from modules.dynamics import ConvTransition
 from modules.emissions import LinearEmission
 from modules.eval_utils import evaluate_img_model
-from modules.models import DynamicImgModel
+from modules.models import DynamicImgModel, MeanFieldImg
 from modules.networks import ASVIupdate
 from modules.plot_tools import plot_img_model, plot_img_steps
 from modules.training_tools import variational_img_update
@@ -32,6 +32,7 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
 
     uni_eval_asvi = []
     uni_eval_cfr = []
+    uni_eval_mf = []
 
     for rep in range(num_repetitions):
 
@@ -48,7 +49,7 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
         # plt.show()
 
         ### Cascading flow ###
-        print("Train cascading flows")
+        '''print("Train cascading flows")
         transformations = [TriResNet(d_x=d_x*d_x, d_epsilon=10, epsilon_nu=0.1, in_pre_lambda=4.) for _ in range(T)]
         variational_model = DynamicImgModel(sigma=sigma, initial_sigma=initial_sigma, distribution=dist, d_x=d_x,
                                          transition=transition_model,
@@ -119,9 +120,41 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
 
         plt.plot(loss_list)
         plt.savefig('{}_figures/ASVI_loss_rep:{}.png'.format(exp_name, rep))
+        plt.clf()'''
+
+        ### MF ###
+        print("Train MF")
+        variational_model = MeanFieldImg(T=T, d_x=d_x*d_x)
+
+        plot_img_model(variational_model, X_true, M=1, name=f"MF_rep:{rep}_initial", savename=f"{exp_name}_figures")
+        loss_list = []
+        params_list = [variational_model.parameters()]
+        params = []
+        for p in params_list:
+            params += p
+        optimizer = optim.Adam(params, lr=0.01)
+
+        for itr in tqdm(range(num_iterations)):
+            # Variational update
+            loss = variational_img_update(prior_model, variational_model, Y, bin_list, optimizer, batch_size)
+
+            # Loss
+            loss_list.append(float(loss.detach().numpy()))
+
+        # Performance metrics
+        uni_lk = evaluate_img_model(variational_model, X_true, M=5000)
+
+        uni_eval_mf.append(uni_lk)
+
+        # Plots
+
+        plot_img_model(variational_model, X_true, M=1, name=f"MF_rep:{rep}_final", savename=f"{exp_name}_figures")
+
+        plt.plot(loss_list)
+        plt.savefig('{}_figures/MF_loss_rep:{}.png'.format(exp_name, rep))
         plt.clf()
 
-    uni_results = {"ASVI": uni_eval_asvi}
+    uni_results = {"ASVI": uni_eval_asvi, "CF": uni_eval_cfr, "MF": uni_eval_mf}
 
     import pickle
     pickle_out = open("{}_results/uni_results.pickle".format(exp_name), "wb")

@@ -668,6 +668,61 @@ class MeanField(ProbabilisticModel):
          raise ValueError("You cannot evaluate data likelihood with a variational model")
     return avg_log_prob
 
+class MeanFieldImg(ProbabilisticModel):
+
+  def __init__(self, T, d_x, mu_sd=0.001, transformations = ()):
+    super(MeanFieldImg, self).__init__()
+    self.mu_sd = mu_sd
+    self.T = T
+    self.d_x = d_x
+    self.initial_means = nn.Parameter(torch.Tensor(np.random.normal(0,0.2,(T,d_x))))
+    self.initial_pre_deviations = nn.Parameter(torch.Tensor(np.random.normal(0.1,0.1,(T,d_x))))
+    if transformations:
+      self.transformations = transformations
+      self.is_transformed = True
+    else:
+      self.is_transformed = False
+
+  def sample_timeseries(self, N, data=None):
+    log_jacobian = 0.
+    epsilon_loss = 0.
+    mu = torch.distributions.normal.Normal(0., self.mu_sd).rsample((N,))
+    x = torch.Tensor()
+    for t in range(self.T):
+      new_x = torch.distributions.normal.Normal(self.initial_means[t,:], F.softplus(self.initial_pre_deviations[t,:])).rsample((N,)).view((N,self.d_x,1))
+      if self.is_transformed:
+        new_x_tr, new_epsilon_in, new_epsilon_out, new_log_jacobian = self.transformations[t](new_x)
+        log_jacobian += new_log_jacobian
+        eps_sigma = self.transformations[t].epsilon_nu
+        epsilon_loss += - self._avg_gaussian_log_prob(new_epsilon_out, 0., eps_sigma) + self._avg_gaussian_log_prob(new_epsilon_in, 0., eps_sigma)
+      else:
+        new_x_tr = new_x
+      if t > 0:
+        x_pre = torch.cat((x_pre, new_x), 2)
+        x = torch.cat((x, new_x_tr), 2)
+      else:
+        x_pre = new_x
+        x = new_x_tr
+    dim = int(np.sqrt(self.d_x))
+    return x.reshape(N, 1, dim, dim, -1), mu, x_pre.reshape(N, 1, dim, dim, -1), log_jacobian, epsilon_loss
+
+  def evaluate_avg_joint_log_prob(self, x, y, mu, bin_list=None, x_pre=None, log_jacobian = None, epsilon_loss=None):
+    avg_log_prob = self._avg_gaussian_log_prob(mu, 0., self.mu_sd*torch.ones((1,)))
+    if log_jacobian:
+      avg_log_prob -= log_jacobian
+    if epsilon_loss:
+      avg_log_prob += epsilon_loss
+    if x_pre is not None:
+      x = x_pre
+    for t in range(self.T):
+      mut = self.initial_means[t]
+      st = F.softplus(self.initial_pre_deviations[t])
+      xt = torch.flatten(x[:,:,:,:,t], start_dim=1)
+      avg_log_prob += self._avg_gaussian_log_prob(xt, mut, st)
+
+    if y is not None:
+         raise ValueError("You cannot evaluate data likelihood with a variational model")
+    return avg_log_prob
 
 class MultivariateNormal(ProbabilisticModel): #TODO: Work in progress
 

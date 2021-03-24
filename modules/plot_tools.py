@@ -39,3 +39,4 @@ def plot_img_steps(T, X, title=None, savedir=None):
         fig.suptitle(title, fontsize=14)
     if savedir:
         plt.savefig(savedir)
+        plt.clf()
