@@ -724,6 +724,41 @@ class MeanFieldImg(ProbabilisticModel):
          raise ValueError("You cannot evaluate data likelihood with a variational model")
     return avg_log_prob
 
+
+class GlobalFlowImg(ProbabilisticModel):
+
+  def __init__(self, T, d_x, d_eps, mu_sd = 0.001, residual=False):
+    super(GlobalFlowImg, self).__init__()
+    self.mu_sd = mu_sd
+    self.d_x = d_x
+    self.d_eps = d_eps
+    self.T = T
+    self.transformation = TriResNet(d_x=self.T*self.d_x, d_epsilon=d_eps,
+                                    epsilon_nu=0.1, in_pre_lambda= 3. if residual else None)
+
+  def sample_timeseries(self, N, dim=None):
+    mu = torch.distributions.normal.Normal(0., self.mu_sd).rsample((N,))
+    x_pre = torch.distributions.normal.Normal(0., 1.).rsample((N,self.d_x*self.T))
+    x, new_epsilon_in, new_epsilon_out, log_jacobian = self.transformation(x_pre)
+    eps_sigma = self.transformation.epsilon_nu
+    epsilon_loss = - self._avg_gaussian_log_prob(new_epsilon_out, 0., eps_sigma) + self._avg_gaussian_log_prob(new_epsilon_in, 0., eps_sigma)
+    dim = int(np.sqrt(self.d_x))
+    return x.view((N, 1, dim, dim, self.T)), mu, x_pre, log_jacobian, epsilon_loss
+
+  def evaluate_avg_joint_log_prob(self, x, y, mu, bin_list=None, x_pre=None, log_jacobian = None, epsilon_loss=None):
+    avg_log_prob = self._avg_gaussian_log_prob(mu, 0., self.mu_sd*torch.ones((1,)))
+    if log_jacobian:
+      avg_log_prob -= log_jacobian
+    if epsilon_loss:
+      avg_log_prob += epsilon_loss
+    if x_pre is not None:
+      x = x_pre
+    avg_log_prob += self._avg_gaussian_log_prob(x, 0., 1.)
+
+    if y is not None:
+        raise ValueError("You cannot evaluate data likelihood with a variational model")
+    return avg_log_prob
+
 class MultivariateNormal(ProbabilisticModel): #TODO: Work in progress
 
   def __init__(self, T, d_x, s = 0.01):
