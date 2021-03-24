@@ -31,6 +31,7 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
         os.makedirs(f'{exp_name}_results')
 
     uni_eval_asvi = []
+    uni_eval_cfr = []
 
     for rep in range(num_repetitions):
 
@@ -46,6 +47,41 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
         # plt.plot(X_true.detach().numpy()[0, 1, :])
         # plt.show()
 
+        ### Cascading flow ###
+        print("Train cascading flows")
+        transformations = [TriResNet(d_x=d_x*d_x, d_epsilon=10, epsilon_nu=0.1, in_pre_lambda=4.) for _ in range(T)]
+        variational_model = DynamicImgModel(sigma=sigma, initial_sigma=initial_sigma, distribution=dist, d_x=d_x,
+                                         transition=transition_model,
+                                         emission=emission_model, emission_distribution=emission_dist,
+                                         observation_gain=observation_gain, T=T,
+                                         transformations=transformations, initial_mean=initial_mean)
+        plot_img_model(variational_model, X_true, M=1, name=f"CF_rep:{rep}_initial", savename=f"{exp_name}_figures")
+
+        loss_list = []
+        params_list = [list(tr.parameters()) for tr in transformations]
+        params = []
+        for p in params_list:
+            params += p
+        optimizer = optim.Adam(params, lr=0.001)
+
+        for itr in tqdm(range(num_iterations)):
+            # Variational update
+            loss = variational_img_update(prior_model, variational_model, Y, bin_list, optimizer, batch_size)
+
+            # Loss
+            loss_list.append(float(loss.detach().numpy()))
+
+        # Performance metrics
+        uni_lk = evaluate_img_model(variational_model, X_true, M=5000)
+        uni_eval_cfr.append(uni_lk)
+
+        # Plots
+        plt.plot(loss_list)
+        plt.savefig('{}_figures/CFr_loss_rep:{}.png'.format(exp_name, rep))
+        plt.clf()
+
+        plot_img_model(variational_model, X_true, M=1, name=f"CF_rep:{rep}_final", savename=f"{exp_name}_figures")
+
         ### ASVI ###
         print("Train ASVI")
         mu_transformations = [ASVIupdate(l_init=3.) for _ in range(T)]
@@ -56,7 +92,8 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
                                          observation_gain=observation_gain, T=T,
                                          mu_transformations=mu_transformations,
                                          initial_mean=initial_mean)
-        plot_img_model(variational_model, X_true, M=1, savename="{}_figures/ASVI_rep:{}".format(exp_name, rep))
+
+        plot_img_model(variational_model, X_true, M=1, name=f"ASVI_rep:{rep}_initial", savename=f"{exp_name}_figures")
         loss_list = []
         params_list = [list(tr.parameters()) for tr in mu_transformations]
         params = []
@@ -78,7 +115,7 @@ def rum_timeseries_img_experiment(exp_name, num_repetitions, num_iterations, bat
 
         # Plots
 
-        plot_img_model(variational_model, X_true, M=1, savename="{}_figures/ASVI_rep:{}".format(exp_name, rep))
+        plot_img_model(variational_model, X_true, M=1, name=f"ASVI_rep:{rep}_final", savename=f"{exp_name}_figures")
 
         plt.plot(loss_list)
         plt.savefig('{}_figures/ASVI_loss_rep:{}.png'.format(exp_name, rep))

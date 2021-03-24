@@ -13,11 +13,12 @@ def plot_model(variational_model, X_true, K, M, savename=None):
             plt.savefig(savename + "_{}".format(k))
             plt.clf()
 
-def plot_img_model(variational_model, X_true, M, savename=None):
+# todo: improvement needed here with various paths and checks
+def plot_img_model(variational_model, X_true, M, name=None, savename=None):
     X, mu, x_pre, log_jacobian, epsilon_loss = variational_model.sample_timeseries(M)
     X = X.permute(0,4,1,2,3)
-    plot_img_steps(X.shape[1], X[0].detach().numpy(), title='Variational')
-    plot_img_steps(X.shape[1], X_true[0].detach().numpy(), title='True')
+    plot_img_steps(X.shape[1], X[0].detach().numpy(), title=name, savedir=savename+'/'+name+'.png')
+    plot_img_steps(X.shape[1], X_true[0].detach().numpy(), title='True', savedir=savename+'/true.png')
 
     '''if savename is None:
         plt.show()
@@ -25,7 +26,7 @@ def plot_img_model(variational_model, X_true, M, savename=None):
         plt.savefig(savename + "_{}".format(k))
         plt.clf()'''
 
-def plot_img_steps(T, X, title=None):
+def plot_img_steps(T, X, title=None, savedir=None):
     # X shape: (TimeSteps, Channels, Width, Height)
     fig = plt.figure()
     for i in range(T):
@@ -36,4 +37,5 @@ def plot_img_steps(T, X, title=None):
         plt.yticks([])
     if title:
         fig.suptitle(title, fontsize=14)
-    plt.show()
+    if savedir:
+        plt.savefig(savedir)

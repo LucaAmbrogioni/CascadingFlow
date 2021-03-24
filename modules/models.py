@@ -533,11 +533,11 @@ class DynamicImgModel(ProbabilisticModel):
         x_pre = torch.cat([self.dist.rsample(self.mnist, st) for _ in range(N)])
         # Transform prior
         if self.is_transformed:
-            x, log_jac, eps_loss = self.cascading_transformation(x_pre, 0, log_jacobian, epsilon_loss,
+            x, log_jac, eps_loss = self.cascading_img_transformation(x_pre, 0, log_jacobian, epsilon_loss,
                                                                  eps_mean=eps_mean,
                                                                  eps_scale=eps_scale,
                                                                  local_eps=local_eps)
-            x = x.view(x_pre.shape)
+            # x = x.view(x_pre.shape)
         else:
             x = x_pre
 
@@ -556,7 +556,7 @@ class DynamicImgModel(ProbabilisticModel):
 
             # Flow transformation
             if self.is_transformed:
-                new_x_tr, log_jac, eps_loss = self.cascading_transformation(new_x, t, log_jacobian, epsilon_loss,
+                new_x_tr, log_jac, eps_loss = self.cascading_img_transformation(new_x, t, log_jacobian, epsilon_loss,
                                                                             eps_mean=eps_mean,
                                                                             eps_scale=eps_scale,
                                                                             local_eps=local_eps)
@@ -592,6 +592,25 @@ class DynamicImgModel(ProbabilisticModel):
                 yt = y[:, t, :]
                 avg_log_prob += self._avg_log_likelihood(x[:, :, :, :, t], yt)
         return avg_log_prob
+
+    def cascading_img_transformation(self, x, tr_index, log_jacobian, epsilon_loss, eps_mean=None, eps_scale=None, local_eps=None):
+        N = x.shape[0]
+        m = eps_mean[:,:,tr_index] if eps_mean is not None else 0.
+        scale = eps_scale[:,:,tr_index] if eps_scale is not None else self.transformations[0].epsilon_nu
+        if local_eps is not None:
+            local_eps = local_eps[:,:,tr_index]
+
+        # todo: so far assuming only one channel, make generic for any number of channels
+        x = x.squeeze()
+        if N==1:
+            x = x.unsqueeze(0)
+        x, new_epsilon_in, new_epsilon_out, new_log_jacobian = self.transformations[tr_index](torch.flatten(x, start_dim=1), local_eps=local_eps)
+        log_jacobian += new_log_jacobian
+        epsilon_loss += -self._avg_gaussian_log_prob(new_epsilon_out, m, scale)
+        epsilon_loss += self._avg_gaussian_log_prob(new_epsilon_in, m, scale)
+        x = x.view((N, 1, self.d_x, self.d_x, 1))
+        #print(new_epsilon_out.detach().numpy())
+        return x, log_jacobian, epsilon_loss
 
 
 class MeanField(ProbabilisticModel):
